@@ -1,6 +1,6 @@
 .hero {
   min-height: 100vh;
-  max-width: 1400px;
+  max-width: 1280px;
   margin: 0 auto;
   padding: 170px 40px 80px;
 
@@ -37,13 +37,13 @@
 }
 
 .hero h1 {
-  font-size: clamp(3rem,5vw,4.3rem);
+  font-size: clamp(3rem,4vw,4rem);
 
   line-height: 1.05;
 
-  font-weight: 800;
+  font-weight: 900;
 
-  letter-spacing: -2px;
+  letter-spacing: 3px;
 
   margin-bottom: 1.5rem;
 }
@@ -59,7 +59,7 @@
 }
 
 .hero p {
-  max-width: 600px;
+  max-width: 520px;
 
   color: #94a3b8;
 
@@ -68,6 +68,8 @@
   font-size: 1.05rem;
 
   margin-bottom: 2.5rem;
+
+  opacity: 82;
 }
 
 .hero-buttons {
@@ -158,13 +160,165 @@
   margin-left: 0;
 }
 
-.hero-preview {
+.hero-preview{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
 
-  display: flex;
+.network{
 
-  justify-content: center;
+    position:relative;
 
-  animation: float 6s ease-in-out infinite;
+    width:600px;
+    height:600px;
+}
+
+.connections{
+
+    position:absolute;
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+    overflow:visible;
+}
+
+.connections line{
+
+    stroke:#6366f1;
+
+    stroke-width:2;
+
+    opacity:.35;
+
+    stroke-dasharray:10;
+
+    animation:flow 8s linear infinite;
+}
+
+.core{
+
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    width:160px;
+    height:160px;
+
+    border-radius:50%;
+
+    background:
+    radial-gradient(circle at 30% 30%,
+    #ffffffaa,
+    #22d3ee,
+    #6366f1);
+
+    box-shadow:
+    0 0 70px #6366f180,
+    0 0 180px #22d3ee40;
+
+    animation:pulseCore 5s ease-in-out infinite;
+}
+
+.node{
+
+    position:absolute;
+
+    padding:14px 22px;
+
+    border-radius:18px;
+
+    backdrop-filter:blur(20px);
+
+    background:rgba(13,17,23,.72);
+
+    border:1px solid rgba(99,102,241,.2);
+
+    color:white;
+
+    font-size:.9rem;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.35);
+
+    animation:floatNode 6s ease-in-out infinite;
+}
+
+.resume{
+
+top:70px;
+left:170px;
+
+}
+
+.ats{
+
+left:20px;
+top:260px;
+
+animation-delay:.5s;
+
+}
+
+.interview{
+
+right:0;
+top:260px;
+
+animation-delay:1s;
+
+}
+
+.analytics{
+
+left:160px;
+bottom:40px;
+
+animation-delay:1.5s;
+
+}
+
+.roadmap{
+
+right:120px;
+bottom:80px;
+
+animation-delay:2s;
+
+}
+
+@keyframes pulseCore{
+
+50%{
+
+transform:translate(-50%,-50%) scale(1.08);
+
+}
+
+}
+
+@keyframes floatNode{
+
+50%{
+
+transform:translateY(-12px);
+
+}
+
+}
+
+@keyframes flow{
+
+to{
+
+stroke-dashoffset:-120;
+
+}
+
 }
 
 .browser {
