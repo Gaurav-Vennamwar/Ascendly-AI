@@ -915,90 +915,135 @@ color:#94a3b8;
 font-size:.95rem;
 
 }
-<section class="workflow">
+/*================ WORKFLOW ================*/
 
-    <div class="section-header">
+.workflow{
 
-        <span class="section-tag">
-            Workflow
-        </span>
+padding:140px 0;
 
-        <h2>
+}
 
-            Four simple steps
-            <br>
+.workflow-line{
 
-            to your next opportunity.
+display:grid;
 
-        </h2>
+grid-template-columns:repeat(4,1fr);
 
-        <p>
+gap:30px;
 
-            From resume upload to interview success,
-            Ascendly AI guides every stage.
+position:relative;
 
-        </p>
+margin-top:70px;
 
-    </div>
+}
 
-    <div class="workflow-line">
+.workflow-line::before{
 
-        <div class="workflow-step">
+content:"";
 
-            <div class="step-number">
-                01
-            </div>
+position:absolute;
 
-            <h3>Upload Resume</h3>
+top:42px;
 
-            <p>
-                Securely upload your latest resume for AI analysis.
-            </p>
+left:10%;
 
-        </div>
+width:80%;
 
-        <div class="workflow-step">
+height:1px;
 
-            <div class="step-number">
-                02
-            </div>
+background:linear-gradient(
+90deg,
+transparent,
+rgba(99,102,241,.35),
+transparent);
 
-            <h3>AI Analysis</h3>
+}
 
-            <p>
-                Detect ATS issues, missing keywords and improvement areas.
-            </p>
+.workflow-step{
 
-        </div>
+position:relative;
 
-        <div class="workflow-step">
+padding:40px 28px;
 
-            <div class="step-number">
-                03
-            </div>
+border-radius:28px;
 
-            <h3>Mock Interview</h3>
+background:linear-gradient(
+180deg,
+rgba(255,255,255,.05),
+rgba(255,255,255,.03));
 
-            <p>
-                Practice with AI-generated interview questions.
-            </p>
+border:1px solid rgba(255,255,255,.08);
 
-        </div>
+backdrop-filter:blur(24px);
 
-        <div class="workflow-step">
+transition:.35s;
 
-            <div class="step-number">
-                04
-            </div>
+z-index:2;
 
-            <h3>Track Progress</h3>
+}
 
-            <p>
-                Monitor interview readiness and continuously improve.
-            </p>
+.workflow-step:hover{
 
-        </div>
+transform:
+translateY(-8px);
 
-    </div>
+border-color:
+rgba(99,102,241,.35);
 
-</section>
+box-shadow:
+0 20px 60px rgba(99,102,241,.18);
+
+}
+
+.step-number{
+
+width:58px;
+
+height:58px;
+
+border-radius:50%;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+margin-bottom:22px;
+
+font-weight:700;
+
+font-size:1rem;
+
+color:white;
+
+background:
+
+linear-gradient(
+135deg,
+#6366f1,
+#22d3ee);
+
+box-shadow:
+
+0 0 30px rgba(99,102,241,.35);
+
+}
+
+.workflow-step h3{
+
+font-size:1.2rem;
+
+margin-bottom:14px;
+
+}
+
+.workflow-step p{
+
+line-height:1.8;
+
+color:#94a3b8;
+
+font-size:.95rem;
+
+}
