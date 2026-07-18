@@ -113,16 +113,21 @@ display:none;
 
 .logo .logo-mark {
   display: inline-grid;
-  width: 30px;
-  height: 30px;
-  place-items: center;
+  position: relative;
+  width: 32px;
+  height: 32px;
+  overflow: hidden;
   border-radius: 10px;
-  color: #fff;
-  font-size: .78rem;
-  font-weight: 800;
-  background: linear-gradient(145deg, #8b5cf6, #4f46e5 55%, #0891b2);
-  box-shadow: 0 6px 18px rgba(99, 102, 241, .35), inset 0 1px rgba(255,255,255,.35);
-  -webkit-text-fill-color: #fff;
+  background: #080a16;
+  box-shadow: 0 6px 18px rgba(99, 102, 241, .35);
+}
+
+.logo .logo-mark img {
+  position: absolute;
+  width: 50px;
+  max-width: none;
+  height: 50px;
+  transform: translate(-9px, -8px);
 }
 
 .nav-links a {
