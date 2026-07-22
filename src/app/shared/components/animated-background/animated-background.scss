@@ -9,7 +9,7 @@
 .background {
   position: absolute;
   inset: 0;
-  background: #03040a;
+  background: #02030a;
 }
 
 /* Mesh Gradients */
@@ -17,7 +17,7 @@
   position: absolute;
   border-radius: 50%;
   filter: blur(120px);
-  opacity: .45;
+  opacity: .28;
   animation: float 18s ease-in-out infinite;
 }
 
@@ -54,7 +54,7 @@
   height: 900px;
   border-radius: 50%;
   filter: blur(180px);
-  opacity: .15;
+  opacity: .1;
 }
 
 .glow-top {
@@ -74,7 +74,7 @@
 .grid {
   position: absolute;
   inset: 0;
-  opacity: .05;
+  opacity: .032;
   background-image:
     linear-gradient(rgba(99,102,241,.4) 1px, transparent 1px),
     linear-gradient(90deg, rgba(99,102,241,.4) 1px, transparent 1px);
@@ -88,7 +88,7 @@
   height: 2px;
   background: white;
   border-radius: 50%;
-  opacity: .35;
+  opacity: .48;
   animation: particleFloat linear infinite;
 }
 

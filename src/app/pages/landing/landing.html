@@ -49,6 +49,18 @@
     <div class="network-container" id="network" #network>
 
       <div class="network-glow"></div>
+      <div class="network-grid" aria-hidden="true"></div>
+      <div class="network-orbit orbit-one" aria-hidden="true"></div>
+      <div class="network-orbit orbit-two" aria-hidden="true"></div>
+      <div class="network-scan" aria-hidden="true"></div>
+
+      <div class="network-readout readout-top" aria-hidden="true">
+        <span>NEURAL SIGNAL</span>
+        <strong>99.8%</strong>
+      </div>
+      <div class="network-readout readout-bottom" aria-hidden="true">
+        <i></i><span>ANALYZING</span>
+      </div>
 
       <!-- SVG CONNECTIONS + ANIMATED PACKETS -->
       <svg class="connections-svg" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -373,7 +385,7 @@
   </div>
 
 </section>
-<section class="features">
+<section class="features" id="features">
 
   <div class="section-header">
 
@@ -449,7 +461,7 @@
   </div>
 
 </section>
-<section class="workflow">
+<section class="workflow" id="workflow">
 
     <div class="section-header">
 
@@ -624,16 +636,14 @@
                 Start For Free
             </button>
 
-            <button class="btn-secondary">
-                Live Demo
-            </button>
+           
 
         </div>
 
     </div>
 
 </section>
-<footer class="footer">
+<footer class="footer" id="footer">
 
     <div class="footer-top">
 
