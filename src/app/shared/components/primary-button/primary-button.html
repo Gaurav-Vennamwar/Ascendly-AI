@@ -1,0 +1,4 @@
+<button [type]="type()" class="button" [class]="'button ' + variant()">
+  @if (icon()) { <span class="button-icon" aria-hidden="true">{{ icon() }}</span> }
+  <span>{{ label() }}</span>
+</button>
