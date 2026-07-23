@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Ascendly.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+757dbd2b54c5ddd3d1563adb4651120a6c17437e")]
 [assembly: System.Reflection.AssemblyProductAttribute("Ascendly.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Ascendly.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
