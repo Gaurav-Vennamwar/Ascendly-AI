@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Ascendly.API.props" />
+</Project>
