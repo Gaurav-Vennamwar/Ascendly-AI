@@ -1,4 +1,6 @@
-﻿using Ascendly.Application.DTOs.Auth;
+﻿using System.ComponentModel;
+using System.Text.RegularExpressions;
+using Ascendly.Application.DTOs.Auth;
 using Ascendly.Application.Interfaces;
 using Ascendly.Domain.Entities;
 using Ascendly.Infrastructure.Persistence;
@@ -46,6 +48,31 @@ public class AuthService : IAuthService
 
     public async Task<string?> LoginAsync(LoginRequest request)
     {
-        throw new NotImplementedException();
+        //checking if the email exist in our db or not
+        var user = await _context.Users
+    .FirstOrDefaultAsync(x => x.Email == request.Email);
+
+        if (user == null)
+        {
+            return null;
+        }
+        //checking the password is correct or not
+        //BCrypt:
+        //Reads the salt embedded inside the stored hash.
+        //Uses that same salt to hash the password the user just entered.
+        //Compares the result with the stored hash.
+
+        //If they match → true.
+
+        //If not → false.
+        var isPasswordValid = BCrypt.Net.BCrypt.Verify(
+         request.Password,
+        user.PasswordHash);
+
+        if (!isPasswordValid)
+        {
+            return null;
+        }
+        return "Login Successful";
     }
 }

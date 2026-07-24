@@ -27,4 +27,18 @@ public class AuthController : ControllerBase
 
         return Ok("User registered successfully.");
     }
+    //endpoint to login the user 
+    [HttpPost("login")]
+    public async Task<IActionResult> Login(LoginRequest request)
+    {
+        //all the work is done by the auth service
+        var result = await _authService.LoginAsync(request);
+
+        if (result == null)
+        {
+            return Unauthorized("Invalid email or password.");
+        }
+
+        return Ok(result);
+    }
 }
