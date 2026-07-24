@@ -7,10 +7,10 @@ using Ascendly.Application.DTOs.Auth;
 
 namespace Ascendly.Application.Interfaces
 {
-    internal interface IAuthService
+    public interface IAuthService
     {
-        Task<bool> RegisterAsync(RegisterRequest request);
+       public Task<bool> RegisterAsync(RegisterRequest request);
 
-        Task<string?> LoginAsync(LoginRequest request);
+        public Task<string?> LoginAsync(LoginRequest request);
     }
 }
