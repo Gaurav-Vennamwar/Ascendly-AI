@@ -1,2 +1,0 @@
-import { Component } from '@angular/core'; import { WorkspaceLayout } from '../../shared/components/workspace-layout/workspace-layout'; import { PrimaryButton } from '../../shared/components/primary-button/primary-button';
-@Component({selector:'app-mock-interview-page',standalone:true,imports:[WorkspaceLayout,PrimaryButton],templateUrl:'./mock-interview-page.html',styleUrl:'./mock-interview-page.scss'}) export class MockInterviewPage {}

@@ -1,2 +1,0 @@
-import { Component } from '@angular/core'; import { WorkspaceLayout } from '../../shared/components/workspace-layout/workspace-layout'; import { MetricCard } from '../../shared/components/metric-card/metric-card'; import { PrimaryButton } from '../../shared/components/primary-button/primary-button';
-@Component({selector:'app-profile-page',standalone:true,imports:[WorkspaceLayout,MetricCard,PrimaryButton],templateUrl:'./profile-page.html',styleUrl:'./profile-page.scss'}) export class ProfilePage {}
