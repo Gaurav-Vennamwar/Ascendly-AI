@@ -1,22 +1,34 @@
 ﻿using System.ComponentModel;
+using System.Security.Claims;
+using System.Text;
 using System.Text.RegularExpressions;
 using Ascendly.Application.DTOs.Auth;
 using Ascendly.Application.Interfaces;
 using Ascendly.Domain.Entities;
 using Ascendly.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using System.IdentityModel.Tokens.Jwt;
+
+
+
+using BCrypt.Net;
+
+using Microsoft.IdentityModel.Tokens;
 
 namespace Ascendly.Infrastructure.Services;
 
 public class AuthService : IAuthService
 {
     private readonly ApplicationDbContext _context;
+    private readonly IConfiguration _configuration;
 
-    public AuthService(ApplicationDbContext context)
+    public AuthService(ApplicationDbContext context, IConfiguration configuration)
     {
         _context = context;
+        _configuration = configuration;
     }
-
+    //register service for the user to register the user 
     public async Task<bool> RegisterAsync(RegisterRequest request)
     {
         //checking if the email already exists or not 
@@ -45,7 +57,7 @@ public class AuthService : IAuthService
         return true;
 
     }
-
+    //login service to login the users
     public async Task<string?> LoginAsync(LoginRequest request)
     {
         //checking if the email exist in our db or not
@@ -73,6 +85,34 @@ public class AuthService : IAuthService
         {
             return null;
         }
-        return "Login Successful";
+        return GenerateJwtToken(user);
+    }
+    //creating jwt token for the users
+    private string GenerateJwtToken(User user)
+    {
+        //c;aims users id email and roles as a digitally signed 
+        var claims = new[]
+        {
+        new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+        new Claim(JwtRegisteredClaimNames.Email, user.Email),
+        new Claim(ClaimTypes.Role, user.Role)
+    };
+        //the symmetric key from app settings .json
+        var key = new SymmetricSecurityKey(
+            Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]!));
+
+        var credentials = new SigningCredentials(
+            key,
+            SecurityAlgorithms.HmacSha256);
+        //creating the jwt token
+        var token = new JwtSecurityToken(
+            issuer: _configuration["Jwt:Issuer"],
+            audience: _configuration["Jwt:Audience"],
+            claims: claims,
+            expires: DateTime.UtcNow.AddMinutes(
+                Convert.ToDouble(_configuration["Jwt:ExpiryMinutes"])),
+            signingCredentials: credentials);
+
+        return new JwtSecurityTokenHandler().WriteToken(token);
     }
 }
