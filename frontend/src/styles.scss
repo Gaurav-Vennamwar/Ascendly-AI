@@ -34,6 +34,7 @@ html,
 body {
   width: 100%;
   height: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -41,6 +42,20 @@ body {
   background: radial-gradient(circle at 50% -20%, rgba(99, 102, 241, .18), transparent 33rem), #06070d;
   color: var(--text);
   overflow-x: hidden;
+  min-width: 320px;
+}
+
+img,
+svg,
+canvas {
+  max-width: 100%;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
 }
 
 code,

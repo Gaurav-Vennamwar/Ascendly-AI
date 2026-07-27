@@ -1,5 +1,7 @@
-﻿using Ascendly.Application.DTOs.Auth;
+﻿using System.Security.Claims;
+using Ascendly.Application.DTOs.Auth;
 using Ascendly.Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ascendly.API.Controllers;
@@ -40,5 +42,16 @@ public class AuthController : ControllerBase
         }
 
         return Ok(result);
+    }
+    [Authorize]
+    [HttpGet("me")]
+    public IActionResult Me()
+    {
+        return Ok(new
+        {
+            UserId = User.FindFirstValue(ClaimTypes.NameIdentifier),
+            Email = User.FindFirstValue(ClaimTypes.Email),
+            Role = User.FindFirstValue(ClaimTypes.Role)
+        });
     }
 }
