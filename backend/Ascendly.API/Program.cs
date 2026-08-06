@@ -89,6 +89,9 @@ builder.Services.AddScoped<IJwtService, JwtService>();
 //registering the refresh token service 
 builder.Services.AddScoped<IRefreshTokenService, RefreshTokenService>();
 
+//regustering the email verification token service 
+builder.Services.AddScoped<IEmailVerificationService, EmailVerificationService>();
+
 
 var app = builder.Build();
 

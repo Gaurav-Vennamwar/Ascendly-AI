@@ -20,12 +20,14 @@ public class AuthService : IAuthService
     private readonly ApplicationDbContext _context;
     private readonly IJwtService _jwtService;
     private readonly IRefreshTokenService _refreshTokenService;
+    private readonly IEmailVerificationService _emailVerificationService;
 
-    public AuthService(ApplicationDbContext context, IConfiguration configuration, IJwtService jwtService, IRefreshTokenService refreshTokenService)
+    public AuthService(ApplicationDbContext context, IConfiguration configuration, IJwtService jwtService, IRefreshTokenService refreshTokenService, IEmailVerificationService emailVerificationService)
     {
         _context = context;
         _jwtService = jwtService;
         _refreshTokenService = refreshTokenService;
+        _emailVerificationService = emailVerificationService;
     }
     //register service for the user to register the user 
     public async Task<bool> RegisterAsync(RegisterRequest request)
@@ -50,6 +52,12 @@ public class AuthService : IAuthService
         };
         //saving it 
         _context.Users.Add(user);
+
+        await _context.SaveChangesAsync();
+        //generating the token for the email verification 
+        var verificationToken = _emailVerificationService.Generate(user);
+
+        _context.EmailVerificationTokens.Add(verificationToken);
 
         await _context.SaveChangesAsync();
 
@@ -163,6 +171,37 @@ public class AuthService : IAuthService
         refreshToken.IsRevoked = true;
         refreshToken.RevokedAt = DateTime.UtcNow;
         //revoke karke save changes in the db 
+        await _context.SaveChangesAsync();
+
+        return true;
+    }
+
+    //the email verification service
+    public async Task<bool> VerifyEmailAsync(VerifyEmailRequest request)
+    {
+        var verificationToken = await _context.EmailVerificationTokens
+            .Include(x => x.User)
+            .FirstOrDefaultAsync(x => x.Token == request.Token);
+
+        if (verificationToken == null)
+        {
+            return false;
+        }
+
+        if (verificationToken.IsUsed)//to check already used or not 
+        {
+            return false;
+        }
+
+        if (verificationToken.ExpiresAt < DateTime.UtcNow)
+        {
+            return false;
+        }
+
+        verificationToken.User.EmailVerified = true;
+
+        verificationToken.IsUsed = true;
+
         await _context.SaveChangesAsync();
 
         return true;

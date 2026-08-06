@@ -80,4 +80,17 @@ public class AuthController : ControllerBase
 
         return Ok("Logged out successfully.");
     }
+    //endpoint to verify the email
+    [HttpPost("verify-email")]
+    public async Task<IActionResult> VerifyEmail(VerifyEmailRequest request)
+    {
+        var result = await _authService.VerifyEmailAsync(request);
+
+        if (!result)
+        {
+            return BadRequest("Invalid or expired verification token.");
+        }
+
+        return Ok("Email verified successfully.");
+    }
 }

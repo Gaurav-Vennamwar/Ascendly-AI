@@ -23,6 +23,7 @@ namespace Ascendly.Domain.Entities
 
         public bool IsActive { get; set; } = true;
         public ICollection<RefreshToken> RefreshTokens { get; set; } = new List<RefreshToken>();
+        public bool EmailVerified { get; set; } = false;
     }
 }
     
