@@ -11,6 +11,7 @@ namespace Ascendly.Application.Interfaces
     {
        public Task<bool> RegisterAsync(RegisterRequest request);
 
-        public Task<string?> LoginAsync(LoginRequest request);
+        public Task<AuthResponse?> LoginAsync(LoginRequest request);
+        public Task<AuthResponse?> RefreshTokenAsync(RefreshTokenRequest request);
     }
 }

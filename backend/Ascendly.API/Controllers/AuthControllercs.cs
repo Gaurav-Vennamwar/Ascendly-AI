@@ -54,4 +54,17 @@ public class AuthController : ControllerBase
             Role = User.FindFirstValue(ClaimTypes.Role)
         });
     }
+    //refreh token endpoint to refreh rotate the refreh token 
+    [HttpPost("refresh")]
+    public async Task<IActionResult> Refresh(RefreshTokenRequest request)
+    {
+        var result = await _authService.RefreshTokenAsync(request);
+        //The controller simply delegates the request to the authentication service. The service validates the refresh token, checks whether it's still active, revokes it, generates a new access token and a new refresh token, stores the new refresh token, and returns the new token pair. This is called refresh token rotation because every refresh invalidates the previous refresh token.
+        if (result == null)
+        {
+            return Unauthorized("Invalid or expired refresh token.");
+        }
+
+        return Ok(result);
+    }
 }

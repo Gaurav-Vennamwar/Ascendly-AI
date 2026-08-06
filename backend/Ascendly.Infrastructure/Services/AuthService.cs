@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -6,27 +7,25 @@ using Ascendly.Application.DTOs.Auth;
 using Ascendly.Application.Interfaces;
 using Ascendly.Domain.Entities;
 using Ascendly.Infrastructure.Persistence;
+using BCrypt.Net;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System.IdentityModel.Tokens.Jwt;
-
-
-
-using BCrypt.Net;
-
 using Microsoft.IdentityModel.Tokens;
+using static Ascendly.Infrastructure.Services.JwtService;
 
 namespace Ascendly.Infrastructure.Services;
 
 public class AuthService : IAuthService
 {
     private readonly ApplicationDbContext _context;
-    private readonly IConfiguration _configuration;
+    private readonly IJwtService _jwtService;
+    private readonly IRefreshTokenService _refreshTokenService;
 
-    public AuthService(ApplicationDbContext context, IConfiguration configuration)
+    public AuthService(ApplicationDbContext context, IConfiguration configuration, IJwtService jwtService, IRefreshTokenService refreshTokenService)
     {
         _context = context;
-        _configuration = configuration;
+        _jwtService = jwtService;
+        _refreshTokenService = refreshTokenService;
     }
     //register service for the user to register the user 
     public async Task<bool> RegisterAsync(RegisterRequest request)
@@ -58,7 +57,7 @@ public class AuthService : IAuthService
 
     }
     //login service to login the users
-    public async Task<string?> LoginAsync(LoginRequest request)
+    public async Task<AuthResponse?> LoginAsync(LoginRequest request)
     {
         //checking if the email exist in our db or not
         var user = await _context.Users
@@ -85,34 +84,97 @@ public class AuthService : IAuthService
         {
             return null;
         }
-        return GenerateJwtToken(user);
-    }
-    //creating jwt token for the users
-    private string GenerateJwtToken(User user)
-    {
-        //c;aims users id email and roles as a digitally signed 
-        var claims = new[]
+        var accessToken = _jwtService.GenerateToken(user);
+
+        var refreshToken = _refreshTokenService.Generate(user);
+        _context.RefreshTokens.Add(refreshToken);
+
+        await _context.SaveChangesAsync();
+
+        return new AuthResponse
         {
-        new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
-        new Claim(JwtRegisteredClaimNames.Email, user.Email),
-        new Claim(ClaimTypes.Role, user.Role)
-    };
-        //the symmetric key from app settings .json
-        var key = new SymmetricSecurityKey(
-            Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]!));
+            AccessToken = accessToken,
+            RefreshToken = refreshToken.Token,
+            ExpiresAt = DateTime.UtcNow.AddMinutes(
+              Convert.ToDouble(15))
+        };
 
-        var credentials = new SigningCredentials(
-            key,
-            SecurityAlgorithms.HmacSha256);
-        //creating the jwt token
-        var token = new JwtSecurityToken(
-            issuer: _configuration["Jwt:Issuer"],
-            audience: _configuration["Jwt:Audience"],
-            claims: claims,
-            expires: DateTime.UtcNow.AddMinutes(
-                Convert.ToDouble(_configuration["Jwt:ExpiryMinutes"])),
-            signingCredentials: credentials);
 
-        return new JwtSecurityTokenHandler().WriteToken(token);
     }
+    //the main game of the refresh token rotaion
+    public async Task<AuthResponse?> RefreshTokenAsync(RefreshTokenRequest request)
+    {
+        //taking the user and the refresh token 
+        var oldRefreshToken = await _context.RefreshTokens
+            .Include(x => x.User)
+            .FirstOrDefaultAsync(x => x.Token == request.RefreshToken);
+
+        //checking if the token is null or not
+        if (oldRefreshToken == null)
+        {
+            return null;
+        }
+        //checking the token is active or not
+        if (!oldRefreshToken.IsActive)
+        {
+            return null;
+        }
+        //generating the new acess token and the refresh token 
+        var newAccessToken = _jwtService.GenerateToken(oldRefreshToken.User);
+
+        var newRefreshToken = _refreshTokenService.Generate(oldRefreshToken.User);
+
+        //revoking the old token and replacing it by the new one
+        oldRefreshToken.IsRevoked = true;
+        oldRefreshToken.RevokedAt = DateTime.UtcNow;
+        oldRefreshToken.ReplacedByToken = newRefreshToken.Token;
+
+        //saving the new refresh token 
+        _context.RefreshTokens.Add(newRefreshToken);
+
+        await _context.SaveChangesAsync();
+
+        //returning the access token and the refresh token
+        return new AuthResponse
+        {
+            AccessToken = newAccessToken,
+            RefreshToken = newRefreshToken.Token,
+            ExpiresAt = DateTime.UtcNow.AddMinutes(15)
+        };
+
+    }
+
+
+    //shifted to the jwt service 
+
+    //creating jwt token for the users
+    //private string GenerateJwtToken(User user)
+    //{
+    //    //c;aims users id email and roles as a digitally signed 
+    //    var claims = new[]
+    //    {
+    //    new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+    //    new Claim(JwtRegisteredClaimNames.Email, user.Email),
+    //    new Claim(ClaimTypes.Role, user.Role)
+    //};
+    //    //the symmetric key from app settings .json
+    //    var key = new SymmetricSecurityKey(
+    //        Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]!));
+
+    //    var credentials = new SigningCredentials(
+    //        key,
+    //        SecurityAlgorithms.HmacSha256);
+    //    //creating the jwt token
+    //    var token = new JwtSecurityToken(
+    //        issuer: _configuration["Jwt:Issuer"],
+    //        audience: _configuration["Jwt:Audience"],
+    //        claims: claims,
+    //        expires: DateTime.UtcNow.AddMinutes(
+    //            Convert.ToDouble(_configuration["Jwt:ExpiryMinutes"])),
+    //        signingCredentials: credentials);
+
+    //    return new JwtSecurityTokenHandler().WriteToken(token);
+    //}
+
+
 }

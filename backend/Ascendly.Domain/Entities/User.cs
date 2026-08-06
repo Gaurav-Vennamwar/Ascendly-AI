@@ -18,13 +18,11 @@ namespace Ascendly.Domain.Entities
 
         public string Role { get; set; } = "User";
 
-        public string? RefreshToken { get; set; }
-
-        public DateTime? RefreshTokenExpiryTime { get; set; }
-
+      
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         public bool IsActive { get; set; } = true;
+        public ICollection<RefreshToken> RefreshTokens { get; set; } = new List<RefreshToken>();
     }
 }
     
