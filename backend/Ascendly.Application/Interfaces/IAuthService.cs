@@ -13,5 +13,6 @@ namespace Ascendly.Application.Interfaces
 
         public Task<AuthResponse?> LoginAsync(LoginRequest request);
         public Task<AuthResponse?> RefreshTokenAsync(RefreshTokenRequest request);
+        public Task<bool> LogoutAsync(LogoutRequest request);
     }
 }

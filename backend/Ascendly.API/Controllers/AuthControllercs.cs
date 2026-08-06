@@ -67,4 +67,17 @@ public class AuthController : ControllerBase
 
         return Ok(result);
     }
+    //endpoint to logout the user
+    [HttpPost("logout")]
+    public async Task<IActionResult> Logout(LogoutRequest request)
+    {
+        var result = await _authService.LogoutAsync(request);
+        //agar pahile se hie expierd or anything then :
+        if (!result)
+        {
+            return Unauthorized("Invalid or expired refresh token.");
+        }
+
+        return Ok("Logged out successfully.");
+    }
 }

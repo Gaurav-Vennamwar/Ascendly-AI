@@ -144,6 +144,29 @@ public class AuthService : IAuthService
 
     }
 
+    // the logout service to logout the user the only logic is to revoke the user's refresh token and returns a boolean indicating whether the operation succeeded
+    public async Task<bool> LogoutAsync(LogoutRequest request)
+    {
+        var refreshToken = await _context.RefreshTokens
+            .FirstOrDefaultAsync(x => x.Token == request.RefreshToken);
+
+        if (refreshToken == null)
+        {
+            return false;
+        }
+
+        if (!refreshToken.IsActive)
+        {
+            return false;
+        }
+        //agar refreh token nulll and pahile se hie revoked ny hoga toh then make it :
+        refreshToken.IsRevoked = true;
+        refreshToken.RevokedAt = DateTime.UtcNow;
+        //revoke karke save changes in the db 
+        await _context.SaveChangesAsync();
+
+        return true;
+    }
 
     //shifted to the jwt service 
 
