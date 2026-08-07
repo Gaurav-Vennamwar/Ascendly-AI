@@ -21,13 +21,15 @@ public class AuthService : IAuthService
     private readonly IJwtService _jwtService;
     private readonly IRefreshTokenService _refreshTokenService;
     private readonly IEmailVerificationService _emailVerificationService;
+    private readonly IEmailService _emailService;
 
-    public AuthService(ApplicationDbContext context, IConfiguration configuration, IJwtService jwtService, IRefreshTokenService refreshTokenService, IEmailVerificationService emailVerificationService)
+    public AuthService(ApplicationDbContext context, IConfiguration configuration, IJwtService jwtService, IRefreshTokenService refreshTokenService, IEmailVerificationService emailVerificationService, IEmailService emailService)
     {
         _context = context;
         _jwtService = jwtService;
         _refreshTokenService = refreshTokenService;
         _emailVerificationService = emailVerificationService;
+        _emailService = emailService;
     }
     //register service for the user to register the user 
     public async Task<bool> RegisterAsync(RegisterRequest request)
@@ -60,6 +62,13 @@ public class AuthService : IAuthService
         _context.EmailVerificationTokens.Add(verificationToken);
 
         await _context.SaveChangesAsync();
+        //sendiong the verification link
+        var verificationLink =
+                $"http://localhost:4200/verify-email?token={verificationToken.Token}";
+
+        await _emailService.SendVerificationEmailAsync(
+            user.Email,
+            verificationLink);
 
         return true;
 
