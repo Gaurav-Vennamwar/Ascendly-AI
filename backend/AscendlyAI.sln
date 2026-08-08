@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.31903.59
+# Visual Studio Version 18
+VisualStudioVersion = 18.8.12021.73 stable
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ascendly.API", "Ascendly.API\Ascendly.API.csproj", "{37D70B77-3992-4FC6-B385-880D78ADF3D2}"
 EndProject
@@ -11,13 +11,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ascendly.Domain", "Ascendly
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ascendly.Infrastructure", "Ascendly.Infrastructure\Ascendly.Infrastructure.csproj", "{AB5554AC-50A5-44C4-A11C-3D4398A985BB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8371E585-A07F-4C5E-93CC-D8324C0838EA}"
+	ProjectSection(SolutionItems) = preProject
+		Dockerfile. = Dockerfile.
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{37D70B77-3992-4FC6-B385-880D78ADF3D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -36,5 +38,11 @@ Global
 		{AB5554AC-50A5-44C4-A11C-3D4398A985BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB5554AC-50A5-44C4-A11C-3D4398A985BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB5554AC-50A5-44C4-A11C-3D4398A985BB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {07A82079-9E3C-4767-AA01-260C45F8F7AF}
 	EndGlobalSection
 EndGlobal
