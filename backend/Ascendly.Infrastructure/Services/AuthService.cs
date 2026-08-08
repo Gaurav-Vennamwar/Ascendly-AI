@@ -64,7 +64,7 @@ public class AuthService : IAuthService
         await _context.SaveChangesAsync();
         //sendiong the verification link
         var verificationLink =
-                $"http://localhost:4200/verify-email?token={verificationToken.Token}";
+             $"https://ascendlyai.in/verify-email?token={verificationToken.Token}";
 
         await _emailService.SendVerificationEmailAsync(
             user.Email,
