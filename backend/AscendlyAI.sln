@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ascendly.Infrastructure", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8371E585-A07F-4C5E-93CC-D8324C0838EA}"
 	ProjectSection(SolutionItems) = preProject
-		Dockerfile. = Dockerfile.
+		Dockerfile = Dockerfile
 	EndProjectSection
 EndProject
 Global
