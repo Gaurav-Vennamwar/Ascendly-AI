@@ -16,6 +16,22 @@ public class AuthController : ControllerBase
     {
         _authService = authService;
     }
+    //endpoint to verify the email 
+    [HttpPost("request-email-verification")]
+    public async Task<IActionResult> RequestEmailVerification(
+    RequestEmailVerificationRequest request)
+    {
+        var result =
+            await _authService.RequestEmailVerificationAsync(request);
+
+        if (!result)
+        {
+            return BadRequest(
+                "Email is already verified or could not be processed.");
+        }
+
+        return Ok("Verification email sent successfully.");
+    }
     //endpoint to register the user service will handle it for us
     [HttpPost("register")]
     public async Task<IActionResult> Register(RegisterRequest request)
@@ -24,7 +40,7 @@ public class AuthController : ControllerBase
 
         if (!result)
         {
-            return BadRequest("Email already exists.");
+            return BadRequest("Email must be verified before creating your account.");
         }
 
         return Ok("User registered successfully.");

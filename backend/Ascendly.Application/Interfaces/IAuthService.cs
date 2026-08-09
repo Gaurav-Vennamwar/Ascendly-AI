@@ -15,5 +15,6 @@ namespace Ascendly.Application.Interfaces
         public Task<AuthResponse?> RefreshTokenAsync(RefreshTokenRequest request);
         public Task<bool> LogoutAsync(LogoutRequest request);
         Task<bool> VerifyEmailAsync(VerifyEmailRequest request);
+        Task<bool> RequestEmailVerificationAsync(RequestEmailVerificationRequest request);
     }
 }

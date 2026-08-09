@@ -31,48 +31,135 @@ public class AuthService : IAuthService
         _emailVerificationService = emailVerificationService;
         _emailService = emailService;
     }
-    //register service for the user to register the user 
-    public async Task<bool> RegisterAsync(RegisterRequest request)
+    //service to verify the email before creating the user in short a pending acount 
+    //idr apn ne user ka name and email liya then send the user the verification link to thier email
+    
+    public async Task<bool> RequestEmailVerificationAsync(
+    RequestEmailVerificationRequest request)
     {
-        //checking if the email already exists or not 
         var existingUser = await _context.Users
-    .FirstOrDefaultAsync(x => x.Email == request.Email);
+            .FirstOrDefaultAsync(x => x.Email == request.Email);
 
-        if (existingUser != null)
+        // If an already verified account exists, don't send another verification.
+        if (existingUser != null && existingUser.EmailVerified)
         {
             return false;
         }
-        //hashed the password
-        var passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
-        //creating the user entity 
-        var user = new User
-        {
-            FullName = request.FullName,
-            Email = request.Email,
-            PasswordHash = passwordHash,
-            Role = "User"
-        };
-        //saving it 
-        _context.Users.Add(user);
 
-        await _context.SaveChangesAsync();
-        //generating the token for the email verification 
+        // Create a pending user if this email doesn't exist yet.
+        var user = existingUser;
+
+        if (user == null)
+        {
+            user = new User
+            {
+                FullName = request.FullName,
+                Email = request.Email,
+                PasswordHash = string.Empty,
+                Role = "User",
+                EmailVerified = false
+            };
+
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync();
+        }
+
+        // Generate verification token
         var verificationToken = _emailVerificationService.Generate(user);
 
         _context.EmailVerificationTokens.Add(verificationToken);
 
         await _context.SaveChangesAsync();
-        //sendiong the verification link
+
         var verificationLink =
-             $"https://ascendlyai.in/verify-email?token={verificationToken.Token}";
+            $"https://ascendlyai.in/verify-email?token={verificationToken.Token}";
 
         await _emailService.SendVerificationEmailAsync(
             user.Email,
             verificationLink);
 
         return true;
-
     }
+    //creating a register async service so we check if the email is verified first then register the user
+    //idr apn ne check kiya if the the user email is verified or not then only create the user...
+    public async Task<bool> RegisterAsync(RegisterRequest request)
+    {
+        var user = await _context.Users
+            .FirstOrDefaultAsync(x => x.Email == request.Email);
+
+        // User doesn't exist
+        if (user == null)
+        {
+            return false;
+        }
+
+        // Email must be verified first
+        if (!user.EmailVerified)
+        {
+            return false;
+        }
+
+        // Don't allow registering an already completed account
+        if (!string.IsNullOrEmpty(user.PasswordHash))
+        {
+            return false;
+        }
+
+        if (request.Password != request.ConfirmPassword)
+        {
+            return false;
+        }
+
+        // Hash password
+        user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(
+            request.Password);
+
+        await _context.SaveChangesAsync();
+
+        return true;
+    }
+    ////register service for the user to register the user 
+    //public async Task<bool> RegisterAsync(RegisterRequest request)
+    //{
+    //    //checking if the email already exists or not 
+    //    var existingUser = await _context.Users
+    //.FirstOrDefaultAsync(x => x.Email == request.Email);
+
+    //    if (existingUser != null)
+    //    {
+    //        return false;
+    //    }
+    //    //hashed the password
+    //    var passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
+    //    //creating the user entity 
+    //    var user = new User
+    //    {
+    //        FullName = request.FullName,
+    //        Email = request.Email,
+    //        PasswordHash = passwordHash,
+    //        Role = "User"
+    //    };
+    //    //saving it 
+    //    _context.Users.Add(user);
+
+    //    await _context.SaveChangesAsync();
+    //    //generating the token for the email verification 
+    //    var verificationToken = _emailVerificationService.Generate(user);
+
+    //    _context.EmailVerificationTokens.Add(verificationToken);
+
+    //    await _context.SaveChangesAsync();
+    //    //sendiong the verification link
+    //    var verificationLink =
+    //         $"https://ascendlyai.in/verify-email?token={verificationToken.Token}";
+
+    //    await _emailService.SendVerificationEmailAsync(
+    //        user.Email,
+    //        verificationLink);
+
+    //    return true;
+
+    //}
     //login service to login the users
     public async Task<AuthResponse?> LoginAsync(LoginRequest request)
     {
