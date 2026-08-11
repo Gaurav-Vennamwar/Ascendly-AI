@@ -1,12 +1,140 @@
 <main class="auth-shell register-shell">
   <section class="auth-showcase">
-    <a routerLink="/" class="auth-brand"><span class="brand-mark"><img src="logo.png" alt="Ascendly AI"></span><span>Ascendly <b>AI</b></span></a>
-    <div class="showcase-orbit orbit-one"></div><div class="showcase-orbit orbit-two"></div><div class="showcase-signal signal-one"></div><div class="showcase-signal signal-two"></div>
-    <div class="showcase-copy"><span class="eyebrow">Your next chapter starts here</span><h1>Bring your ambition.<br><em>We’ll bring the structure.</em></h1><p>Turn career preparation into a repeatable, confident practice—one thoughtful step at a time.</p><ul><li><i></i> Build an interview-ready profile</li><li><i></i> Get clear on what to improve</li><li><i></i> Create a path to your next role</li></ul></div>
-    <footer>© 2026 Ascendly AI <span>•</span> Prepare <span>•</span> Practice <span>•</span> Ascend</footer>
+    <a routerLink="/" class="auth-brand"
+      ><span class="brand-mark"><img src="logo.png" alt="Ascendly AI" /></span
+      ><span>Ascendly <b>AI</b></span></a
+    >
+    <div class="showcase-orbit orbit-one"></div>
+    <div class="showcase-orbit orbit-two"></div>
+    <div class="showcase-signal signal-one"></div>
+    <div class="showcase-signal signal-two"></div>
+    <div class="showcase-copy">
+      <span class="eyebrow">Your next chapter starts here</span>
+      <h1>Bring your ambition.<br /><em>We’ll bring the structure.</em></h1>
+      <p>
+        Turn career preparation into a repeatable, confident practice—one thoughtful step at a time.
+      </p>
+      <ul>
+        <li><i></i> Build an interview-ready profile</li>
+        <li><i></i> Get clear on what to improve</li>
+        <li><i></i> Create a path to your next role</li>
+      </ul>
+    </div>
+    <footer>
+      © 2026 Ascendly AI <span>•</span> Prepare <span>•</span> Practice <span>•</span> Ascend
+    </footer>
   </section>
-  <section class="auth-panel"><div class="auth-card register-card"><div class="card-reflection"></div><div class="form-head"><span class="eyebrow">Create your workspace</span><h2>Start your ascent</h2><p>Set up your free career intelligence workspace.</p></div>
-    <form (submit)="$event.preventDefault()" novalidate><label class="field-label" for="register-name">Full name</label><div class="field"><span aria-hidden="true">◇</span><input id="register-name" type="text" autocomplete="name" placeholder="Jordan Davis" required></div><label class="field-label" for="register-email">Email address</label><div class="field"><span aria-hidden="true">@</span><input id="register-email" type="email" autocomplete="email" placeholder="you@example.com" required></div><div class="field-row"><div><label class="field-label" for="register-password">Password</label><div class="field"><span aria-hidden="true">●</span><input id="register-password" type="password" autocomplete="new-password" placeholder="Create password" required></div></div><div><label class="field-label" for="confirm-password">Confirm password</label><div class="field"><span aria-hidden="true">●</span><input id="confirm-password" type="password" autocomplete="new-password" placeholder="Confirm password" required></div></div></div><label class="check terms"><input type="checkbox" required> <span>I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</span></label><button class="submit-button" type="submit">Create account <span aria-hidden="true">→</span></button></form>
-    <p class="auth-switch">Already have an account? <a routerLink="/login">Sign in</a></p>
-  </div></section>
+  <section class="auth-panel">
+    <div class="auth-card register-card">
+      <div class="card-reflection"></div>
+      <div class="form-head">
+        <span class="eyebrow">Create your workspace</span>
+        <h2>Start your ascent</h2>
+        <p>Verify your email first, then finish setting up your account.</p>
+      </div>
+      <form (ngSubmit)="register()" novalidate>
+        <label class="field-label" for="register-name">Full name</label>
+        <div class="field">
+          <span aria-hidden="true">◇</span
+          ><input
+            id="register-name"
+            type="text"
+            name="fullName"
+            [(ngModel)]="fullName"
+            autocomplete="name"
+            placeholder="Your name"
+            required
+          />
+        </div>
+        <div class="email-heading">
+          <label class="field-label" for="register-email">Email address</label
+          ><span class="step-indicator">Step 1 of 2</span>
+        </div>
+        <div class="verify-row">
+          <div class="field">
+            <span aria-hidden="true">@</span
+            ><input
+              id="register-email"
+              type="email"
+              name="email"
+              [(ngModel)]="email"
+              (ngModelChange)="onEmailChange()"
+              autocomplete="email"
+              placeholder="you@example.com"
+              required
+            />
+          </div>
+          <button
+            type="button"
+            class="verify-button"
+            (click)="requestVerification()"
+            [class.sent]="emailVerified"
+          >
+           {{ emailVerified ? '✓ Verified' : 'Verify email' }}
+          </button>
+        </div>
+        @if (verificationNotice()) {
+          <div class="verification-notice" [class.success]="emailVerified">
+            <i aria-hidden="true">{{ emailVerified ? '✓' : '!' }}</i
+            ><span>{{ verificationNotice() }}</span>
+          </div>
+        }
+        <div class="password-section" [class.locked]="!emailVerified">
+          <div class="password-heading">
+            <span class="field-label">Create your password</span
+            ><span class="step-indicator">Step 2 of 2</span>
+          </div>
+          <p>Available after you request email verification.</p>
+          <div class="field-row">
+            <div>
+              <label class="field-label" for="register-password">Password</label>
+              <div class="field">
+                <span aria-hidden="true">●</span
+                ><input
+                  id="register-password"
+                  type="password"
+                  name="password"
+                  [(ngModel)]="password"
+                  autocomplete="new-password"
+                  placeholder="Create password"
+                 [disabled]="!emailVerified"
+                  required
+                />
+              </div>
+            </div>
+            <div>
+              <label class="field-label" for="confirm-password">Confirm password</label>
+              <div class="field">
+                <span aria-hidden="true">●</span
+                ><input
+                  id="confirm-password"
+                  type="password"
+                  name="confirmPassword"
+                  [(ngModel)]="confirmPassword"
+                  autocomplete="new-password"
+                  placeholder="Confirm password"
+                  [disabled]="!emailVerified"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <label class="check terms"
+          ><input
+            type="checkbox"
+            name="terms"
+           [disabled]="!emailVerified"
+            required
+          /><span
+            >I agree to the <a href="#">Terms of Service</a> and
+            <a href="#">Privacy Policy</a>.</span
+          ></label
+        ><button class="submit-button" type="submit" [disabled]="!emailVerified">
+          Create account <span aria-hidden="true">→</span>
+        </button>
+      </form>
+      <p class="auth-switch">Already have an account? <a routerLink="/login">Sign in</a></p>
+    </div>
+  </section>
 </main>

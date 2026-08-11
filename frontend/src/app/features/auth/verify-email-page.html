@@ -1,0 +1,27 @@
+<main class="auth-shell">
+  <section class="auth-panel">
+    <div class="auth-card">
+      <div class="form-head">
+        <span class="eyebrow">Email verification</span>
+
+        <h2>{{ status }}</h2>
+
+        @if (success) {
+          <p>You can now finish creating your Ascendly AI account.</p>
+        } @else {
+          <p>Please wait while we verify your email.</p>
+        }
+      </div>
+
+      @if (success) {
+        <button
+          class="submit-button"
+          type="button"
+          (click)="router.navigate(['/register'])"
+        >
+          Continue to registration →
+        </button>
+      }
+    </div>
+  </section>
+</main>

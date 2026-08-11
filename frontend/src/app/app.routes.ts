@@ -7,6 +7,7 @@ import { LearningRoadmapPage } from './features/learning-roadmap/learning-roadma
 import { ProfilePage } from './features/profile/profile-page';
 import { LoginPage } from './features/auth/login-page';
 import { RegisterPage } from './features/auth/register-page';
+import { VerifyEmailPage } from './features/auth/verify-email-page';
 
 export const routes: Routes = [
   {
@@ -22,6 +23,7 @@ export const routes: Routes = [
   { path: 'learning-roadmap', component: LearningRoadmapPage },
   { path: 'profile', component: ProfilePage },
   { path: 'login', component: LoginPage },
+  { path: 'verify-email', component: VerifyEmailPage},
   { path: 'register', component: RegisterPage },
   {
     path: '**',
