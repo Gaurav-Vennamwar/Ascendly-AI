@@ -27,7 +27,9 @@ export class VerifyEmailPage implements OnInit {
     }
 
     this.authService.verifyEmail(token).subscribe({
-      next: () => {
+      next: (response) => {
+        console.log('VERIFY EMAIL SUCCESS:', response);
+
         localStorage.setItem('ascendlyEmailVerified', 'true');
 
         this.success = true;
@@ -35,7 +37,7 @@ export class VerifyEmailPage implements OnInit {
         this.status = 'Email verified successfully!';
       },
       error: (error) => {
-        console.error('Email verification failed:', error);
+        console.error('VERIFY EMAIL ERROR:', error);
 
         this.success = false;
         this.verifying = false;
