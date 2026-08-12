@@ -1,5 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-verify-email-page',
@@ -10,10 +11,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class VerifyEmailPage implements OnInit {
   private route = inject(ActivatedRoute);
   router = inject(Router);
+  private authService = inject(AuthService);
 
   status = 'Verifying your email...';
   success = false;
-  verifying = false;
+  verifying = true;
 
   ngOnInit() {
     const token = this.route.snapshot.queryParamMap.get('token');
@@ -24,10 +26,21 @@ export class VerifyEmailPage implements OnInit {
       return;
     }
 
-    // The registration flow is intentionally frontend-led for now. Backend
-    // token validation can be connected later without changing this UI.
-    localStorage.setItem('ascendlyEmailVerified', 'true');
-    this.success = true;
-    this.status = 'Email verified successfully!';
+    this.authService.verifyEmail(token).subscribe({
+      next: () => {
+        localStorage.setItem('ascendlyEmailVerified', 'true');
+
+        this.success = true;
+        this.verifying = false;
+        this.status = 'Email verified successfully!';
+      },
+      error: (error) => {
+        console.error('Email verification failed:', error);
+
+        this.success = false;
+        this.verifying = false;
+        this.status = 'This verification link is invalid or expired.';
+      }
+    });
   }
 }
