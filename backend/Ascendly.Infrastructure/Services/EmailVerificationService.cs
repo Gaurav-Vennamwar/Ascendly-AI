@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Ascendly.Application.Interfaces;
 using Ascendly.Domain.Entities;
+using Microsoft.AspNetCore.WebUtilities;
 
 namespace Ascendly.Infrastructure.Services
 {
@@ -18,7 +19,7 @@ namespace Ascendly.Infrastructure.Services
 
             return new EmailVerificationToken
             {
-                Token = Convert.ToBase64String(randomBytes),
+                Token = WebEncoders.Base64UrlEncode(randomBytes),
                 UserId = user.Id,
                 CreatedAt = DateTime.UtcNow,
                 ExpiresAt = DateTime.UtcNow.AddHours(24),
