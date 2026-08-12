@@ -8,8 +8,10 @@
 
         @if (success) {
           <p>You can now finish creating your Ascendly AI account.</p>
-        } @else {
+        } @else if (verifying) {
           <p>Please wait while we verify your email.</p>
+        } @else {
+          <p>You can retry this link. If it still fails, request a new verification email.</p>
         }
       </div>
 
@@ -20,6 +22,10 @@
           (click)="router.navigate(['/register'])"
         >
           Continue to registration →
+        </button>
+      } @else if (!verifying) {
+        <button class="submit-button" type="button" (click)="verify()">
+          Try verification again →
         </button>
       }
     </div>
