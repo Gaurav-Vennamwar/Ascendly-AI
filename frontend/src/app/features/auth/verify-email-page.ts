@@ -45,4 +45,4 @@ export class VerifyEmailPage implements OnInit {
       }
     });
   }
-}
+} 
