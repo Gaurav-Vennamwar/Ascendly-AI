@@ -8,6 +8,7 @@ import { ProfilePage } from './features/profile/profile-page';
 import { LoginPage } from './features/auth/login-page';
 import { RegisterPage } from './features/auth/register-page';
 import { VerifyEmailPage } from './features/auth/verify-email-page';
+import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -18,10 +19,10 @@ export const routes: Routes = [
     path: 'resume-analyzer',
     component: ResumeAnalyzerPage
   },
-  { path: 'dashboard', component: DashboardPage },
-  { path: 'mock-interview', component: MockInterviewPage },
-  { path: 'learning-roadmap', component: LearningRoadmapPage },
-  { path: 'profile', component: ProfilePage },
+  { path: 'dashboard', component: DashboardPage, canActivate: [authGuard] },
+  { path: 'mock-interview', component: MockInterviewPage, canActivate: [authGuard]},
+  { path: 'learning-roadmap', component: LearningRoadmapPage, canActivate: [authGuard] },
+  { path: 'profile', component: ProfilePage, canActivate: [authGuard] },
   { path: 'login', component: LoginPage },
   { path: 'verify-email', component: VerifyEmailPage},
   { path: 'register', component: RegisterPage },

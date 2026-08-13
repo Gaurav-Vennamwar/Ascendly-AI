@@ -101,14 +101,32 @@ public class AuthController : ControllerBase
     }
     //endpoint to logout the user
     [HttpPost("logout")]
-    public async Task<IActionResult> Logout(LogoutRequest request)
+    public async Task<IActionResult> Logout()
     {
-        var result = await _authService.LogoutAsync(request);
-        //agar pahile se hie expierd or anything then :
+        // Read the refresh token from the HttpOnly cookie.
+        // Angular/JavaScript never gets direct access to it.
+        var refreshToken = Request.Cookies["refreshToken"];
+
+        if (string.IsNullOrEmpty(refreshToken))
+        {
+            return Unauthorized("No active refresh token found.");
+        }
+
+        // Pass the token to the service.
+        // The service remains responsible for DB/revocation logic.
+        var result = await _authService.LogoutAsync(
+            new LogoutRequest
+            {
+                RefreshToken = refreshToken
+            });
+
         if (!result)
         {
             return Unauthorized("Invalid or expired refresh token.");
         }
+
+        // Remove the refresh-token cookie from the browser.
+        Response.Cookies.Delete("refreshToken");
 
         return Ok("Logged out successfully.");
     }

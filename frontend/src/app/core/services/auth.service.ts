@@ -67,9 +67,19 @@ setAccessToken(token: string): void {
 //     return localStorage.getItem('refreshToken');
 //   }
 
+logout() {
+  // Backend reads the refresh token from the HttpOnly cookie.
+  // Angular does NOT send or read the refresh token manually.
+  return this.http.post(
+    `${this.apiUrl}/logout`,
+    {},
+    { withCredentials: true, responseType: 'text' }
+  );
+}
   clearTokens(): void {
     // Remove authentication data during logout.
     localStorage.removeItem('accessToken');
     // localStorage.removeItem('refreshToken');
   }
+
 }
