@@ -4,7 +4,7 @@ import { environment } from '../../../environments/environment';
 
 export interface AuthResponse {
   accessToken: string;
-  refreshToken: string;
+//   refreshToken: string;
   expiresAt: string;
 }
 
@@ -46,25 +46,30 @@ export class AuthService {
       withCredentials: true,
     });
   }
-  //Save both tokens in one central place.
-  // Login component doesn't need to know how storage works.
-  setTokens(response: AuthResponse): void {
-    localStorage.setItem('accessToken', response.accessToken);
-    localStorage.setItem('refreshToken', response.refreshToken);
-  }
+//   //Save both tokens in one central place.
+//   // Login component doesn't need to know how storage works.
+//   setTokens(response: AuthResponse): void {
+//     localStorage.setItem('accessToken', response.accessToken);
+//     localStorage.setItem('refreshToken', response.refreshToken);
+//   }
+// Storing  only the access token.
+// Refresh token is handled securely by the HttpOnly cookie.
+setAccessToken(token: string): void {
+  localStorage.setItem('accessToken', token);
+}
 
   getAccessToken(): string | null {
       // Anyone who needs the access token asks AuthService.
     return localStorage.getItem('accessToken');
   }
 
-  getRefreshToken(): string | null {
-    return localStorage.getItem('refreshToken');
-  }
+//   getRefreshToken(): string | null {
+//     return localStorage.getItem('refreshToken');
+//   }
 
   clearTokens(): void {
     // Remove authentication data during logout.
     localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken');
+    // localStorage.removeItem('refreshToken');
   }
 }

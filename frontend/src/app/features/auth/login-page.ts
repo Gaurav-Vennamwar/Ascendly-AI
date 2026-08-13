@@ -29,26 +29,30 @@ export class LoginPage {
     this.loading = true;
     this.errorMessage = '';
 
-    this.authService.login({
-      email: this.email,
-      password: this.password
-    }).subscribe({
-      next: (response) => {
-        console.log('Login successful:', response);
+    this.authService
+      .login({
+        email: this.email,
+        password: this.password,
+      })
+      .subscribe({
+        next: (response) => {
+          console.log('Login successful:', response);
 
-        this.loading = false;
+          this.loading = false;
 
-        this.authService.setTokens(response);
+          // this.authService.setTokens(response);
+          // Store only the access token.
+          // Refresh token is already stored in the HttpOnly cookie by the backend.
+          this.authService.setAccessToken(response.accessToken);
 
-        this.router.navigate(['/dashboard']);
-      },
-      error: (error) => {
-        console.error('Login failed:', error);
+          this.router.navigate(['/dashboard']);
+        },
+        error: (error) => {
+          console.error('Login failed:', error);
 
-        this.loading = false;
-        this.errorMessage =
-          error.error || 'Invalid email or password.';
-      }
-    });
+          this.loading = false;
+          this.errorMessage = error.error || 'Invalid email or password.';
+        },
+      });
   }
 }
