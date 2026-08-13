@@ -49,7 +49,7 @@ public class AuthController : ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> Login(LoginRequest request)
     {
-        //all the work is done by the auth service
+        // Authentication and token generation happen inside AuthService.
         var result = await _authService.LoginAsync(request);
 
         if (result == null)
@@ -57,7 +57,23 @@ public class AuthController : ControllerBase
             return Unauthorized("Invalid email or password.");
         }
 
-        return Ok(result);
+        // HTTP-specific responsibility:
+        // Store refresh token in an HttpOnly cookie.
+        // JavaScript cannot directly read this cookie.
+        Response.Cookies.Append("refreshToken", result.RefreshToken, new CookieOptions
+        {
+            HttpOnly = true,
+            Secure = true,
+            SameSite = SameSiteMode.None,
+            Expires = DateTime.UtcNow.AddDays(7)
+        });
+
+        // Only send the access token to Angular.
+        return Ok(new
+        {
+            result.AccessToken,
+            result.ExpiresAt
+        });
     }
     [Authorize]
     [HttpGet("me")]

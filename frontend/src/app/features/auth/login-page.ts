@@ -38,10 +38,7 @@ export class LoginPage {
 
         this.loading = false;
 
-        // Temporary token storage.
-        // We'll harden this during the security phase.
-        localStorage.setItem('accessToken', response.accessToken);
-        localStorage.setItem('refreshToken', response.refreshToken);
+        this.authService.setTokens(response);
 
         this.router.navigate(['/dashboard']);
       },
