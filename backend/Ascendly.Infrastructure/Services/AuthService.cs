@@ -64,7 +64,16 @@ public class AuthService : IAuthService
             await _context.SaveChangesAsync();
         }
         //making the previous token is used so pahile tokens cant be used 
+        // Invalidate any previous unused verification tokens.
+        // Only the latest verification link should remain valid.
+        var previousTokens = await _context.EmailVerificationTokens
+            .Where(x => x.UserId == user.Id && !x.IsUsed)
+            .ToListAsync();
 
+        foreach (var token in previousTokens)
+        {
+            token.IsUsed = true;
+        }
         // Generate verification token
         var verificationToken = _emailVerificationService.Generate(user);
 
