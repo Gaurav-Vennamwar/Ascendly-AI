@@ -81,5 +81,22 @@ logout() {
     localStorage.removeItem('accessToken');
     // localStorage.removeItem('refreshToken');
   }
+  getCurrentUser() {
+  // Calls the protected /me endpoint.
+  // The HTTP interceptor automatically adds:
+  // Authorization: Bearer <accessToken>
+  return this.http.get(`${this.apiUrl}/me`);
+}
+refreshAccessToken() {
+  // The refresh token is NOT read here.
+  // Browser automatically sends the HttpOnly cookie.
+  return this.http.post<AuthResponse>(
+    `${this.apiUrl}/refresh`,
+    {},
+    {
+      withCredentials: true,
+    }
+  );
+}
 
 }

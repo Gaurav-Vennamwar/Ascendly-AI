@@ -4,6 +4,7 @@ import { AuthService } from '../../core/services/auth.service';
 import { WorkspaceLayout } from '../../shared/components/workspace-layout/workspace-layout';
 import { MetricCard } from '../../shared/components/metric-card/metric-card';
 import { PrimaryButton } from '../../shared/components/primary-button/primary-button';
+import {  OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-profile-page',
@@ -15,6 +16,18 @@ import { PrimaryButton } from '../../shared/components/primary-button/primary-bu
 export class ProfilePage {
   private authService = inject(AuthService);
   private router = inject(Router);
+
+   ngOnInit(): void {
+    // Call the protected endpoint when Profile opens.
+    this.authService.getCurrentUser().subscribe({
+      next: (user) => {
+        console.log('Authenticated user:', user);
+      },
+      error: (error) => {
+        console.error('Failed to load user:', error);
+      }
+    });
+  }
 
   logout(): void {
     // Backend revokes the refresh token.
