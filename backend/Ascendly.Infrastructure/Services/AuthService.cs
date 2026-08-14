@@ -63,6 +63,7 @@ public class AuthService : IAuthService
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
         }
+        //making the previous token is used so pahile tokens cant be used 
 
         // Generate verification token
         var verificationToken = _emailVerificationService.Generate(user);
@@ -168,6 +169,23 @@ public class AuthService : IAuthService
     .FirstOrDefaultAsync(x => x.Email == request.Email);
 
         if (user == null)
+        {
+            return null;
+        }
+        // User must verify their email before logging in.
+        if (!user.EmailVerified)
+        {
+            return null;
+        }
+
+        // Inactive accounts cannot authenticate.
+        if (!user.IsActive)
+        {
+            return null;
+        }
+
+        // Protect against incomplete/pending accounts.
+        if (string.IsNullOrEmpty(user.PasswordHash))
         {
             return null;
         }

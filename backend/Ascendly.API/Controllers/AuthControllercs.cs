@@ -88,16 +88,43 @@ public class AuthController : ControllerBase
     }
     //refreh token endpoint to refreh rotate the refreh token 
     [HttpPost("refresh")]
-    public async Task<IActionResult> Refresh(RefreshTokenRequest request)
+    public async Task<IActionResult> Refresh()
     {
-        var result = await _authService.RefreshTokenAsync(request);
-        //The controller simply delegates the request to the authentication service. The service validates the refresh token, checks whether it's still active, revokes it, generates a new access token and a new refresh token, stores the new refresh token, and returns the new token pair. This is called refresh token rotation because every refresh invalidates the previous refresh token.
+        // Browser automatically sends the HttpOnly refresh-token cookie.
+        var refreshToken = Request.Cookies["refreshToken"];
+
+        if (string.IsNullOrEmpty(refreshToken))
+        {
+            return Unauthorized("Refresh token not found.");
+        }
+
+        // Auth Service 
+        var result = await _authService.RefreshTokenAsync(
+            new RefreshTokenRequest
+            {
+                RefreshToken = refreshToken
+            });
+
         if (result == null)
         {
             return Unauthorized("Invalid or expired refresh token.");
         }
 
-        return Ok(result);
+        // Replace the old cookie with the newly rotated refresh token.
+        Response.Cookies.Append("refreshToken", result.RefreshToken, new CookieOptions
+        {
+            HttpOnly = true,
+            Secure = true,
+            SameSite = SameSiteMode.None,
+            Expires = DateTime.UtcNow.AddDays(7)
+        });
+
+        // Only return the new access token to Angular.
+        return Ok(new
+        {
+            result.AccessToken,
+            result.ExpiresAt
+        });
     }
     //endpoint to logout the user
     [HttpPost("logout")]
