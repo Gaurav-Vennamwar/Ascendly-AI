@@ -5,5 +5,11 @@ import { JobDescriptionCard } from './components/job-description-card/job-descri
 import { AnalysisDashboard } from './components/analysis-dashboard/analysis-dashboard';
 import { InsightCard } from './components/insight-card/insight-card';
 
-@Component({ selector: 'app-resume-analyzer-page', standalone: true, imports: [WorkspaceLayout, ResumeUploadCard, JobDescriptionCard, AnalysisDashboard, InsightCard], templateUrl: './resume-analyzer-page.html', styleUrl: './resume-analyzer-page.scss' })
+@Component({
+  selector: 'app-resume-analyzer-page',
+  standalone: true,
+  imports: [WorkspaceLayout, ResumeUploadCard, JobDescriptionCard, AnalysisDashboard, InsightCard],
+  templateUrl: './resume-analyzer-page.html',
+  styleUrl: './resume-analyzer-page.scss',
+})
 export class ResumeAnalyzerPage {}

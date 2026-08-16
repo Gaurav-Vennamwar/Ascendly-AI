@@ -1,26 +1,243 @@
-<app-workspace-layout title="Mock Interviews" subtitle="Configure a focused interview practice session." eyebrow="Practice studio">
+<app-workspace-layout
+  title="Mock Interviews"
+  subtitle="Configure a focused interview practice session."
+  eyebrow="Practice studio"
+>
   <div class="interview">
     <section class="setup panel">
-      <div class="intro"><span class="kicker">Interview configuration</span><h2>Build your practice session</h2><p>Choose your format and focus areas. These preferences shape your future interview experience once connected.</p></div>
-      <div class="config-grid">
-        <article class="config-card wide"><span class="step">01</span><h3>Interview type</h3><div class="choice-grid">
-          @for (type of interviewTypes; track type) { <button type="button" [class.selected]="selectedType() === type" (click)="selectedType.set(type)"><b>{{ type }}</b><span>@if (type === 'Technical') { Role-specific knowledge } @else if (type === 'HR') { Culture & communication } @else if (type === 'Behavioral') { Experience & judgment } @else { Balanced practice }</span></button> }
-        </div></article>
-        <article class="config-card"><span class="step">02</span><h3>Target role</h3><label class="select"><select [ngModel]="selectedRole()" (ngModelChange)="selectedRole.set($event)">@for (role of roles; track role) { <option>{{ role }}</option> }</select><span>⌄</span></label><div class="role-chips">@for (role of roles.slice(1); track role) { <button type="button" (click)="selectedRole.set(role)">{{ role }}</button> }</div></article>
-        <article class="config-card"><span class="step">03</span><h3>Difficulty</h3><div class="segmented">@for (difficulty of difficulties; track difficulty) { <button type="button" [class.selected]="selectedDifficulty() === difficulty" (click)="selectedDifficulty.set(difficulty)">{{ difficulty }}</button> }</div><span class="help">Choose a level that helps you grow.</span></article>
-        <article class="config-card wide"><span class="step">04</span><h3>Job description <small>Optional</small></h3><p class="help top-help">If supplied, future AI interview questions can use this job context.</p><textarea placeholder="Paste a job description to guide future interview questions..."></textarea></article>
-        <article class="config-card wide"><span class="step">05</span><h3>Custom topics <small>Optional</small></h3><p class="help top-help">Future interview questions can focus only on the technologies selected here.</p><div class="topic-input">@for (topic of topics(); track topic) { <span>{{ topic }}<button type="button" aria-label="Remove {{ topic }}" (click)="removeTopic(topic)">×</button></span> }<input [(ngModel)]="topicInput" (keydown.enter)="$event.preventDefault(); addTopic()" placeholder="Add a technology"><button type="button" class="add-topic" (click)="addTopic()">Add topic</button></div><p class="topic-examples">Suggested: JWT · Azure · Docker · Microservices · Redis · System Design · DSA · Clean Architecture</p></article>
-        <article class="config-card wide"><span class="step">06</span><h3>Interview duration</h3><div class="duration">@for (duration of durations; track duration) { <button type="button" [class.selected]="selectedDuration() === duration" (click)="selectedDuration.set(duration)">{{ duration }}<span>min</span></button> }</div></article>
-        <article class="config-card wide"><span class="step">07</span><h3>Interview style</h3><p class="help top-help">Choose the communication energy you want to practice against.</p><div class="style-grid">@for (style of styles; track style) { <button type="button" [class.selected]="selectedStyle() === style" (click)="selectedStyle.set(style)"><i></i>{{ style }}</button> }</div></article>
+      <div class="intro">
+        <span class="kicker">Interview configuration</span>
+        <h2>Build your practice session</h2>
+        <p>
+          Choose your format and focus areas. These preferences shape your future interview
+          experience once connected.
+        </p>
       </div>
-      <div class="start"><div><strong>Ready when you are</strong><span>Set your preferences, then begin your session.</span></div><app-primary-button label="Start AI Interview" icon="→"></app-primary-button></div>
+      <div class="config-grid">
+        <article class="config-card wide">
+          <span class="step">01</span>
+          <h3>Interview type</h3>
+          <div class="choice-grid">
+            @for (type of interviewTypes; track type) {
+              <button
+                type="button"
+                [class.selected]="selectedType() === type"
+                (click)="selectedType.set(type)"
+              >
+                <b>{{ type }}</b
+                ><span>
+                  @if (type === 'Technical') {
+                    Role-specific knowledge
+                  } @else if (type === 'HR') {
+                    Culture & communication
+                  } @else if (type === 'Behavioral') {
+                    Experience & judgment
+                  } @else {
+                    Balanced practice
+                  }
+                </span>
+              </button>
+            }
+          </div>
+        </article>
+        <article class="config-card">
+          <span class="step">02</span>
+          <h3>Target role</h3>
+          <label class="select"
+            ><select [ngModel]="selectedRole()" (ngModelChange)="selectedRole.set($event)">
+              @for (role of roles; track role) {
+                <option>{{ role }}</option>
+              }</select
+            ><span>⌄</span></label
+          >
+          <div class="role-chips">
+            @for (role of roles.slice(1); track role) {
+              <button type="button" (click)="selectedRole.set(role)">{{ role }}</button>
+            }
+          </div>
+        </article>
+        <article class="config-card">
+          <span class="step">03</span>
+          <h3>Difficulty</h3>
+          <div class="segmented">
+            @for (difficulty of difficulties; track difficulty) {
+              <button
+                type="button"
+                [class.selected]="selectedDifficulty() === difficulty"
+                (click)="selectedDifficulty.set(difficulty)"
+              >
+                {{ difficulty }}
+              </button>
+            }
+          </div>
+          <span class="help">Choose a level that helps you grow.</span>
+        </article>
+        <article class="config-card wide">
+          <span class="step">04</span>
+          <h3>Job description <small>Optional</small></h3>
+          <p class="help top-help">
+            If supplied, future AI interview questions can use this job context.
+          </p>
+          <textarea
+            placeholder="Paste a job description to guide future interview questions..."
+          ></textarea>
+        </article>
+        <article class="config-card wide">
+          <span class="step">05</span>
+          <h3>Custom topics <small>Optional</small></h3>
+          <p class="help top-help">
+            Future interview questions can focus only on the technologies selected here.
+          </p>
+          <div class="topic-input">
+            @for (topic of topics(); track topic) {
+              <span
+                >{{ topic
+                }}<button
+                  type="button"
+                  aria-label="Remove {{ topic }}"
+                  (click)="removeTopic(topic)"
+                >
+                  ×
+                </button></span
+              >
+            }
+            <input
+              [(ngModel)]="topicInput"
+              (keydown.enter)="$event.preventDefault(); addTopic()"
+              placeholder="Add a technology"
+            /><button type="button" class="add-topic" (click)="addTopic()">Add topic</button>
+          </div>
+          <p class="topic-examples">
+            Suggested: JWT · Azure · Docker · Microservices · Redis · System Design · DSA · Clean
+            Architecture
+          </p>
+        </article>
+        <article class="config-card wide">
+          <span class="step">06</span>
+          <h3>Interview duration</h3>
+          <div class="duration">
+            @for (duration of durations; track duration) {
+              <button
+                type="button"
+                [class.selected]="selectedDuration() === duration"
+                (click)="selectedDuration.set(duration)"
+              >
+                {{ duration }}<span>min</span>
+              </button>
+            }
+          </div>
+        </article>
+        <article class="config-card wide">
+          <span class="step">07</span>
+          <h3>Interview style</h3>
+          <p class="help top-help">Choose the communication energy you want to practice against.</p>
+          <div class="style-grid">
+            @for (style of styles; track style) {
+              <button
+                type="button"
+                [class.selected]="selectedStyle() === style"
+                (click)="selectedStyle.set(style)"
+              >
+                <i></i>{{ style }}
+              </button>
+            }
+          </div>
+        </article>
+      </div>
+      <div class="start">
+        <div>
+          <strong>Ready when you are</strong
+          ><span>Set your preferences, then begin your session.</span>
+        </div>
+        <app-primary-button label="Start AI Interview" icon="→"></app-primary-button>
+      </div>
     </section>
 
     <section class="context-grid">
-      <article class="panel context-card"><span class="kicker">Interviewer context</span><h2>Meet your likely interviewer</h2><p>Personalize your interview based on who will likely conduct it.</p><div class="persona-grid">@for (persona of personas; track persona) { <button type="button" [class.selected]="selectedPersona() === persona" (click)="selectedPersona.set(persona)">{{ persona }}</button> }</div><label class="context-input">Interviewer LinkedIn URL or name <input placeholder="https://linkedin.com/in/... or Priya Shah"></label><div class="context-note"><i>◇</i><p>In future versions, AI will adapt the interview style based on interviewer role and publicly available professional context.</p></div></article>
-      <article class="panel explanation-card"><span class="kicker">Your session at a glance</span><h2>How the interview will work</h2><ul><li><i></i><span><b>Resume context</b>Your resume will be analyzed when a document is available.</span></li><li><i></i><span><b>Role alignment</b>Job description context can shape future questions.</span></li><li><i></i><span><b>Technology focus</b>Selected topics will influence the question set.</span></li><li><i></i><span><b>Communication style</b>Interviewer role and style guide the conversation.</span></li><li><i></i><span><b>Calibrated depth</b>Difficulty adjusts the expected question depth.</span></li><li><i></i><span><b>Actionable feedback</b>Feedback will cover knowledge, communication and confidence.</span></li></ul></article>
+      <article class="panel context-card">
+        <span class="kicker">Interviewer context</span>
+        <h2>Meet your likely interviewer</h2>
+        <p>Personalize your interview based on who will likely conduct it.</p>
+        <div class="persona-grid">
+          @for (persona of personas; track persona) {
+            <button
+              type="button"
+              [class.selected]="selectedPersona() === persona"
+              (click)="selectedPersona.set(persona)"
+            >
+              {{ persona }}
+            </button>
+          }
+        </div>
+        <label class="context-input"
+          >Interviewer LinkedIn URL or name
+          <input placeholder="https://linkedin.com/in/... or Priya Shah"
+        /></label>
+        <div class="context-note">
+          <i>◇</i>
+          <p>
+            In future versions, AI will adapt the interview style based on interviewer role and
+            publicly available professional context.
+          </p>
+        </div>
+      </article>
+      <article class="panel explanation-card">
+        <span class="kicker">Your session at a glance</span>
+        <h2>How the interview will work</h2>
+        <ul>
+          <li>
+            <i></i
+            ><span
+              ><b>Resume context</b>Your resume will be analyzed when a document is available.</span
+            >
+          </li>
+          <li>
+            <i></i
+            ><span><b>Role alignment</b>Job description context can shape future questions.</span>
+          </li>
+          <li>
+            <i></i
+            ><span><b>Technology focus</b>Selected topics will influence the question set.</span>
+          </li>
+          <li>
+            <i></i
+            ><span
+              ><b>Communication style</b>Interviewer role and style guide the conversation.</span
+            >
+          </li>
+          <li>
+            <i></i
+            ><span><b>Calibrated depth</b>Difficulty adjusts the expected question depth.</span>
+          </li>
+          <li>
+            <i></i
+            ><span
+              ><b>Actionable feedback</b>Feedback will cover knowledge, communication and
+              confidence.</span
+            >
+          </li>
+        </ul>
+      </article>
     </section>
 
-    <section class="history panel"><div class="section-head"><div><span class="kicker">Recent interviews</span><h2>Practice history</h2></div><button type="button">View history</button></div><div class="history-empty"><div>◇</div><h3>Your sessions will appear here</h3><p>Once interviews are connected, scores and feedback cards will live in this space.</p></div><div class="feedback-grid"><article><span>Interview score</span><i></i><i></i></article><article><span>Feedback summary</span><i></i><i></i></article><article><span>Focus for next time</span><i></i><i></i></article></div></section>
+    <section class="history panel">
+      <div class="section-head">
+        <div>
+          <span class="kicker">Recent interviews</span>
+          <h2>Practice history</h2>
+        </div>
+        <button type="button">View history</button>
+      </div>
+      <div class="history-empty">
+        <div>◇</div>
+        <h3>Your sessions will appear here</h3>
+        <p>Once interviews are connected, scores and feedback cards will live in this space.</p>
+      </div>
+      <div class="feedback-grid">
+        <article><span>Interview score</span><i></i><i></i></article>
+        <article><span>Feedback summary</span><i></i><i></i></article>
+        <article><span>Focus for next time</span><i></i><i></i></article>
+      </div>
+    </section>
   </div>
 </app-workspace-layout>

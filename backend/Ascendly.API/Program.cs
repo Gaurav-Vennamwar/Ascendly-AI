@@ -124,6 +124,12 @@ builder.Services.AddScoped<IEmailVerificationService, EmailVerificationService>(
 //registering the email service
 builder.Services.AddScoped<IEmailService, EmailService>();
 
+//registering the resume analyzer service 
+builder.Services.AddScoped<IResumeAnalyzerService, ResumeAnalyzerService>();
+
+//registering the pdf extractor service 
+builder.Services.AddScoped<PdfResumeExtractorService>();
+
 var app = builder.Build();
 
 app.UseSwagger();

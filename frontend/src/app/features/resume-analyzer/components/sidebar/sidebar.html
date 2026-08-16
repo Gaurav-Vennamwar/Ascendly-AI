@@ -1,15 +1,43 @@
 <aside class="sidebar" [class.mobile-open]="mobileOpen()">
-  <div class="brand-row"><a class="brand" routerLink="/" (click)="closeRequested.emit()"><span class="brand-mark"><img src="logo.png" alt=""></span><span>Ascendly <b>AI</b></span></a><button class="drawer-close" type="button" aria-label="Close navigation" (click)="closeRequested.emit()">×</button></div>
+  <div class="brand-row">
+    <a class="brand" routerLink="/" (click)="closeRequested.emit()"
+      ><span class="brand-mark"><img src="logo.png" alt="" /></span
+      ><span>Ascendly <b>AI</b></span></a
+    ><button
+      class="drawer-close"
+      type="button"
+      aria-label="Close navigation"
+      (click)="closeRequested.emit()"
+    >
+      ×
+    </button>
+  </div>
   <nav class="navigation" aria-label="Main navigation">
     <p class="nav-label">Workspace</p>
-    <a routerLink="/dashboard" routerLinkActive="active" (click)="closeRequested.emit()"><span>⌘</span> Dashboard</a>
-    <a routerLink="/resume-analyzer" routerLinkActive="active" (click)="closeRequested.emit()"><span>▧</span> Resume Analyzer</a>
-    <a routerLink="/mock-interview" routerLinkActive="active" (click)="closeRequested.emit()"><span>◌</span> Mock Interviews</a>
-    <a routerLink="/learning-roadmap" routerLinkActive="active" (click)="closeRequested.emit()"><span>↗</span> Learning Roadmap</a>
+    <a routerLink="/dashboard" routerLinkActive="active" (click)="closeRequested.emit()"
+      ><span>⌘</span> Dashboard</a
+    >
+    <a routerLink="/resume-analyzer" routerLinkActive="active" (click)="closeRequested.emit()"
+      ><span>▧</span> Resume Analyzer</a
+    >
+    <a routerLink="/mock-interview" routerLinkActive="active" (click)="closeRequested.emit()"
+      ><span>◌</span> Mock Interviews</a
+    >
+    <a routerLink="/learning-roadmap" routerLinkActive="active" (click)="closeRequested.emit()"
+      ><span>↗</span> Learning Roadmap</a
+    >
     <p class="nav-label general">General</p>
     <a routerLink="/profile" (click)="closeRequested.emit()"><span>⊙</span> Profile & Settings</a>
     <a href="#"><span>?</span> Support</a>
   </nav>
-  <div class="upgrade-card"><span class="spark">✦</span><strong>Unlock your edge</strong><p>Get unlimited analyses and tailored coaching.</p><button>Upgrade to Pro <span>↗</span></button></div>
-  <div class="user"><div class="avatar">JD</div><div><strong>Jordan Davis</strong><span>Free workspace</span></div><button aria-label="Open profile options">•••</button></div>
+  <div class="upgrade-card">
+    <span class="spark">✦</span><strong>Unlock your edge</strong>
+    <p>Get unlimited analyses and tailored coaching.</p>
+    <button>Upgrade to Pro <span>↗</span></button>
+  </div>
+  <div class="user">
+    <div class="avatar">JD</div>
+    <div><strong>Jordan Davis</strong><span>Free workspace</span></div>
+    <button aria-label="Open profile options">•••</button>
+  </div>
 </aside>
