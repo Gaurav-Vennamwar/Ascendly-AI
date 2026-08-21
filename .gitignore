@@ -25,3 +25,10 @@ dist/
 
 # Logs
 *.log
+
+# Local development secrets
+backend/Ascendly.API/appsettings.Development.json
+
+# User-specific IDE files
+*.user
+*.suo

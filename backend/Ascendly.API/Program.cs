@@ -130,6 +130,13 @@ builder.Services.AddScoped<IResumeAnalyzerService, ResumeAnalyzerService>();
 //registering the pdf extractor service 
 builder.Services.AddScoped<PdfResumeExtractorService>();
 
+//registering the role agnostic text analyzer  model 
+builder.Services.AddScoped<RoleAgnosticTextAnalyzer>();
+
+//registering the gemini ai service
+builder.Services.AddHttpClient<IResumeAIService, GeminiResumeAIService>();
+
+
 var app = builder.Build();
 
 app.UseSwagger();
