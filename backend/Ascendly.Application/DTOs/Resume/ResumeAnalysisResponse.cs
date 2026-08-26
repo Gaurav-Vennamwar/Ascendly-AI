@@ -7,6 +7,11 @@ public class ResumeAnalysisResponse
     public int ResumeMatch { get; set; }
     public int FormattingScore { get; set; }
     public int KeywordMatch { get; set; }
+    // Keywords Gemini found in the resume/JD comparison.
+    public List<string> MatchedKeywords { get; set; } = [];
+
+    // Keywords from the JD that are not covered by the resume.
+    public List<string> MissingKeywords { get; set; } = [];
 
     // Semantic matching details.
     public List<MatchDto> DirectMatches { get; set; } = [];

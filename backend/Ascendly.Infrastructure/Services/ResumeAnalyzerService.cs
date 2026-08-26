@@ -193,6 +193,9 @@
             FormattingScore = aiResponse.FormattingScore.Value,
             KeywordMatch = aiResponse.KeywordMatch.Score.Value,
 
+            MatchedKeywords = aiResponse.KeywordMatch.MatchedKeywords,
+            MissingKeywords = aiResponse.KeywordMatch.MissingKeywords,
+
             DirectMatches = aiResponse.DirectMatches,
             TransferableMatches = aiResponse.TransferableMatches,
             Gaps = aiResponse.Gaps,
