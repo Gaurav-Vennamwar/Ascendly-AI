@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-insight-card',
@@ -6,4 +6,8 @@ import { Component } from '@angular/core';
   templateUrl: './insight-card.html',
   styleUrl: './insight-card.scss',
 })
-export class InsightCard {}
+export class InsightCard {
+  completed = input(false);
+  isAnalyzing = input(false);
+  durationSeconds = input<number | null>(null);
+}

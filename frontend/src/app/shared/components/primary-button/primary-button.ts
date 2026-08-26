@@ -1,4 +1,5 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
+
 
 @Component({
   selector: 'app-primary-button',
@@ -11,4 +12,7 @@ export class PrimaryButton {
   variant = input<'primary' | 'secondary' | 'ghost'>('primary');
   icon = input<string>('');
   type = input<'button' | 'submit'>('button');
+  disabled = input(false);
+
+  clicked = output<void>();
 }

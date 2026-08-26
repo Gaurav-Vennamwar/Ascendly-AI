@@ -4,29 +4,345 @@
       <span class="section-kicker">Analysis dashboard</span>
       <h2>Readiness intelligence</h2>
     </div>
-    <span class="pending">● Waiting for inputs</span>
+
+    <span class="pending">
+      ● Analysis complete
+    </span>
   </div>
-  <div class="empty-state">
-    <div class="empty-orbit"><span>✦</span></div>
-    <div>
-      <h3>Your analysis will appear here</h3>
-      <p>Upload your resume and paste a job description to begin analysis.</p>
-    </div>
-  </div>
+
+  <!-- Direct score cards -->
   <div class="score-grid">
-    <app-score-card title="ATS score" detail="Compatibility estimate" tone="cyan"></app-score-card
-    ><app-score-card title="Resume match" detail="Role alignment" tone="purple"></app-score-card
-    ><app-score-card
+    <app-score-card
+      title="ATS score"
+      detail="Compatibility estimate"
+      tone="cyan"
+      [score]="analysis().atsScore"
+    ></app-score-card>
+
+    <app-score-card
+      title="Resume match"
+      detail="Role alignment"
+      tone="purple"
+      [score]="analysis().resumeMatch"
+    ></app-score-card>
+
+    <app-score-card
       title="Formatting score"
       detail="Structure & parsing"
       tone="cyan"
-    ></app-score-card
-    ><app-score-card title="Keyword match" detail="Relevant terms" tone="purple"></app-score-card>
+      [score]="analysis().formattingScore"
+    ></app-score-card>
   </div>
-  <div class="insight-skeletons">
-    <article><span>Missing skills</span><i></i><i></i><i></i></article>
-    <article><span>Strengths & weaknesses</span><i></i><i></i><i></i></article>
-    <article><span>Humanization suggestions</span><i></i><i></i><i></i></article>
-    <article><span>Final recommendation</span><i></i><i></i><i></i></article>
+
+  <!-- Expandable insight cards -->
+  <div class="insight-grid">
+    <button
+      type="button"
+      class="insight-card"
+      (click)="openInsight('keyword')"
+    >
+      <span>Keyword match</span>
+      <strong>{{ analysis().keywordMatch }}/100</strong>
+      <small>Relevant terms</small>
+    </button>
+
+    <button
+      type="button"
+      class="insight-card"
+      (click)="openInsight('gaps')"
+    >
+      <span>Missing skills</span>
+      <small>Gaps & blockers</small>
+    </button>
+
+    <button
+      type="button"
+      class="insight-card"
+      (click)="openInsight('tailoring')"
+    >
+      <span>ATS Tailoring</span>
+      <small>JD-specific improvements</small>
+    </button>
+
+    <button
+      type="button"
+      class="insight-card"
+      (click)="openInsight('humanization')"
+    >
+      <span>Humanization suggestions</span>
+      <small>Improve resume wording</small>
+    </button>
+
+    <button
+      type="button"
+      class="insight-card"
+      (click)="openInsight('recommendation')"
+    >
+      <span>Final recommendation</span>
+      <small>Application guidance</small>
+    </button>
   </div>
+
+  <!-- Glassmorphism insight panel -->
+  @if (activeInsight()) {
+    <div
+      class="insight-overlay"
+      (click)="closeInsight()"
+    >
+      <div
+        class="insight-modal"
+        (click)="$event.stopPropagation()"
+      >
+        <button
+          type="button"
+          class="close-button"
+          (click)="closeInsight()"
+          aria-label="Close"
+        >
+          ×
+        </button>
+
+        @switch (activeInsight()) {
+
+          <!-- Keyword Match -->
+          @case ('keyword') {
+            <div class="modal-content">
+              <span class="section-kicker">Keyword analysis</span>
+              <h2>Keyword match</h2>
+
+              <div class="modal-score">
+                {{ analysis().keywordMatch }}/100
+              </div>
+
+              <h3>Matched keywords</h3>
+
+              @if (analysis().matchedKeywords.length === 0) {
+                <p class="muted-copy">No matched keywords were returned.</p>
+              } @else {
+                <div class="chip-list">
+                  @for (keyword of analysis().matchedKeywords; track keyword) {
+                    <span class="chip">{{ keyword }}</span>
+                  }
+                </div>
+              }
+
+              <h3>Missing keywords</h3>
+
+              @if (analysis().missingKeywords.length === 0) {
+                <p class="muted-copy">No missing keywords were returned.</p>
+              } @else {
+                <div class="chip-list">
+                  @for (keyword of analysis().missingKeywords; track keyword) {
+                    <span class="chip missing">{{ keyword }}</span>
+                  }
+                </div>
+              }
+            </div>
+          }
+
+          <!-- Missing Skills -->
+          @case ('gaps') {
+            <div class="modal-content">
+              <span class="section-kicker">Skill intelligence</span>
+              <h2>Missing skills</h2>
+
+              @if (analysis().gaps.length === 0) {
+                <div class="empty-modal-state">
+                  <h3>No major gaps identified</h3>
+                  <p>
+                    The analysis did not identify additional skill gaps.
+                  </p>
+                </div>
+              } @else {
+                @for (
+                  gap of analysis().gaps;
+                  track gap.requirement
+                ) {
+                  <article class="result-item">
+                    <h3>{{ gap.requirement }}</h3>
+
+                    <div class="meta-row">
+                      <span>Type: {{ gap.requirementType }}</span>
+                      <span>Gap: {{ gap.gapType }}</span>
+                      <span>Severity: {{ gap.severity }}</span>
+                    </div>
+
+                    <p><strong>Preparation</strong><br />{{ gap.preparationSuggestion }}</p>
+                  </article>
+                }
+              }
+
+              <div class="modal-section">
+                <h3>Direct matches</h3>
+                @if (analysis().directMatches.length === 0) {
+                  <p class="muted-copy">No direct requirement matches were returned.</p>
+                } @else {
+                  @for (match of analysis().directMatches; track match.jdRequirement) {
+                    <article class="result-item compact">
+                      <h4>{{ match.jdRequirement }}</h4>
+                      <span class="status">{{ match.matchType }}</span>
+                      <p><strong>Resume evidence</strong><br />{{ match.resumeEvidence }}</p>
+                    </article>
+                  }
+                }
+              </div>
+
+              <div class="modal-section">
+                <h3>Transferable matches</h3>
+                @if (analysis().transferableMatches.length === 0) {
+                  <p class="muted-copy">No transferable matches were returned.</p>
+                } @else {
+                  @for (match of analysis().transferableMatches; track match.jdRequirement) {
+                    <article class="result-item compact">
+                      <h4>{{ match.jdRequirement }}</h4>
+                      <span class="status">{{ match.matchType }}</span>
+                      <p><strong>Resume evidence</strong><br />{{ match.resumeEvidence }}</p>
+                      <p><strong>Why it transfers</strong><br />{{ match.reasoning }}</p>
+                    </article>
+                  }
+                }
+              </div>
+            </div>
+          }
+
+          <!-- ATS Tailoring -->
+          @case ('tailoring') {
+            <div class="modal-content">
+              <span class="section-kicker">ATS intelligence</span>
+              <h2>ATS tailoring</h2>
+
+              @if (analysis().atsTailoring.length === 0) {
+                <div class="empty-modal-state">
+                  <h3>No tailoring changes recommended</h3>
+                  <p>
+                    Your resume wording already aligns well with the analyzed role.
+                  </p>
+                </div>
+              } @else {
+                @for (
+                  item of analysis().atsTailoring;
+                  track item.jdRequirement
+                ) {
+                  <article class="result-item">
+                    <h3>{{ item.jdRequirement }}</h3>
+
+                    <span class="status">
+                      {{ item.status }}
+                    </span>
+
+                    <p><strong>Resume section</strong><br />{{ item.resumeSection }}</p>
+                    <p><strong>Evidence</strong><br />{{ item.resumeEvidence }}</p>
+                    <p><strong>Recommendation</strong><br />{{ item.recommendation }}</p>
+
+                    @if (item.suggestedTerminology.length > 0) {
+                      <div class="chip-list">
+                        @for (
+                          term of item.suggestedTerminology;
+                          track term
+                        ) {
+                          <span class="chip">
+                            {{ term }}
+                          </span>
+                        }
+                      </div>
+                    }
+                  </article>
+                }
+              }
+            </div>
+          }
+
+          <!-- Humanization -->
+          @case ('humanization') {
+            <div class="modal-content">
+              <span class="section-kicker">Writing intelligence</span>
+              <h2>Humanization suggestions</h2>
+
+              @if (
+                analysis().humanization.flaggedSentences.length === 0
+              ) {
+                <div class="empty-modal-state">
+                  <h3>No improvements needed</h3>
+                  <p>
+                    No meaningful wording improvements were identified.
+                  </p>
+                </div>
+              } @else {
+                @for (
+                  item of analysis().humanization.flaggedSentences;
+                  track item.original
+                ) {
+                  <article class="result-item">
+                    <span class="status">
+                      {{ item.action }}
+                    </span>
+
+                    <p>
+                      <strong>Original</strong><br />
+                      {{ item.original }}
+                    </p>
+
+                    <p>
+                      <strong>Rewritten</strong><br />
+                      {{ item.rewritten }}
+                    </p>
+
+                    <p>
+                      <strong>Why</strong><br />
+                      {{ item.reason }}
+                    </p>
+                  </article>
+                }
+              }
+            </div>
+          }
+
+          <!-- Final Recommendation -->
+          @case ('recommendation') {
+            <div class="modal-content">
+              <span class="section-kicker">Career intelligence</span>
+              <h2>Final recommendation</h2>
+
+              <div class="recommendation-badge">
+                {{ analysis().applicationRecommendation.decision }}
+              </div>
+
+              <div class="confidence">Confidence: {{ analysis().applicationRecommendation.confidence }}</div>
+
+              <p class="recommendation-text">
+                {{ analysis().finalRecommendation }}
+              </p>
+
+              <h3>Why</h3>
+
+              <p>
+                {{ analysis().applicationRecommendation.reasoning }}
+              </p>
+
+              <h3>Preparation plan</h3>
+
+              @if (
+                analysis().applicationRecommendation.preparationPlan.length === 0
+              ) {
+                <p>
+                  No additional preparation plan was recommended.
+                </p>
+              } @else {
+                <div class="preparation-list">
+                  @for (
+                    item of analysis().applicationRecommendation.preparationPlan;
+                    track item
+                  ) {
+                    <div class="preparation-item">
+                      {{ item }}
+                    </div>
+                  }
+                </div>
+              }
+            </div>
+          }
+        }
+      </div>
+    </div>
+  }
 </section>

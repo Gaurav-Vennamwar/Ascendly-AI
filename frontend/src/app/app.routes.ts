@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { Landing } from './pages/landing/landing';
-import { ResumeAnalyzerPage } from './features/resume-analyzer/resume-analyzer-page';
+import { ResumeAnalyzer } from './features/resume-analyzer/resume-analyzer-page';
 import { DashboardPage } from './features/dashboard/dashboard-page';
 import { MockInterviewPage } from './features/mock-interview/mock-interview-page';
 import { LearningRoadmapPage } from './features/learning-roadmap/learning-roadmap-page';
@@ -17,7 +17,7 @@ export const routes: Routes = [
   },
   {
     path: 'resume-analyzer',
-    component: ResumeAnalyzerPage
+    component: ResumeAnalyzer
   },
   { path: 'dashboard', component: DashboardPage, canActivate: [authGuard] },
   { path: 'mock-interview', component: MockInterviewPage, canActivate: [authGuard]},

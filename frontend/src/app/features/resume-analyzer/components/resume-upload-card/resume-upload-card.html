@@ -7,16 +7,55 @@
     </div>
     <span class="secure">⌁ Secure</span>
   </div>
-  <app-upload-zone></app-upload-zone>
-  <div class="file-placeholder">
-    <div class="file-icon">PDF</div>
-    <div>
-      <strong>Your resume will appear here</strong><span>Ready for analysis after upload</span>
-    </div>
-    <button aria-label="Remove resume">×</button>
+  <app-upload-zone
+  [locked]="locked()"
+  (fileSelected)="onFileSelected($event)"
+></app-upload-zone>
+  <div class="file-placeholder" [class.has-file]="selectedFile()">
+    <div class="file-icon" aria-hidden="true">PDF</div>
+    <div class="file-info">
+    @if (selectedFile()) {
+      <strong>{{ selectedFile()!.name }}</strong>
+      <span>{{ selectedFile()!.size / 1024 | number:'1.0-0' }} KB · PDF document</span>
+    } @else {
+      <strong>Your resume will appear here</strong>
+      <span>Upload a PDF to begin your analysis</span>
+    }
   </div>
-  <div class="progress-placeholder">
-    <div><span>Upload progress</span><b>Waiting</b></div>
-    <i><em></em></i>
+
+  <button
+    type="button"
+    class="remove-file"
+    [disabled]="!selectedFile() || locked()"
+  >
+    ×
+  </button>
+</div>
+
+<div class="upload-progress">
+  <div class="progress-label">
+    <span class="progress-title">
+      <i aria-hidden="true"></i>
+      {{ selectedFile() ? 'Document ready' : 'Awaiting document' }}
+    </span>
+
+    @if (selectedFile()) {
+      <strong>Ready to analyze</strong>
+    } @else {
+      <strong>PDF · max 5 MB</strong>
+    }
   </div>
+
+  <div class="progress-track">
+    <div
+      class="progress-fill"
+      [style.width.%]="uploadProgress()"
+      role="progressbar"
+      aria-label="Resume upload progress"
+      [attr.aria-valuenow]="uploadProgress()"
+      aria-valuemin="0"
+      aria-valuemax="100"
+    ></div>
+  </div>
+</div>
 </section>

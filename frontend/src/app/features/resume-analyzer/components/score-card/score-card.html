@@ -1,9 +1,16 @@
 <article class="score-card" [class]="'score-card ' + tone()">
   <div class="score-top">
-    <span>{{ title() }}</span
-    ><i></i>
+    <span>{{ title() }}</span>
+    <i></i>
   </div>
-  <div class="skeleton-line wide"></div>
-  <div class="skeleton-line short"></div>
+
+  <div class="score-value">
+    {{ score() }}/100
+  </div>
+
+  <div class="score-meter" aria-hidden="true">
+    <span [style.width.%]="score()"></span>
+  </div>
+
   <p>{{ detail() }}</p>
 </article>

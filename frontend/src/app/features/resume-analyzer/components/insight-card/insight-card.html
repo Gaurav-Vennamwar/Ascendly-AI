@@ -8,13 +8,14 @@
     <i></i>
   </div>
   <div class="status-block">
-    <span>Resume status</span><strong><b></b> Ready for analysis</strong>
-    <p>Upload a PDF to initialize your workspace.</p>
+    <span>Resume status</span>
+    <strong><b [class.processing]="isAnalyzing()"></b>{{ completed() ? 'Analysis complete' : isAnalyzing() ? 'Analyzing resume' : 'Ready for analysis' }}</strong>
+    <p>{{ completed() ? 'Your analysis is ready to explore below.' : isAnalyzing() ? 'AI is comparing your document with the role requirements.' : 'Upload a PDF to initialize your workspace.' }}</p>
   </div>
   <div class="detail-list">
-    <div><span>Estimated time</span><strong>15 seconds</strong></div>
+    <div><span>{{ completed() ? 'Completed in' : 'Estimated time' }}</span><strong>{{ completed() ? (durationSeconds() + ' seconds') : '15 seconds' }}</strong></div>
     <div><span>AI model</span><strong>Gemini</strong></div>
-    <div><span>Upload status</span><strong class="waiting">Waiting...</strong></div>
+    <div><span>Upload status</span><strong [class.waiting]="!completed()">{{ completed() ? 'Processed' : 'Waiting...' }}</strong></div>
   </div>
   <div class="tip">
     <span>✦</span>

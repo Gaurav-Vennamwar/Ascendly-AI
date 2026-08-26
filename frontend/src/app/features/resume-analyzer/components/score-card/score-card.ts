@@ -10,4 +10,6 @@ export class ScoreCard {
   title = input.required<string>();
   detail = input.required<string>();
   tone = input<'cyan' | 'purple' | 'rose'>('purple');
+
+  score = input<number>(0);
 }

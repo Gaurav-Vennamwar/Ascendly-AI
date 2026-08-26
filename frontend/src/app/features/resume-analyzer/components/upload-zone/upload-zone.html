@@ -1,7 +1,32 @@
-<div class="upload-zone">
-  <div class="upload-icon"><span>↑</span></div>
+<div class="upload-zone" [class.locked]="locked()">
+  <div class="upload-icon">
+    <span>↑</span>
+  </div>
+
   <h3>Drop your resume here</h3>
+
   <p>Upload a PDF and we’ll prepare it for ATS analysis.</p>
-  <app-primary-button label="Browse files" icon="▧"></app-primary-button>
-  <div class="upload-meta"><span>PDF only</span><i></i><span>Maximum 5 MB</span></div>
+
+  <!-- Hidden file picker -->
+  <input
+    #fileInput
+    type="file"
+    accept=".pdf,application/pdf"
+    hidden
+    [disabled]="locked()"
+    (change)="onFileSelected($event)"
+  />
+
+  <app-primary-button
+    label="Browse files"
+    icon="▧"
+    [disabled]="locked()"
+    (clicked)="fileInput.click()"
+  ></app-primary-button>
+
+  <div class="upload-meta">
+    <span>PDF only</span>
+    <i></i>
+    <span>Maximum 5 MB</span>
+  </div>
 </div>
