@@ -1,0 +1,9 @@
+<app-workspace-layout title="Interview Report" subtitle="Your complete interview evaluation." eyebrow="Practice studio">
+  <section class="flow-shell">
+    @if (report(); as result) {
+      <article class="question-panel"><span class="kicker">Final evaluation</span><h1>Interview report</h1><p class="lead">{{ result.overallSummary }}</p><h3>Recommendation</h3><p class="feedback-item">{{ result.recommendation }}</p><h3>Next steps</h3>@for (step of result.nextSteps; track step) { <p class="feedback-item">{{ step }}</p> }</article>
+    } @else {
+      <article class="empty-flow"><div class="signal">✦</div><h2>Your final report will appear here</h2><p>This screen is prepared to render the real final interview evaluation once the session backend is connected.</p></article>
+    }
+  </section>
+</app-workspace-layout>

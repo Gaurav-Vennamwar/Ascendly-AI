@@ -1,0 +1,9 @@
+<app-workspace-layout title="Topic Evaluation" subtitle="Focused feedback after each completed topic." eyebrow="Practice studio">
+  <section class="flow-shell">
+    @if (evaluation(); as result) {
+      <article class="question-panel"><span class="kicker">Topic complete</span><h1>{{ result.topic }}</h1><p class="lead">{{ result.summary }}</p><div class="evaluation-grid"><div><h3>Strengths</h3>@for (item of result.strengths; track item) { <p class="feedback-item">{{ item }}</p> }</div><div><h3>Improve next</h3>@for (item of result.improvements; track item) { <p class="feedback-item">{{ item }}</p> }</div></div></article>
+    } @else {
+      <article class="empty-flow"><div class="signal">✦</div><h2>Topic feedback will appear here</h2><p>This screen is ready for the backend topic-evaluation response after a topic is completed.</p></article>
+    }
+  </section>
+</app-workspace-layout>

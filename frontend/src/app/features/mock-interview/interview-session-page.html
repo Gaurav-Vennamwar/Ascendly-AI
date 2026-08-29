@@ -1,0 +1,10 @@
+<app-workspace-layout title="Interview Session" subtitle="One focused question at a time." eyebrow="Practice studio">
+  <section class="flow-shell">
+    <header class="flow-head"><div><span class="kicker">Live interview</span><h2>Stay present. Answer with intent.</h2></div><span class="session-state">Session ready</span></header>
+    @if (question(); as current) {
+      <article class="question-panel"><div class="progress-row"><span>{{ current.topic }}</span><span>Question {{ questionNumber() }} of {{ totalQuestions() }}</span></div><div class="progress-track"><i [style.width.%]="totalQuestions() ? (questionNumber() / totalQuestions()) * 100 : 0"></i></div><h1>{{ current.prompt }}</h1><label class="answer-box"><span>Your answer</span><textarea [value]="answer()" (input)="answer.set($any($event.target).value)" placeholder="Write your answer here..."></textarea></label><div class="flow-actions"><span>Responses are saved when the interview session API is connected.</span><app-primary-button label="Submit answer" icon="→"></app-primary-button></div></article>
+    } @else {
+      <article class="empty-flow"><div class="signal">✦</div><h2>Waiting for your interview session</h2><p>Questions will appear here after the backend creates a session from your role, optional context, and interview preferences.</p></article>
+    }
+  </section>
+</app-workspace-layout>
