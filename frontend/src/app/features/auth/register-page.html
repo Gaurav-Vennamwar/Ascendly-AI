@@ -68,15 +68,16 @@
             type="button"
             class="verify-button"
             (click)="requestVerification()"
-            [class.sent]="emailVerified"
+            [class.sent]="emailVerified || verificationRequested()"
+            [disabled]="loading || emailVerified"
           >
-           {{ emailVerified ? '✓ Verified' : 'Verify email' }}
+           {{ emailVerified ? '✓ Verified' : loading ? 'Sending…' : verificationRequested() ? 'Email sent' : 'Verify email' }}
           </button>
         </div>
         @if (verificationNotice()) {
-          <div class="verification-notice" [class.success]="emailVerified">
+          <div class="verification-notice verification-toast" [class.success]="emailVerified" role="status" aria-live="polite">
             <i aria-hidden="true">{{ emailVerified ? '✓' : '!' }}</i
-            ><span>{{ verificationNotice() }}</span>
+            ><span>{{ verificationNotice() }}</span><button type="button" aria-label="Dismiss notification" (click)="dismissVerificationNotice()">×</button>
           </div>
         }
         <div class="password-section" [class.locked]="!emailVerified">

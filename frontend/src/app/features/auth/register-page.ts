@@ -94,6 +94,10 @@ export class RegisterPage implements OnInit{
       }
     });
   }
+
+  dismissVerificationNotice(): void {
+    this._verificationNotice.set('');
+  }
   ngOnInit() {
   const pendingRegistration = localStorage.getItem(this.pendingRegistrationKey);
 

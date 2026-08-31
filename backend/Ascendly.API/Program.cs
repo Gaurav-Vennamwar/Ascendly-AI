@@ -136,6 +136,9 @@ builder.Services.AddScoped<RoleAgnosticTextAnalyzer>();
 //registering the gemini ai service
 builder.Services.AddHttpClient<IResumeAIService, GeminiResumeAIService>();
 
+// Registers the Gemini service used by Mock Interview.
+builder.Services.AddHttpClient<IInterviewAIService, GeminiInterviewAIService>();
+
 
 var app = builder.Build();
 

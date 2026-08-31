@@ -428,6 +428,8 @@
   background: rgba(45, 212, 191, 0.1);
 }
 
+.verify-button:disabled { cursor: not-allowed; opacity: .7; }
+
 .verification-notice {
   display: flex;
   align-items: center;
@@ -466,6 +468,8 @@
   color: #ccfbf1;
   background: rgba(45, 212, 191, 0.28);
 }
+
+.verification-toast button { margin-left: auto; padding: 0; border: 0; color: inherit; background: transparent; font-size: 1rem; line-height: 1; cursor: pointer; }
 
 .password-section {
   margin-top: 17px;
@@ -553,6 +557,9 @@
   .auth-switch {
     font-size: 0.63rem;
   }
+  .verification-toast { position: fixed; z-index: 100; right: 14px; bottom: max(14px, env(safe-area-inset-bottom)); left: 14px; margin: 0; padding: 12px; box-shadow: 0 18px 45px rgba(0, 0, 0, .35); backdrop-filter: blur(18px); }
+  .email-heading, .password-heading { gap: 8px; }
+  .step-indicator { flex: 0 0 auto; }
 }
 @media (max-width: 360px) {
   .auth-card {
