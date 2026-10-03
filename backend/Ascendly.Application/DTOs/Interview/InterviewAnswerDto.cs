@@ -8,6 +8,8 @@ namespace Ascendly.Application.DTOs.Interview
 {
     public class InterviewAnswerDto
     {
+        //identifies the topics being answered
+        public int TopicOrder { get; set; }
         // Identifies the question being answered.
         public int QuestionOrder { get; set; }
 

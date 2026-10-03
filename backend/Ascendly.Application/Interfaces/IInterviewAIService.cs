@@ -11,7 +11,7 @@ namespace Ascendly.Application.Interfaces
     {
         // Generates the complete interview blueprint.
         Task<List<InterviewTopicDto>> GenerateInterviewAsync(
-            InterviewConfigurationDto configuration);
+            InterviewConfigurationDto configuration, string resumeText);
 
         // Evaluates all answers from one completed topic.
         Task<TopicEvaluationDto> EvaluateTopicAsync(

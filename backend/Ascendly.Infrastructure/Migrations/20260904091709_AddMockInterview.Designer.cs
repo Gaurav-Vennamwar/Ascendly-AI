@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Ascendly.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -12,9 +13,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Ascendly.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260904091709_AddMockInterview")]
+    partial class AddMockInterview
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -279,9 +282,14 @@ namespace Ascendly.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text[]");
 
+                    b.Property<Guid>("TopicEvaluationId")
+                        .HasColumnType("uuid");
+
                     b.HasKey("Id");
 
                     b.HasIndex("InterviewQuestionId");
+
+                    b.HasIndex("TopicEvaluationId");
 
                     b.ToTable("QuestionEvaluations");
                 });
@@ -319,6 +327,28 @@ namespace Ascendly.Infrastructure.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("RefreshTokens");
+                });
+
+            modelBuilder.Entity("Ascendly.Domain.Entities.TopicEvaluation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("EvaluatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("InterviewTopicId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Score")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InterviewTopicId");
+
+                    b.ToTable("TopicEvaluations");
                 });
 
             modelBuilder.Entity("Ascendly.Domain.Entities.User", b =>
@@ -426,12 +456,20 @@ namespace Ascendly.Infrastructure.Migrations
             modelBuilder.Entity("Ascendly.Domain.Entities.QuestionEvaluation", b =>
                 {
                     b.HasOne("Ascendly.Domain.Entities.InterviewQuestion", "InterviewQuestion")
-                        .WithMany("Evaluations")
+                        .WithMany()
                         .HasForeignKey("InterviewQuestionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Ascendly.Domain.Entities.TopicEvaluation", "TopicEvaluation")
+                        .WithMany("QuestionEvaluations")
+                        .HasForeignKey("TopicEvaluationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("InterviewQuestion");
+
+                    b.Navigation("TopicEvaluation");
                 });
 
             modelBuilder.Entity("Ascendly.Domain.Entities.RefreshToken", b =>
@@ -445,11 +483,20 @@ namespace Ascendly.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Ascendly.Domain.Entities.TopicEvaluation", b =>
+                {
+                    b.HasOne("Ascendly.Domain.Entities.InterviewTopic", "InterviewTopic")
+                        .WithMany()
+                        .HasForeignKey("InterviewTopicId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("InterviewTopic");
+                });
+
             modelBuilder.Entity("Ascendly.Domain.Entities.InterviewQuestion", b =>
                 {
                     b.Navigation("Answers");
-
-                    b.Navigation("Evaluations");
                 });
 
             modelBuilder.Entity("Ascendly.Domain.Entities.InterviewSession", b =>
@@ -460,6 +507,11 @@ namespace Ascendly.Infrastructure.Migrations
             modelBuilder.Entity("Ascendly.Domain.Entities.InterviewTopic", b =>
                 {
                     b.Navigation("Questions");
+                });
+
+            modelBuilder.Entity("Ascendly.Domain.Entities.TopicEvaluation", b =>
+                {
+                    b.Navigation("QuestionEvaluations");
                 });
 
             modelBuilder.Entity("Ascendly.Domain.Entities.User", b =>

@@ -10,8 +10,8 @@ namespace Ascendly.Application.Interfaces
     public interface IInterviewService
     {
         // Creates a session and generates the interview blueprint.
-        Task<StartInterviewResponseDto> StartAsync(StartInterviewRequestDto request);
-
+        Task<StartInterviewResponseDto> StartAsync(
+        StartInterviewRequestDto request, string resumeText, Guid userId);
         // Returns the current interview session.
         Task<InterviewSessionDto?> GetSessionAsync(Guid sessionId);
 

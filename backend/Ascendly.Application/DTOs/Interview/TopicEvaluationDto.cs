@@ -11,8 +11,8 @@ namespace Ascendly.Application.DTOs.Interview
         // Identifies the completed interview topic.
         public string Topic { get; set; } = string.Empty;
 
-        // Overall score for this topic.
-        public int Score { get; set; }
+        //// Overall score for this topic.
+        //public int Score { get; set; }
 
         // Evaluation for every question in this topic.
         public List<QuestionEvaluationDto> QuestionEvaluations { get; set; } = [];

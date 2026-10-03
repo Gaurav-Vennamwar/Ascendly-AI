@@ -11,8 +11,8 @@ namespace Ascendly.Application.DTOs.Interview
         // Role the candidate wants to practice for.
         public string TargetRole { get; set; } = string.Empty;
 
-        // Optional resume used for personalized questions.
-        public string? ResumeText { get; set; }
+        //// Optional resume used for personalized questions.
+        //public string? ResumeText { get; set; }
 
         // Optional JD used for role-specific questions.
         public string? JobDescription { get; set; }
@@ -21,15 +21,19 @@ namespace Ascendly.Application.DTOs.Interview
         public List<string> CustomTopics { get; set; } = [];
 
         // Controls the type of interview Gemini should generate.
-        public string InterviewType { get; set; } = "Mixed";
+        public string InterviewType { get; set; } = string.Empty;
 
         // Controls question difficulty.
-        public string Difficulty { get; set; } = "Intermediate";
+        public string Difficulty { get; set; } = string.Empty;
 
         // Requested interview duration in minutes.
         public int DurationMinutes { get; set; }
 
         // Controls the interviewer's communication style.
-        public string InterviewStyle { get; set; } = "Professional";
+        public string InterviewStyle { get; set; } = string.Empty;
+        public string InterviewerRole { get; set; } = string.Empty;
+
+        // Optional interviewer name or LinkedIn URL.
+        public string? InterviewerContext { get; set; }
     }
 }
