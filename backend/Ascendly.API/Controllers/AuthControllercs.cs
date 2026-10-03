@@ -3,6 +3,8 @@ using Ascendly.Application.DTOs.Auth;
 using Ascendly.Application.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Ascendly.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace Ascendly.API.Controllers;
 
@@ -11,10 +13,12 @@ namespace Ascendly.API.Controllers;
 public class AuthController : ControllerBase
 {
     private readonly IAuthService _authService;
+    private readonly ApplicationDbContext _context;
 
-    public AuthController(IAuthService authService)
+    public AuthController(IAuthService authService, ApplicationDbContext context)
     {
         _authService = authService;
+        _context = context;
     }
     //endpoint to verify the email 
     [HttpPost("request-email-verification")]
@@ -77,14 +81,29 @@ public class AuthController : ControllerBase
     }
     [Authorize]
     [HttpGet("me")]
-    public IActionResult Me()
+    public async Task<IActionResult> Me()
     {
-        return Ok(new
+        var userIdValue = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (!Guid.TryParse(userIdValue, out var userId))
         {
-            UserId = User.FindFirstValue(ClaimTypes.NameIdentifier),
-            Email = User.FindFirstValue(ClaimTypes.Email),
-            Role = User.FindFirstValue(ClaimTypes.Role)
-        });
+            return Unauthorized();
+        }
+
+        var user = await _context.Users
+            .AsNoTracking()
+            .Where(x => x.Id == userId)
+            .Select(x => new CurrentUserResponse
+            {
+                UserId = x.Id,
+                FullName = x.FullName,
+                Email = x.Email,
+                Role = x.Role,
+                InterviewSessionCount = x.InterviewSessions.Count,
+                CompletedInterviewSessionCount = x.InterviewSessions.Count(session => session.CompletedAt != null)
+            })
+            .SingleOrDefaultAsync();
+
+        return user is null ? Unauthorized() : Ok(user);
     }
     //refreh token endpoint to refreh rotate the refreh token 
     [HttpPost("refresh")]

@@ -2,6 +2,7 @@
   display: grid;
   gap: 18px;
 }
+.data-state,.unavailable{padding:14px;border:1px solid rgba(148,163,184,.12);border-radius:12px;color:rgba(203,213,225,.62);background:rgba(255,255,255,.025);font-size:.68rem;line-height:1.55}.data-state.error{border-color:rgba(251,113,133,.3);color:#fecdd3;background:rgba(244,63,94,.07)}.panel .unavailable{margin-top:18px}
 .welcome {
   display: flex;
   justify-content: space-between;

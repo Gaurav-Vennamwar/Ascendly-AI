@@ -5,6 +5,7 @@ import { WorkspaceLayout } from '../../shared/components/workspace-layout/worksp
 import { MetricCard } from '../../shared/components/metric-card/metric-card';
 import { PrimaryButton } from '../../shared/components/primary-button/primary-button';
 import {  OnInit } from '@angular/core';
+import { AccountStateService } from '../../core/services/account-state.service';
 
 @Component({
   selector: 'app-profile-page',
@@ -16,17 +17,10 @@ import {  OnInit } from '@angular/core';
 export class ProfilePage {
   private authService = inject(AuthService);
   private router = inject(Router);
+  readonly account = inject(AccountStateService);
 
    ngOnInit(): void {
-    // Call the protected endpoint when Profile opens.
-    this.authService.getCurrentUser().subscribe({
-      next: (user) => {
-        console.log('Authenticated user:', user);
-      },
-      error: (error) => {
-        console.error('Failed to load user:', error);
-      }
-    });
+    this.account.load();
   }
 
   logout(): void {
@@ -35,6 +29,7 @@ export class ProfilePage {
       next: () => {
         // Remove the access token from browser storage.
         this.authService.clearTokens();
+        this.account.clear();
 
         // Redirect user to login.
         this.router.navigate(['/login']);
@@ -42,6 +37,7 @@ export class ProfilePage {
       error: () => {
         // Even if backend logout fails, clear local session.
         this.authService.clearTokens();
+        this.account.clear();
         this.router.navigate(['/login']);
       }
     });

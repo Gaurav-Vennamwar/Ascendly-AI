@@ -1,11 +1,21 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 
 export interface AuthResponse {
   accessToken: string;
 //   refreshToken: string;
   expiresAt: string;
+}
+
+export interface CurrentUserResponse {
+  userId: string;
+  fullName: string;
+  email: string;
+  role: string;
+  interviewSessionCount: number;
+  completedInterviewSessionCount: number;
 }
 
 @Injectable({
@@ -85,8 +95,32 @@ logout() {
   // Calls the protected /me endpoint.
   // The HTTP interceptor automatically adds:
   // Authorization: Bearer <accessToken>
-  return this.http.get(`${this.apiUrl}/me`);
+  return this.http.get<CurrentUserResponse>(`${this.apiUrl}/me`);
 }
+
+  getAuthErrorMessage(error: unknown, operation: 'login' | 'register' | 'verification'): string {
+    if (!(error instanceof HttpErrorResponse)) {
+      return 'Something went wrong. Please try again.';
+    }
+
+    if (error.status === 0) {
+      return 'We could not reach Ascendly AI. Check your connection and try again.';
+    }
+
+    if (operation === 'login' && (error.status === 400 || error.status === 401)) {
+      return 'Incorrect email or password.';
+    }
+
+    if (operation === 'verification' && error.status === 400) {
+      return 'An account may already exist for this email. Sign in or use a different email.';
+    }
+
+    if (operation === 'register' && error.status === 400) {
+      return 'We could not create your account. Verify your email first, then try again.';
+    }
+
+    return 'Something went wrong. Please try again.';
+  }
 refreshAccessToken() {
   // The refresh token is NOT read here.
   // Browser automatically sends the HttpOnly cookie.

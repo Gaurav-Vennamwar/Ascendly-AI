@@ -491,6 +491,8 @@
 .password-section.locked .field {
   border-style: dashed;
 }
+.form-error { margin: 9px 0 0; color: #fda4af; font-size: .62rem; line-height: 1.45; }
+.field:has(input[aria-invalid='true']) { border-color: rgba(251, 113, 133, .55); }
 
 .submit-button:disabled,
 .submit-button:disabled:hover {

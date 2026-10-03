@@ -99,6 +99,7 @@
                   autocomplete="new-password"
                   placeholder="Create password"
                  [disabled]="!emailVerified"
+                  [attr.aria-invalid]="passwordError() ? 'true' : null"
                   required
                 />
               </div>
@@ -115,12 +116,16 @@
                   autocomplete="new-password"
                   placeholder="Confirm password"
                   [disabled]="!emailVerified"
+                  [attr.aria-invalid]="passwordError() ? 'true' : null"
                   required
                 />
               </div>
             </div>
           </div>
         </div>
+        @if (passwordError()) {
+          <p class="form-error" role="alert">{{ passwordError() }}</p>
+        }
         <label class="check terms"
           ><input
             type="checkbox"
@@ -131,9 +136,12 @@
             >I agree to the <a href="#">Terms of Service</a> and
             <a href="#">Privacy Policy</a>.</span
           ></label
-        ><button class="submit-button" type="submit" [disabled]="!emailVerified">
-          Create account <span aria-hidden="true">→</span>
+        ><button class="submit-button" type="submit" [disabled]="!emailVerified || isRegistering()">
+          {{ isRegistering() ? 'Creating account...' : 'Create account' }} <span aria-hidden="true">→</span>
         </button>
+        @if (registrationError()) {
+          <p class="form-error" role="alert">{{ registrationError() }}</p>
+        }
       </form>
       <p class="auth-switch">Already have an account? <a routerLink="/login">Sign in</a></p>
     </div>

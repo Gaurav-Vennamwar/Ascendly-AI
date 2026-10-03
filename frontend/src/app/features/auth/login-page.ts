@@ -1,4 +1,5 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
+import { finalize } from 'rxjs';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../core/services/auth.service';
@@ -17,28 +18,27 @@ export class LoginPage {
   email = '';
   password = '';
 
-  loading = false;
-  errorMessage = '';
+  loading = signal(false);
+  errorMessage = signal('');
 
   login() {
     if (!this.email || !this.password) {
-      this.errorMessage = 'Please enter your email and password.';
+      this.errorMessage.set('Please enter your email and password.');
       return;
     }
 
-    this.loading = true;
-    this.errorMessage = '';
+    this.loading.set(true);
+    this.errorMessage.set('');
 
     this.authService
       .login({
         email: this.email,
         password: this.password,
       })
+      .pipe(finalize(() => this.loading.set(false)))
       .subscribe({
         next: (response) => {
           console.log('Login successful:', response);
-
-          this.loading = false;
 
           // this.authService.setTokens(response);
           // Store only the access token.
@@ -50,8 +50,7 @@ export class LoginPage {
         error: (error) => {
           console.error('Login failed:', error);
 
-          this.loading = false;
-          this.errorMessage = error.error || 'Invalid email or password.';
+          this.errorMessage.set(this.authService.getAuthErrorMessage(error, 'login'));
         },
       });
   }

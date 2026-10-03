@@ -2,6 +2,7 @@ import { Component, inject, signal, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../core/services/auth.service';
+import { finalize } from 'rxjs';
 
 
 @Component({
@@ -25,6 +26,9 @@ export class RegisterPage implements OnInit{
 
   emailVerified = false;
   loading = false;
+  isRegistering = signal(false);
+  registrationError = signal('');
+  passwordError = signal('');
 
   verificationRequested = this._verificationRequested.asReadonly();
   verificationNotice = this._verificationNotice.asReadonly();
@@ -78,12 +82,25 @@ export class RegisterPage implements OnInit{
       return;
     }
 
+    this.registrationError.set('');
+    this.passwordError.set('');
+    if (!this.password) {
+      this.passwordError.set('Enter a password to continue.');
+      return;
+    }
+    if (this.password !== this.confirmPassword) {
+      this.passwordError.set('Passwords do not match.');
+      return;
+    }
+
+    this.isRegistering.set(true);
+
     this.authService.register({
       fullName: this.fullName,
       email: this.email,
       password: this.password,
       confirmPassword: this.confirmPassword
-    }).subscribe({
+    }).pipe(finalize(() => this.isRegistering.set(false))).subscribe({
       next: () => {
         localStorage.removeItem(this.pendingRegistrationKey);
         localStorage.removeItem(this.emailVerifiedKey);
@@ -91,6 +108,7 @@ export class RegisterPage implements OnInit{
       },
       error: (error) => {
         console.error('Registration failed:', error);
+        this.registrationError.set(this.authService.getAuthErrorMessage(error, 'register'));
       }
     });
   }
