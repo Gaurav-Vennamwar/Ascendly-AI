@@ -10,7 +10,7 @@ import { AccountStateService } from '../../core/services/account-state.service';
 @Component({
   selector: 'app-profile-page',
   standalone: true,
-  imports: [WorkspaceLayout, MetricCard, PrimaryButton],
+  imports: [WorkspaceLayout, MetricCard],
   templateUrl: './profile-page.html',
   styleUrl: './profile-page.scss',
 })

@@ -9,8 +9,7 @@
         <span class="kicker">Interview configuration</span>
         <h2>Build your practice session</h2>
         <p>
-          Choose your format and focus areas. These preferences shape your future interview
-          experience once connected.
+          Choose your format and focus areas. These preferences shape your personalized interview practice session.
         </p>
       </div>
       <div class="config-grid">
@@ -162,8 +161,7 @@
         <div class="context-note">
           <i>◇</i>
           <p>
-            In future versions, AI will adapt the interview style based on interviewer role and
-            publicly available professional context.
+            Your interviewer adapts their evaluation focus and communication style based on your selected persona.
           </p>
         </div>
       </article>
@@ -174,32 +172,31 @@
           <li>
             <i></i
             ><span
-              ><b>Resume context</b>Your resume will be analyzed when a document is available.</span
+              ><b>Resume context</b>Your resume will provide background for tailored questions.</span
             >
           </li>
           <li>
             <i></i
-            ><span><b>Role alignment</b>Job description context can shape future questions.</span>
+            ><span><b>Role alignment</b>Job description context shapes technical and scenario questions.</span>
           </li>
           <li>
             <i></i
-            ><span><b>Technology focus</b>Selected topics will influence the question set.</span>
+            ><span><b>Technology focus</b>Selected custom topics guide the subject matter.</span>
           </li>
           <li>
             <i></i
             ><span
-              ><b>Communication style</b>Interviewer role and style guide the conversation.</span
+              ><b>Communication style</b>Interviewer role and tone guide the conversation.</span
             >
           </li>
           <li>
             <i></i
-            ><span><b>Calibrated depth</b>Difficulty adjusts the expected question depth.</span>
+            ><span><b>Calibrated depth</b>Difficulty sets the depth expected in your responses.</span>
           </li>
           <li>
             <i></i
             ><span
-              ><b>Actionable feedback</b>Feedback will cover knowledge, communication and
-              confidence.</span
+              ><b>Actionable feedback</b>Feedback evaluates knowledge, communication, and delivery.</span
             >
           </li>
         </ul>
@@ -207,9 +204,21 @@
     </section>
 
     <section class="start panel">
-      <div><span class="kicker">Session ready</span><strong>Start AI Interview</strong><span>Your role, preferences, and optional context will be used once the session API is connected.</span></div>
-      <app-primary-button label="Start AI Interview" icon="→" (clicked)="startInterview()"></app-primary-button>
+      <div>
+        <span class="kicker">Session ready</span>
+        <strong>Start AI Interview</strong>
+        <span>Your role, preferences, and background will shape this personalized interview.</span>
+      </div>
+      <app-primary-button
+        [label]="interview.starting() ? 'Preparing your interview…' : 'Start AI Interview'"
+        icon="→"
+        [disabled]="interview.starting()"
+        (clicked)="startInterview()"
+      ></app-primary-button>
     </section>
+    @if (interview.error()) {
+      <p class="form-error" role="alert">{{ interview.error() }}</p>
+    }
 
     <section class="history panel">
       <div class="section-head">
@@ -221,8 +230,8 @@
       </div>
       <div class="history-empty">
         <div>◇</div>
-        <h3>Your sessions will appear here</h3>
-        <p>Once interviews are connected, scores and feedback cards will live in this space.</p>
+        <h3>Your completed sessions will appear here</h3>
+        <p>After finishing an interview, your aggregate score and actionable suggestions will appear in your history.</p>
       </div>
       <div class="feedback-grid">
         <article><span>Interview score</span><i></i><i></i></article>

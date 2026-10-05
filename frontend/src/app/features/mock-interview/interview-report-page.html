@@ -1,9 +1,221 @@
-<app-workspace-layout title="Interview Report" subtitle="Your complete interview evaluation." eyebrow="Practice studio">
-  <section class="flow-shell">
-    @if (report(); as result) {
-      <article class="question-panel"><span class="kicker">Final evaluation</span><h1>Interview report</h1><p class="lead">{{ result.overallSummary }}</p><h3>Recommendation</h3><p class="feedback-item">{{ result.recommendation }}</p><h3>Next steps</h3>@for (step of result.nextSteps; track step) { <p class="feedback-item">{{ step }}</p> }</article>
+<app-workspace-layout
+  title="Final Interview Report"
+  subtitle="Aggregate career and performance evaluation."
+  eyebrow="Practice studio"
+>
+  <div class="flow-shell">
+    @if (finalEvaluation(); as result) {
+      <!-- FINAL EVALUATION REPORT -->
+      <article class="report-panel">
+        <!-- Report Header -->
+        <header class="report-header">
+          <div class="report-header-meta">
+            <span class="kicker">FINAL INTERVIEW ASSESSMENT</span>
+            <h1 class="report-role-title">{{ targetRole() }}</h1>
+          </div>
+          <div class="readiness-tag" [class]="getReadinessClass(result.interviewReadiness)">
+            <span class="readiness-label">Interview Readiness</span>
+            <span class="readiness-value">{{ result.interviewReadiness }}</span>
+          </div>
+        </header>
+
+        <!-- Hero Overall Score -->
+        <div class="overall-score-hero">
+          <span class="hero-score-label">OVERALL SCORE</span>
+          <div class="hero-score-row">
+            <span class="hero-score-val">{{ result.overallScore }}</span>
+            <span class="hero-score-denom">/ 100</span>
+          </div>
+        </div>
+
+        <!-- 5 Dimension Scores Grid -->
+        <section class="dimension-section">
+          <div class="dimension-grid">
+            <div class="dimension-card">
+              <div class="dim-head">
+                <span class="dim-title">Communication</span>
+                <span class="dim-score">{{ result.communicationScore }}</span>
+              </div>
+              <div class="dim-bar">
+                <i [style.width.%]="result.communicationScore"></i>
+              </div>
+            </div>
+
+            <div class="dimension-card">
+              <div class="dim-head">
+                <span class="dim-title">Technical</span>
+                <span class="dim-score">{{ result.technicalScore }}</span>
+              </div>
+              <div class="dim-bar">
+                <i [style.width.%]="result.technicalScore"></i>
+              </div>
+            </div>
+
+            <div class="dimension-card">
+              <div class="dim-head">
+                <span class="dim-title">Problem Solving</span>
+                <span class="dim-score">{{ result.problemSolvingScore }}</span>
+              </div>
+              <div class="dim-bar">
+                <i [style.width.%]="result.problemSolvingScore"></i>
+              </div>
+            </div>
+
+            <div class="dimension-card">
+              <div class="dim-head">
+                <span class="dim-title">Behavioral</span>
+                <span class="dim-score">{{ result.behavioralScore }}</span>
+              </div>
+              <div class="dim-bar">
+                <i [style.width.%]="result.behavioralScore"></i>
+              </div>
+            </div>
+
+            <div class="dimension-card">
+              <div class="dim-head">
+                <span class="dim-title">Role Alignment</span>
+                <span class="dim-score">{{ result.roleAlignmentScore }}</span>
+              </div>
+              <div class="dim-bar">
+                <i [style.width.%]="result.roleAlignmentScore"></i>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Insights 2-Col Grid: Strongest Areas & Areas to Improve -->
+        <div class="report-insights-grid">
+          <!-- Strongest Areas -->
+          <section class="insight-column">
+            <div class="column-header">
+              <span class="col-icon col-strength">✓</span>
+              <h2 class="column-title">Strongest Areas</h2>
+            </div>
+            @if (result.strongestAreas && result.strongestAreas.length > 0) {
+              <div class="insight-cards-list">
+                @for (item of result.strongestAreas; track item) {
+                  <div class="report-insight-card strength-card">
+                    <p>{{ item }}</p>
+                  </div>
+                }
+              </div>
+            } @else {
+              <p class="empty-list-note">No specific highlights reported.</p>
+            }
+          </section>
+
+          <!-- Areas to Improve -->
+          <section class="insight-column">
+            <div class="column-header">
+              <span class="col-icon col-improve">△</span>
+              <h2 class="column-title">Areas to Improve</h2>
+            </div>
+            @if (result.areasToImprove && result.areasToImprove.length > 0) {
+              <div class="insight-cards-list">
+                @for (item of result.areasToImprove; track item) {
+                  <div class="report-insight-card improve-card">
+                    <p>{{ item }}</p>
+                  </div>
+                }
+              </div>
+            } @else {
+              <p class="empty-list-note">No critical areas flagged.</p>
+            }
+          </section>
+        </div>
+
+        <!-- Repeated Mistakes (if any) -->
+        @if (result.repeatedMistakes && result.repeatedMistakes.length > 0) {
+          <section class="report-full-section">
+            <div class="column-header">
+              <span class="col-icon col-mistake">!</span>
+              <h2 class="column-title">Repeated Mistakes</h2>
+            </div>
+            <div class="insight-cards-list">
+              @for (mistake of result.repeatedMistakes; track mistake) {
+                <div class="report-insight-card mistake-card">
+                  <p>{{ mistake }}</p>
+                </div>
+              }
+            </div>
+          </section>
+        }
+
+        <!-- Preparation Plan -->
+        @if (result.preparationPlan && result.preparationPlan.length > 0) {
+          <section class="report-full-section">
+            <div class="column-header">
+              <span class="col-icon col-plan">◈</span>
+              <h2 class="column-title">Preparation Plan</h2>
+            </div>
+            <div class="plan-steps-list">
+              @for (step of result.preparationPlan; track step; let idx = $index) {
+                <div class="plan-step-card">
+                  <span class="step-num">{{ formatIndex(idx) }}</span>
+                  <p class="step-text">{{ step }}</p>
+                </div>
+              }
+            </div>
+          </section>
+        }
+
+        <!-- Actions Footer -->
+        <footer class="report-actions-footer">
+          <button type="button" class="btn-ghost-secondary" (click)="goToDashboard()">
+            Return to Dashboard
+          </button>
+          <app-primary-button
+            label="Practice Another Role"
+            icon="→"
+            (clicked)="startNewSession()"
+          ></app-primary-button>
+        </footer>
+      </article>
+    } @else if (session(); as activeSession) {
+      <!-- PRE-GENERATION STATE (INTERVIEW COMPLETE) -->
+      <article class="complete-prompt-card">
+        <div class="signal-ring">✦</div>
+        <span class="kicker">INTERVIEW COMPLETE</span>
+        <h1 class="complete-main-title">You've completed your mock interview</h1>
+        <p class="complete-lead">
+          All sections and questions have been finished. Your complete performance is ready to be synthesized into an aggregate assessment.
+        </p>
+
+        @if (completing()) {
+          <div class="generating-state" role="status">
+            <div class="eval-spinner"></div>
+            <p class="generating-text">Reviewing your complete interview performance…</p>
+          </div>
+        } @else {
+          <div class="generate-action-wrap">
+            <app-primary-button
+              label="Generate Final Evaluation"
+              icon="→"
+              [disabled]="completing()"
+              (clicked)="generateFinalEvaluation()"
+            ></app-primary-button>
+          </div>
+        }
+
+        @if (error()) {
+          <div class="error-banner" role="alert">
+            <span class="error-text">{{ error() }}</span>
+            <button type="button" class="retry-btn" (click)="generateFinalEvaluation()">Try again</button>
+          </div>
+        }
+      </article>
     } @else {
-      <article class="empty-flow"><div class="signal">✦</div><h2>Your final report will appear here</h2><p>This screen is prepared to render the real final interview evaluation once the session backend is connected.</p></article>
+      <!-- NO ACTIVE SESSION -->
+      <article class="empty-flow">
+        <div class="signal">✦</div>
+        <h2>No completed interview found</h2>
+        <p>You haven't completed an interview session yet. Configure your preferences and practice to generate a comprehensive report.</p>
+        <app-primary-button
+          label="Configure Interview"
+          icon="→"
+          (clicked)="goToSetup()"
+        ></app-primary-button>
+      </article>
     }
-  </section>
+  </div>
 </app-workspace-layout>

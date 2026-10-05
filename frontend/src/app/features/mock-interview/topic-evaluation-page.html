@@ -1,9 +1,201 @@
-<app-workspace-layout title="Topic Evaluation" subtitle="Focused feedback after each completed topic." eyebrow="Practice studio">
-  <section class="flow-shell">
-    @if (evaluation(); as result) {
-      <article class="question-panel"><span class="kicker">Topic complete</span><h1>{{ result.topic }}</h1><p class="lead">{{ result.summary }}</p><div class="evaluation-grid"><div><h3>Strengths</h3>@for (item of result.strengths; track item) { <p class="feedback-item">{{ item }}</p> }</div><div><h3>Improve next</h3>@for (item of result.improvements; track item) { <p class="feedback-item">{{ item }}</p> }</div></div></article>
+<app-workspace-layout
+  title="Topic Evaluation"
+  subtitle="Detailed, question-by-question performance review."
+  eyebrow="Practice studio"
+>
+  <div class="flow-shell">
+    @if (session(); as activeSession) {
+      <!-- Topic Tab Bar (if multiple topics exist) -->
+      @if (activeSession.topics.length > 1) {
+        <nav class="topic-tab-nav" aria-label="Topic evaluations">
+          @for (t of activeSession.topics; track t.order; let idx = $index) {
+            <button
+              type="button"
+              class="topic-tab-pill"
+              [class.active]="topicIndex() === idx"
+              [class.evaluated]="interview.evaluations()[idx] !== undefined"
+              (click)="selectTopic(idx)"
+            >
+              <span class="tab-idx">0{{ idx + 1 }}</span>
+              <span class="tab-name">{{ t.name }}</span>
+              @if (interview.evaluations()[idx]) {
+                <span class="tab-check">✓</span>
+              }
+            </button>
+          }
+        </nav>
+      }
+
+      @if (evaluating()) {
+        <!-- LOADING EVALUATION STATE -->
+        <article class="evaluating-state-card" role="status">
+          <div class="eval-spinner"></div>
+          <h2 class="eval-heading">Reviewing your answers…</h2>
+          <p class="eval-desc">
+            Your responses for <b>{{ topic()?.name }}</b> are being evaluated. This takes just a moment.
+          </p>
+        </article>
+      } @else if (evaluation(); as result) {
+        <!-- TOPIC EVALUATION CONTENT -->
+        <div class="topic-eval-container">
+          <!-- Topic Header Card -->
+          <header class="topic-eval-header">
+            <div>
+              <span class="kicker">Topic feedback</span>
+              <h1 class="topic-eval-title">{{ result.topic || topic()?.name }}</h1>
+              @if (topic()?.purpose) {
+                <p class="topic-eval-purpose">{{ topic()?.purpose }}</p>
+              }
+            </div>
+            <div class="topic-stat-pill">
+              {{ sortedQuestionEvaluations().length }} questions evaluated
+            </div>
+          </header>
+
+          <!-- Question Evaluation Cards in Original Order -->
+          <div class="eval-questions-list">
+            @for (item of sortedQuestionEvaluations(); track item.questionOrder) {
+              <article class="question-eval-card">
+                <!-- Question Number & Score Row -->
+                <div class="eval-card-top">
+                  <div class="question-meta-group">
+                    <span class="question-badge">Question {{ item.questionOrder }}</span>
+                  </div>
+                  <div class="eval-score-chip" [class]="getScoreBadgeClass(item.score)">
+                    <span class="score-label">Score</span>
+                    <span class="score-val">{{ item.score }}</span>
+                    <span class="score-max">/ 100</span>
+                  </div>
+                </div>
+
+                <!-- 1. The Actual Question -->
+                <div class="eval-question-block">
+                  <span class="section-micro-tag">QUESTION</span>
+                  <h2 class="eval-question-text">{{ getQuestionText(item.questionOrder) }}</h2>
+                </div>
+
+                <!-- 2. The Actual Candidate Answer -->
+                <div class="eval-answer-block">
+                  <div class="answer-block-header">
+                    <span class="section-micro-tag answer-tag">YOUR ANSWER</span>
+                  </div>
+                  <div class="candidate-answer-content">
+                    <p>{{ getCandidateAnswer(item.questionOrder) || 'No answer recorded.' }}</p>
+                  </div>
+                </div>
+
+                <!-- 3. What You Did Well & What Needs Improvement -->
+                <div class="eval-insights-grid">
+                  <!-- Strengths -->
+                  <div class="insight-box strengths-box">
+                    <div class="insight-header">
+                      <span class="insight-icon strength-icon">✓</span>
+                      <h3 class="insight-heading">WHAT YOU DID WELL</h3>
+                    </div>
+                    @if (item.strengths && item.strengths.length > 0) {
+                      <ul class="feedback-bullets">
+                        @for (point of item.strengths; track point) {
+                          <li>{{ point }}</li>
+                        }
+                      </ul>
+                    } @else {
+                      <p class="no-feedback">Good effort overall.</p>
+                    }
+                  </div>
+
+                  <!-- Mistakes / Weaknesses -->
+                  <div class="insight-box mistakes-box">
+                    <div class="insight-header">
+                      <span class="insight-icon mistake-icon">△</span>
+                      <h3 class="insight-heading">WHAT NEEDS IMPROVEMENT</h3>
+                    </div>
+                    @if (item.mistakes && item.mistakes.length > 0) {
+                      <ul class="feedback-bullets">
+                        @for (point of item.mistakes; track point) {
+                          <li>{{ point }}</li>
+                        }
+                      </ul>
+                    } @else {
+                      <p class="no-feedback">No notable weaknesses identified.</p>
+                    }
+                  </div>
+                </div>
+
+                <!-- 4. How to Improve -->
+                @if (item.improvements && item.improvements.length > 0) {
+                  <div class="how-to-improve-box">
+                    <div class="insight-header">
+                      <span class="insight-icon improve-icon">→</span>
+                      <h3 class="insight-heading">HOW TO IMPROVE</h3>
+                    </div>
+                    <ul class="feedback-bullets">
+                      @for (point of item.improvements; track point) {
+                        <li>{{ point }}</li>
+                      }
+                    </ul>
+                  </div>
+                }
+
+                <!-- 5. A Stronger Way to Say It -->
+                @if (item.betterPhrase) {
+                  <div class="better-phrase-box">
+                    <div class="phrase-header">
+                      <span class="phrase-tag">A STRONGER WAY TO SAY IT</span>
+                    </div>
+                    <div class="phrase-body">
+                      <p>“{{ item.betterPhrase }}”</p>
+                    </div>
+                  </div>
+                }
+              </article>
+            }
+          </div>
+
+          <!-- Bottom Navigation Action -->
+          <footer class="eval-footer-nav">
+            <span class="nav-note">Review your feedback before moving on.</span>
+            @if (hasMoreTopics()) {
+              <app-primary-button
+                label="Continue to Next Topic"
+                icon="→"
+                (clicked)="continueToNextTopic()"
+              ></app-primary-button>
+            } @else {
+              <app-primary-button
+                label="Generate Final Evaluation"
+                icon="→"
+                (clicked)="goToFinalEvaluation()"
+              ></app-primary-button>
+            }
+          </footer>
+        </div>
+      } @else {
+        <!-- ERROR OR UNAVAILABLE STATE -->
+        <article class="empty-flow">
+          <div class="signal">!</div>
+          <h2>Evaluation unavailable</h2>
+          <p>{{ error() || 'The evaluation for this topic could not be loaded.' }}</p>
+          <div class="retry-actions">
+            <app-primary-button
+              label="Retry Evaluation"
+              icon="↻"
+              (clicked)="retryEvaluation()"
+            ></app-primary-button>
+          </div>
+        </article>
+      }
     } @else {
-      <article class="empty-flow"><div class="signal">✦</div><h2>Topic feedback will appear here</h2><p>This screen is ready for the backend topic-evaluation response after a topic is completed.</p></article>
+      <!-- NO ACTIVE SESSION -->
+      <article class="empty-flow">
+        <div class="signal">✦</div>
+        <h2>No active interview session</h2>
+        <p>You haven't started an interview session yet. Configure your practice preferences to begin.</p>
+        <app-primary-button
+          label="Configure Interview"
+          icon="→"
+          (clicked)="goToSetup()"
+        ></app-primary-button>
+      </article>
     }
-  </section>
+  </div>
 </app-workspace-layout>
