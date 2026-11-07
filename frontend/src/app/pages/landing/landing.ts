@@ -47,10 +47,7 @@ export class Landing implements AfterViewInit {
 
       particle.style.left = `${Math.random() * 100}%`;
 
-      particle.style.background =
-        Math.random() > 0.5
-          ? `rgba(34,211,238,${Math.random() * .5 + .2})`
-          : `rgba(99,102,241,${Math.random() * .5 + .2})`;
+      particle.style.background = `rgba(255,255,255,${Math.random() * .34 + .16})`;
 
       particle.style.animationDuration =
         `${Math.random() * 15 + 10}s`;

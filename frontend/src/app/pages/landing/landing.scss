@@ -3,20 +3,38 @@
 // ============================================================
 
 // ── VARIABLES ───────────────────────────────────────────────
-$bg-base:        #080b14;
-$bg-surface:     #0d1020;
-$cyan:           #22d3ee;
-$indigo:         #6366f1;
-$indigo-dark:    #4f46e5;
-$purple:         #c084fc;
-$indigo-muted:   #818cf8;
-$text-primary:   #e8eaf6;
-$text-muted:     rgba(232, 234, 246, 0.5);
-$text-faint:     rgba(232, 234, 246, 0.3);
+$bg-base:        #1f3d2b;
+$bg-surface:     #173424;
+$cyan:           #e8dcc4;
+$indigo:         #8b5cf6;
+$indigo-dark:    #6d3fd0;
+$purple:         #c4b5fd;
+$indigo-muted:   #a78bfa;
+$text-primary:   #e8dcc4;
+$text-muted:     rgba(232, 220, 196, 0.58);
+$text-faint:     rgba(232, 220, 196, 0.34);
 
 $glass-bg:       radial-gradient(circle at 30% 30%, rgba(255,255,255,.18), rgba(12,14,28,.92));
 $glass-border:   1px solid rgba(255, 255, 255, 0.12);
 $glass-shadow:   0 0 30px rgba(99,102,241,.2), inset 0 1px 1px rgba(255,255,255,.15);
+
+// Forest / sand / purple brand overlay — visual only, layout remains unchanged.
+.hero {
+  background:
+    radial-gradient(circle at 57% 92%, rgba(139, 92, 246, .34), transparent 29rem),
+    radial-gradient(circle at 9% 24%, rgba(232, 220, 196, .08), transparent 22rem),
+    linear-gradient(155deg, rgba(20, 55, 37, .92), rgba(31, 61, 43, .79)) !important;
+}
+
+.hero::before { background: radial-gradient(circle, rgba(232, 220, 196, .17) 0 1px, transparent 1.5px) 0 0 / 48px 48px !important; opacity: .32; }
+.hero-title { color: #e8dcc4 !important; }
+.hero-title .grad { background: linear-gradient(120deg, #e8dcc4, #c4b5fd 58%, #8b5cf6) !important; -webkit-background-clip: text !important; background-clip: text !important; }
+.hero-desc, .hero-badge { color: rgba(232, 220, 196, .72) !important; }
+.hero-badge { border-color: rgba(232, 220, 196, .2) !important; background: rgba(232, 220, 196, .06) !important; }
+.badge-dot { background: #8b5cf6 !important; box-shadow: 0 0 14px rgba(139, 92, 246, .75) !important; }
+.btn-primary { background: linear-gradient(135deg, #8b5cf6, #6d3fd0) !important; box-shadow: 0 12px 28px rgba(139, 92, 246, .3) !important; }
+.btn-secondary { color: #e8dcc4 !important; border-color: rgba(232, 220, 196, .24) !important; background: rgba(232, 220, 196, .06) !important; }
+.network-container { filter: hue-rotate(72deg) saturate(.72); }
 
 // ── MIXINS ──────────────────────────────────────────────────
 @mixin glass {
@@ -75,6 +93,8 @@ body {
     position: absolute;
     border-radius: 50%;
     animation: float-particle linear infinite;
+    background: rgba(255, 255, 255, .78) !important;
+    box-shadow: 0 0 8px rgba(232, 220, 196, .42);
   }
 }
 
@@ -2071,4 +2091,136 @@ opacity:.4;
   .network-container { width: 350px; height: 350px; }
   .ai-core { transform: translate(-50%, -50%) scale(.82); }
 }
+
+/* Fernwood atmosphere: this final layer deliberately replaces the legacy blue/cyan visual rules above. */
+:host::before {
+  opacity: 0 !important;
+}
+
+:host::after {
+  opacity: 1 !important;
+  background: radial-gradient(ellipse 50rem 31rem at 50% 100%, rgba(139, 92, 246, .23), transparent 70%) !important;
+}
+
+.particles {
+  opacity: .74 !important;
+  mix-blend-mode: normal !important;
+}
+
+.particles .particle {
+  background: rgba(255, 255, 255, .7) !important;
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, .38)) !important;
+}
+
+.hero,
+.trusted,
+.features,
+.workflow,
+.stats,
+.cta,
+.footer {
+  background: transparent !important;
+}
+
+.hero::before {
+  background: radial-gradient(ellipse 38rem 27rem at 55% 94%, rgba(139, 92, 246, .2), transparent 72%) !important;
+}
+
+.hero::after {
+  background: radial-gradient(ellipse 28rem 20rem at 90% 18%, rgba(232, 220, 196, .055), transparent 74%) !important;
+}
+
+.hero-badge,
+.section-tag {
+  color: #e8dcc4 !important;
+  border-color: rgba(232, 220, 196, .2) !important;
+  background: rgba(232, 220, 196, .055) !important;
+}
+
+.hero-badge .badge-dot {
+  background: #8b5cf6 !important;
+  box-shadow: 0 0 0 4px rgba(139, 92, 246, .14), 0 0 16px rgba(139, 92, 246, .75) !important;
+}
+
+.hero-title,
+.section-header h2,
+.feature-card h3,
+.workflow-step h3,
+.footer-brand h2 {
+  color: #e8dcc4 !important;
+}
+
+.hero-title .grad,
+.section-header span:not(.section-tag),
+.stat-card h3,
+.cta-card h2 span {
+  background: linear-gradient(105deg, #e8dcc4 8%, #d9c8ee 58%, #a985fb) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+}
+
+.hero-desc,
+.section-header p,
+.feature-card p,
+.workflow-step p,
+.hero-social .social-text,
+.footer-brand p,
+.footer-column a,
+.footer-bottom p,
+.footer-social a {
+  color: rgba(232, 220, 196, .67) !important;
+}
+
+.hero-btns .btn-primary,
+.cta-actions .btn-primary {
+  background: #8b5cf6 !important;
+  box-shadow: 0 15px 32px rgba(139, 92, 246, .27), inset 0 1px rgba(255, 255, 255, .24) !important;
+}
+
+.hero-btns .btn-secondary,
+.cta-actions .btn-secondary {
+  color: #e8dcc4 !important;
+  border-color: rgba(232, 220, 196, .2) !important;
+  background: rgba(232, 220, 196, .06) !important;
+}
+
+.feature-card,
+.stat-card,
+.cta-card {
+  border-color: rgba(232, 220, 196, .14) !important;
+  background: rgba(19, 55, 36, .56) !important;
+  box-shadow: inset 0 1px rgba(232, 220, 196, .08), 0 22px 45px rgba(4, 18, 10, .2) !important;
+}
+
+.feature-card::before,
+.feature-card:nth-child(2)::before,
+.feature-card:nth-child(3)::before,
+.feature-card:nth-child(4)::before,
+.cta-card::before {
+  background: radial-gradient(circle, rgba(139, 92, 246, .2), transparent 68%) !important;
+}
+
+.feature-icon {
+  color: #e8dcc4 !important;
+  border-color: rgba(232, 220, 196, .18) !important;
+  background: rgba(139, 92, 246, .2) !important;
+  box-shadow: inset 0 1px rgba(255, 255, 255, .12), 0 10px 25px rgba(139, 92, 246, .16) !important;
+}
+
+.footer {
+  border-color: rgba(232, 220, 196, .11) !important;
+}
+
+.network-container { filter: hue-rotate(58deg) saturate(.48) brightness(.83); }
+.network-glow { background: radial-gradient(ellipse at center, rgba(139, 92, 246, .25), transparent 68%) !important; }
+.network-grid { background-image: linear-gradient(rgba(232, 220, 196, .14) 1px, transparent 1px), linear-gradient(90deg, rgba(232, 220, 196, .14) 1px, transparent 1px) !important; }
+.network-container::before { border-color: rgba(232, 220, 196, .14) !important; box-shadow: 0 0 0 26px rgba(139, 92, 246, .035), 0 0 0 52px rgba(232, 220, 196, .018), inset 0 0 80px rgba(139, 92, 246, .08) !important; }
+.connections-svg > g:first-of-type { stroke: rgba(232, 220, 196, .32) !important; }
+.connections-svg > g:nth-of-type(2) { stroke: rgba(139, 92, 246, .28) !important; }
+.node { border-color: rgba(232, 220, 196, .22) !important; background: radial-gradient(circle at 30% 18%, rgba(232, 220, 196, .15), rgba(17, 53, 34, .94) 68%) !important; }
+.node::after, .network-readout i { background: #8b5cf6 !important; box-shadow: 0 0 10px rgba(139, 92, 246, .8) !important; }
+.node svg, .network-readout strong { color: #e8dcc4 !important; }
+.core-sphere { border-color: rgba(232, 220, 196, .34) !important; background: radial-gradient(circle at 34% 23%, rgba(232, 220, 196, .38) 0%, rgba(139, 92, 246, .28) 28%, rgba(31, 61, 43, .62) 58%, #102b1d 100%) !important; box-shadow: 0 0 84px rgba(139, 92, 246, .42), inset 0 2px 3px rgba(232, 220, 196, .2) !important; }
+.core-inner { background: radial-gradient(circle, rgba(232, 220, 196, .68), rgba(139, 92, 246, .48) 35%, rgba(31, 61, 43, .62) 75%) !important; }
+.network-readout { color: rgba(232, 220, 196, .78) !important; border-color: rgba(232, 220, 196, .16) !important; background: rgba(16, 43, 28, .74) !important; }
 

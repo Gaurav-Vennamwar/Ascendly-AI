@@ -8,7 +8,7 @@
   display: grid;
   grid-template-columns: minmax(0, 1.08fr) minmax(440px, 0.92fr);
   min-height: 100vh;
-  background: rgba(2, 3, 10, 0.48);
+  background: transparent;
 }
 .auth-showcase {
   position: relative;
@@ -17,11 +17,10 @@
   min-height: 100vh;
   padding: 34px clamp(36px, 7vw, 108px);
   overflow: hidden;
-  border-right: 1px solid rgba(148, 163, 184, 0.1);
+  border-right: 1px solid rgba(232, 220, 196, 0.14);
   background:
-    radial-gradient(circle at 36% 66%, rgba(124, 58, 237, 0.28), transparent 30%),
-    radial-gradient(circle at 72% 18%, rgba(8, 145, 178, 0.17), transparent 24%),
-    linear-gradient(145deg, rgba(10, 9, 31, 0.91), rgba(3, 5, 15, 0.78));
+    radial-gradient(circle at 42% 72%, rgba(139, 92, 246, 0.2), transparent 34%),
+    rgba(15, 47, 30, 0.5);
 }
 .auth-brand {
   position: relative;
@@ -29,14 +28,14 @@
   display: flex;
   align-items: center;
   gap: 0.62rem;
-  color: #f8fafc;
+  color: #e8dcc4;
   text-decoration: none;
   font-size: 1rem;
   font-weight: 800;
   letter-spacing: -0.04em;
 }
 .auth-brand b {
-  color: #67e8f9;
+  color: #c4b5fd;
 }
 .brand-mark {
   position: relative;
@@ -44,8 +43,8 @@
   height: 32px;
   overflow: hidden;
   border-radius: 10px;
-  background: #070917;
-  box-shadow: 0 6px 16px rgba(79, 70, 229, 0.4);
+  background: #163724;
+  box-shadow: 0 6px 16px rgba(139, 92, 246, 0.3);
 }
 .brand-mark img {
   position: absolute;
@@ -62,7 +61,7 @@
 }
 .eyebrow {
   display: block;
-  color: #a5b4fc;
+  color: #c4b5fd;
   font:
     600 0.6rem 'DM Mono',
     monospace;
@@ -71,14 +70,14 @@
 }
 .showcase-copy h1 {
   margin: 15px 0;
-  color: #f8fafc;
+  color: #e8dcc4;
   font-size: clamp(2.65rem, 4.2vw, 4.65rem);
   line-height: 1;
   letter-spacing: -0.078em;
 }
 .showcase-copy em {
   font-style: normal;
-  background: linear-gradient(100deg, #c4b5fd, #67e8f9);
+  background: linear-gradient(100deg, #e8dcc4, #c4b5fd);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -86,7 +85,7 @@
 .showcase-copy p {
   max-width: 465px;
   margin: 0;
-  color: rgba(203, 213, 225, 0.67);
+  color: rgba(232, 220, 196, 0.7);
   font-size: 0.88rem;
   line-height: 1.75;
 }
@@ -96,7 +95,7 @@
   margin: 29px 0 0;
   padding: 0;
   list-style: none;
-  color: rgba(226, 232, 240, 0.78);
+  color: rgba(232, 220, 196, 0.78);
   font-size: 0.73rem;
 }
 .showcase-copy li {
@@ -108,8 +107,8 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #67e8f9;
-  box-shadow: 0 0 10px #22d3ee;
+  background: #8b5cf6;
+  box-shadow: 0 0 10px rgba(139, 92, 246, .8);
 }
 .auth-showcase footer {
   position: relative;
@@ -126,7 +125,7 @@
 }
 .showcase-orbit {
   position: absolute;
-  border: 1px solid rgba(129, 140, 248, 0.17);
+  border: 1px solid rgba(232, 220, 196, 0.16);
   border-radius: 50%;
   pointer-events: none;
 }
@@ -135,7 +134,7 @@
   height: 530px;
   right: -190px;
   top: 15%;
-  border-top-color: rgba(103, 232, 249, 0.5);
+  border-top-color: rgba(139, 92, 246, 0.7);
   animation: auth-rotate 24s linear infinite;
 }
 .orbit-two {
@@ -151,8 +150,8 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #67e8f9;
-  box-shadow: 0 0 16px #22d3ee;
+  background: #8b5cf6;
+  box-shadow: 0 0 16px rgba(139, 92, 246, .8);
 }
 .signal-one {
   right: 17%;
@@ -178,7 +177,7 @@
   overflow: hidden;
   border: 1px solid rgba(148, 163, 184, 0.15);
   border-radius: 24px;
-  background: linear-gradient(145deg, rgba(23, 26, 51, 0.76), rgba(7, 9, 20, 0.72));
+  background: rgba(17, 53, 34, 0.76);
   box-shadow:
     inset 0 1px rgba(255, 255, 255, 0.09),
     0 28px 80px rgba(0, 0, 0, 0.31);
@@ -191,7 +190,7 @@
   top: -130px;
   right: -85px;
   border-radius: 50%;
-  background: rgba(103, 232, 249, 0.12);
+  background: rgba(139, 92, 246, 0.12);
   filter: blur(24px);
 }
 .form-head {
@@ -199,7 +198,7 @@
 }
 .form-head h2 {
   margin: 10px 0 7px;
-  color: #f8fafc;
+  color: #e8dcc4;
   font-size: 1.42rem;
   letter-spacing: -0.057em;
 }
@@ -294,9 +293,9 @@
   border: 1px solid rgba(196, 181, 253, 0.25);
   border-radius: 12px;
   color: #fff;
-  background: linear-gradient(135deg, #8b5cf6, #4f46e5 55%, #0891b2);
+  background: #8b5cf6;
   box-shadow:
-    0 12px 28px rgba(79, 70, 229, 0.35),
+    0 12px 28px rgba(139, 92, 246, 0.35),
     inset 0 1px rgba(255, 255, 255, 0.3);
   font:
     700 0.72rem 'Manrope',
@@ -309,7 +308,7 @@
 .submit-button:hover {
   transform: translateY(-2px);
   box-shadow:
-    0 16px 34px rgba(79, 70, 229, 0.48),
+    0 16px 34px rgba(139, 92, 246, 0.48),
     inset 0 1px rgba(255, 255, 255, 0.32);
 }
 .divider {

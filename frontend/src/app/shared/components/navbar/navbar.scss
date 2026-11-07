@@ -35,7 +35,7 @@
 }
 
 .logo span{
-  background: linear-gradient(90deg, #6366f1, #22d3ee);
+  background: linear-gradient(90deg, #e8dcc4, #c4b5fd);
 
   background-clip: text;
   -webkit-background-clip: text;
@@ -100,8 +100,8 @@ display:none;
 .navbar {
   padding: 11px 14px 11px 12px;
   border-radius: 18px;
-  background: rgba(9, 10, 19, .72);
-  border-color: rgba(255, 255, 255, .1);
+  background: rgba(24, 57, 39, .76);
+  border-color: rgba(232, 220, 196, .16);
   box-shadow: 0 16px 50px rgba(0,0,0,.32), inset 0 1px rgba(255,255,255,.04);
 }
 
@@ -118,8 +118,8 @@ display:none;
   height: 32px;
   overflow: hidden;
   border-radius: 10px;
-  background: #080a16;
-  box-shadow: 0 6px 18px rgba(99, 102, 241, .35);
+  background: #163724;
+  box-shadow: 0 6px 18px rgba(139, 92, 246, .3);
 }
 
 .logo .logo-mark img {
@@ -131,7 +131,7 @@ display:none;
 }
 
 .nav-links a {
-  color: rgba(226,232,240,.7);
+  color: rgba(232, 220, 196, .74);
   font-size: .84rem;
   font-weight: 600;
 }
@@ -145,6 +145,6 @@ display:none;
   display: inline-flex;
   align-items: center;
   gap: .55rem;
-  background: linear-gradient(135deg, #7c3aed, #4f46e5 55%, #0891b2);
-  box-shadow: 0 8px 22px rgba(79,70,229,.35), inset 0 1px rgba(255,255,255,.25);
+  background: linear-gradient(135deg, #8b5cf6, #6d3fd0 58%, #4c278f);
+  box-shadow: 0 8px 22px rgba(139,92,246,.35), inset 0 1px rgba(255,255,255,.25);
 }

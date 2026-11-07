@@ -9,7 +9,15 @@
 .background {
   position: absolute;
   inset: 0;
-  background: #02030a;
+  /* This is the one persistent canvas behind every routed page. */
+  background:
+    radial-gradient(circle at 19% 18%, rgba(255, 255, 255, .36) 0 1px, transparent 1.5px) 0 0 / 24px 24px,
+    radial-gradient(circle at 73% 64%, rgba(255, 255, 255, .25) 0 .8px, transparent 1.3px) 0 0 / 41px 41px,
+    radial-gradient(ellipse 50rem 32rem at 50% 106%, rgba(139, 92, 246, .37), transparent 70%),
+    radial-gradient(ellipse 34rem 24rem at 95% 7%, rgba(232, 220, 196, .08), transparent 74%),
+    linear-gradient(155deg, #102b1d 0%, #1f3d2b 52%, #142b20 100%);
+  background-attachment: fixed;
+  animation: starfieldDrift 55s linear infinite;
 }
 
 /* Mesh Gradients */
@@ -17,14 +25,14 @@
   position: absolute;
   border-radius: 50%;
   filter: blur(120px);
-  opacity: .28;
+  opacity: .16;
   animation: float 18s ease-in-out infinite;
 }
 
 .mesh-1 {
   width: 600px;
   height: 600px;
-  background: #6366f1;
+  background: #8b5cf6;
   top: -150px;
   left: -100px;
 }
@@ -32,7 +40,7 @@
 .mesh-2 {
   width: 500px;
   height: 500px;
-  background: #22d3ee;
+  background: #8b5cf6;
   right: -120px;
   top: 20%;
   animation-delay: -6s;
@@ -41,7 +49,7 @@
 .mesh-3 {
   width: 700px;
   height: 700px;
-  background: #7c3aed;
+  background: #8b5cf6;
   bottom: -250px;
   left: 35%;
   animation-delay: -12s;
@@ -61,24 +69,18 @@
   top: -350px;
   left: 50%;
   transform: translateX(-50%);
-  background: #6366f1;
+  background: #e8dcc4;
 }
 
 .glow-bottom {
   bottom: -450px;
   right: -150px;
-  background: #22d3ee;
+  background: #8b5cf6;
 }
 
 /* Grid */
 .grid {
-  position: absolute;
-  inset: 0;
-  opacity: .032;
-  background-image:
-    linear-gradient(rgba(99,102,241,.4) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(99,102,241,.4) 1px, transparent 1px);
-  background-size: 40px 40px;
+  display: none;
 }
 
 /* Particles */
@@ -88,7 +90,8 @@
   height: 2px;
   background: white;
   border-radius: 50%;
-  opacity: .48;
+  opacity: .7;
+  box-shadow: 0 0 6px rgba(255, 255, 255, .55);
   animation: particleFloat linear infinite;
 }
 
@@ -109,4 +112,8 @@
   to{
     transform:translateY(-120px);
   }
+}
+
+@keyframes starfieldDrift {
+  to { background-position: 24px -48px, -41px 82px, 0 0, 0 0, 0 0; }
 }

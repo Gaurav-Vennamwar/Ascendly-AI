@@ -12,18 +12,18 @@
 
 /* Theme */
 :root {
-  --bg: #03040a;
-  --surface: rgba(13, 17, 23, 0.75);
+  --bg: #1f3d2b;
+  --surface: rgba(20, 49, 34, 0.72);
 
-  --primary: #6366f1;
-  --secondary: #22d3ee;
+  --primary: #8b5cf6;
+  --secondary: #e8dcc4;
 
   --success: #10b981;
   --warning: #f59e0b;
   --danger: #ef4444;
 
-  --text: #f8fafc;
-  --muted: #94a3b8;
+  --text: #e8dcc4;
+  --muted: rgba(232, 220, 196, .62);
 
   --radius: 24px;
 
@@ -39,11 +39,68 @@ body {
 
 body {
   font-family: 'Manrope', sans-serif;
-  background: radial-gradient(circle at 50% -20%, rgba(99, 102, 241, .18), transparent 33rem), #06070d;
+  background:
+    radial-gradient(circle at 17% 23%, rgba(255, 255, 255, .48) 0 1px, transparent 1.45px) 0 0 / 22px 22px,
+    radial-gradient(circle at 72% 61%, rgba(255, 255, 255, .36) 0 .85px, transparent 1.35px) 0 0 / 37px 37px,
+    radial-gradient(ellipse 46rem 30rem at 50% 104%, rgba(139, 92, 246, .36), transparent 70%),
+    radial-gradient(ellipse 31rem 24rem at 97% 6%, rgba(232, 220, 196, .08), transparent 73%),
+    linear-gradient(155deg, #102b1d 0%, #1f3d2b 52%, #142b20 100%);
+  background-attachment: fixed;
+  animation: global-ambient-drift 50s linear infinite;
   color: var(--text);
   overflow-x: hidden;
   min-width: 320px;
 }
+
+@keyframes global-ambient-drift { to { background-position: 22px -44px, -37px 74px, 0 0, 0 0, 0 0; } }
+
+body::before,
+body::after {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  content: '';
+}
+
+body::before {
+  opacity: .38;
+  background:
+    radial-gradient(circle at 18% 14%, rgba(232, 220, 196, .75) 0 1px, transparent 1.6px) 0 0 / 42px 42px,
+    radial-gradient(circle at 68% 42%, rgba(255, 255, 255, .55) 0 1px, transparent 1.5px) 0 0 / 57px 57px;
+  animation: ambient-drift 42s linear infinite;
+}
+
+body::after {
+  background:
+    radial-gradient(circle at 48% 105%, rgba(139, 92, 246, .34), transparent 34rem),
+    radial-gradient(circle at 92% 20%, rgba(232, 220, 196, .1), transparent 25rem),
+    linear-gradient(150deg, rgba(8, 28, 18, .58), rgba(31, 61, 43, .24));
+}
+
+@keyframes ambient-drift { to { background-position: 42px -84px, -57px 114px; } }
+
+/* Shared Fernwood-inspired color treatment. Components keep their layout and only inherit new surfaces. */
+/* The application shell stays transparent so every route sits on the one global canvas above. */
+.workspace, .auth-shell { background: transparent !important; }
+.workspace .content, .workspace-content { background: transparent; }
+.workspace .panel, .workspace .analysis-card, .workspace .card, .workspace .job-card, .workspace .insight-card, .workspace .config-card, .workspace .flow-head, .workspace .question-panel, .workspace .empty-flow { border-color: rgba(232, 220, 196, .15) !important; background: rgba(17, 53, 34, .62) !important; }
+.workspace h1, .workspace h2, .workspace h3, .workspace strong, .workspace .field-grid strong { color: #e8dcc4 !important; }
+.workspace .kicker, .workspace .section-kicker, .workspace .eyebrow, .workspace .step { color: #c4b5fd !important; }
+.workspace .button.primary, .workspace .submit-button, .cta-btn { background: linear-gradient(135deg, #8b5cf6, #6d3fd0 58%, #4c278f) !important; box-shadow: 0 10px 25px rgba(139, 92, 246, .28) !important; }
+.workspace input, .workspace textarea, .workspace select { color: #e8dcc4 !important; background-color: rgba(8, 31, 19, .52) !important; border-color: rgba(232, 220, 196, .16) !important; }
+
+/* Shared route surfaces: these override legacy indigo/cyan panels without touching layout or content. */
+.workspace .sidebar { background: rgba(12, 43, 27, .78) !important; border-color: rgba(232, 220, 196, .12) !important; }
+.workspace .topbar { background: rgba(16, 50, 32, .54) !important; border-color: rgba(232, 220, 196, .13) !important; }
+.workspace .welcome, .workspace .profile-hero, .workspace .hero-card, .workspace [class*='setup-hero'], .workspace [class*='interview-header'] { background: rgba(22, 59, 38, .67) !important; border-color: rgba(232, 220, 196, .16) !important; }
+.workspace .top-avatar, .workspace .profile-avatar { color: #e8dcc4 !important; background: #8b5cf6 !important; border-color: rgba(232, 220, 196, .22) !important; }
+.workspace .kicker, .workspace .eyebrow { color: #c4b5fd !important; }
+.workspace .welcome h2, .workspace .profile-hero h2, .workspace .hero-card h2 { color: #e8dcc4 !important; }
+.workspace .welcome p, .workspace .profile-hero p, .workspace .hero-card p { color: rgba(232, 220, 196, .7) !important; }
+.workspace [class*='card'], .workspace [class*='panel'] { background: rgba(17, 53, 34, .62) !important; border-color: rgba(232, 220, 196, .14) !important; }
+.workspace button.selected, .workspace [aria-pressed='true'] { color: #e8dcc4 !important; border-color: rgba(139, 92, 246, .75) !important; background: rgba(139, 92, 246, .28) !important; }
+.workspace [class*='progress'] > span, .workspace [class*='progress'] > i, .workspace .bars i { background: #8b5cf6 !important; box-shadow: 0 0 13px rgba(139, 92, 246, .25) !important; }
 
 img,
 svg,
