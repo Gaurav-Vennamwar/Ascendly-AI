@@ -174,7 +174,7 @@
     } @else if (session(); as activeSession) {
       <!-- PRE-GENERATION STATE (INTERVIEW COMPLETE) -->
       <article class="complete-prompt-card">
-        <div class="signal-ring">✦</div>
+        <div class="signal-ring" aria-hidden="true"></div>
         <span class="kicker">INTERVIEW COMPLETE</span>
         <h1 class="complete-main-title">You've completed your mock interview</h1>
         <p class="complete-lead">
@@ -207,7 +207,7 @@
     } @else {
       <!-- NO ACTIVE SESSION -->
       <article class="empty-flow">
-        <div class="signal">✦</div>
+        <div class="signal" aria-hidden="true"></div>
         <h2>No completed interview found</h2>
         <p>You haven't completed an interview session yet. Configure your preferences and practice to generate a comprehensive report.</p>
         <app-primary-button

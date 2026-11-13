@@ -1,2 +1,9 @@
-import { Component } from '@angular/core'; import { WorkspaceLayout } from '../../shared/components/workspace-layout/workspace-layout'; import { MetricCard } from '../../shared/components/metric-card/metric-card';
-@Component({selector:'app-learning-roadmap-page',standalone:true,imports:[WorkspaceLayout,MetricCard],templateUrl:'./learning-roadmap-page.html',styleUrl:'./learning-roadmap-page.scss'}) export class LearningRoadmapPage {}
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-learning-roadmap-page',
+  standalone: true,
+  templateUrl: './learning-roadmap-page.html',
+  styleUrl: './learning-roadmap-page.scss'
+})
+export class LearningRoadmapPage {}

@@ -1,6 +1,6 @@
 <aside class="insight-card">
   <div class="insight-head">
-    <div class="brain">✦</div>
+    <div class="brain" aria-hidden="true"><span></span></div>
     <div>
       <span>Ascendly intelligence</span>
       <h2>AI insights</h2>
@@ -18,7 +18,7 @@
     <div><span>Upload status</span><strong [class.waiting]="!completed()">{{ completed() ? 'Processed' : 'Waiting...' }}</strong></div>
   </div>
   <div class="tip">
-    <span>✦</span>
+    <span class="tip-mark" aria-hidden="true"></span>
     <p><b>Pro tip</b>Tailor your resume for each job description to improve relevance.</p>
   </div>
 </aside>

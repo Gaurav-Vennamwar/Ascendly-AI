@@ -134,3 +134,192 @@ pre {
   background: var(--primary);
   border-radius: 999px;
 }
+
+/* Ascendly workbench pass — quiet product chrome, one reserved action color. */
+:root {
+  --bg: #111713;
+  --surface: #171d18;
+  --raised: #202821;
+  --primary: #8063bb;
+  --text: #f0eee6;
+  --muted: #a9aaa3;
+  --hairline: rgba(240, 238, 230, .09);
+  --radius: 16px;
+  --transition: 160ms cubic-bezier(.22, 1, .36, 1);
+}
+
+body {
+  background: #111713 !important;
+  color: var(--text);
+  animation: none !important;
+}
+
+app-animated-background .background {
+  background: #111713 !important;
+  animation: none !important;
+}
+
+app-animated-background .mesh,
+app-animated-background .glow,
+app-animated-background .grid,
+app-animated-background .particles {
+  display: none !important;
+}
+
+.workspace,
+.auth-shell {
+  background: transparent !important;
+}
+
+.workspace .sidebar {
+  background: #0d120f !important;
+  border-color: var(--hairline) !important;
+  backdrop-filter: none !important;
+}
+
+.workspace .topbar {
+  min-height: 64px !important;
+  padding-block: 12px !important;
+  background: rgba(17, 23, 19, .84) !important;
+  border-color: var(--hairline) !important;
+  backdrop-filter: blur(12px) !important;
+}
+
+.workspace .panel,
+.workspace .analysis-card,
+.workspace .card,
+.workspace .job-card,
+.workspace .insight-card,
+.workspace .config-card,
+.workspace .flow-head,
+.workspace .question-panel,
+.workspace .empty-flow,
+.workspace [class*='card'],
+.workspace [class*='panel'] {
+  background: #171d18 !important;
+  border-color: var(--hairline) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+.workspace input,
+.workspace textarea,
+.workspace select,
+.auth-card input {
+  color: var(--text) !important;
+  background: #202821 !important;
+  border-color: var(--hairline) !important;
+  box-shadow: none !important;
+}
+
+.workspace h1,
+.workspace h2,
+.workspace h3,
+.workspace strong,
+.auth-card h2,
+.auth-showcase h1 {
+  color: var(--text) !important;
+  font-weight: 500 !important;
+  letter-spacing: -.02em !important;
+}
+
+.workspace p,
+.workspace .subtitle,
+.workspace [class*='description'],
+.auth-card p,
+.auth-showcase p {
+  color: var(--muted) !important;
+}
+
+.workspace .kicker,
+.workspace .eyebrow,
+.workspace .section-kicker,
+.workspace .step,
+.auth-shell .eyebrow {
+  color: var(--muted) !important;
+  font-weight: 500 !important;
+  letter-spacing: .01em !important;
+  text-transform: none !important;
+}
+
+.workspace .button.primary,
+.workspace .submit-button,
+.auth-shell .submit-button,
+.cta-btn,
+.workspace app-primary-button .primary {
+  color: #16131d !important;
+  background: #d9d1ea !important;
+  border-color: #d9d1ea !important;
+  box-shadow: none !important;
+}
+
+.workspace .button.secondary,
+.workspace app-primary-button .secondary,
+.hero-btns .btn-secondary {
+  color: var(--text) !important;
+  background: #202821 !important;
+  border-color: var(--hairline) !important;
+  box-shadow: none !important;
+}
+
+.workspace .navigation a.active,
+.workspace button.selected,
+.workspace [aria-pressed='true'] {
+  color: var(--text) !important;
+  background: rgba(128, 99, 187, .18) !important;
+  border-color: rgba(217, 209, 234, .16) !important;
+  box-shadow: inset 2px 0 #d9d1ea !important;
+}
+
+.workspace .navigation a:hover,
+.workspace button:hover:not(:disabled),
+.workspace [class*='card']:hover {
+  transform: none !important;
+  background-color: #202821 !important;
+  border-color: rgba(240, 238, 230, .16) !important;
+  box-shadow: none !important;
+}
+
+.workspace .score-meter span,
+.workspace .progress-fill,
+.workspace .bars i,
+.workspace [class*='progress'] > span,
+.workspace [class*='progress'] > i {
+  background: #8063bb !important;
+  box-shadow: none !important;
+}
+
+.auth-showcase {
+  background: #111713 !important;
+  border-color: var(--hairline) !important;
+}
+
+.auth-card {
+  background: #171d18 !important;
+  border-color: var(--hairline) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+.auth-shell .showcase-orbit,
+.auth-shell .showcase-signal,
+.auth-shell .card-reflection {
+  display: none !important;
+}
+
+button,
+a,
+input,
+textarea,
+select {
+  transition: color 160ms cubic-bezier(.22, 1, .36, 1), background-color 160ms cubic-bezier(.22, 1, .36, 1), border-color 160ms cubic-bezier(.22, 1, .36, 1), opacity 160ms cubic-bezier(.22, 1, .36, 1), transform 160ms cubic-bezier(.22, 1, .36, 1) !important;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid #d9d1ea;
+  outline-offset: 2px;
+}

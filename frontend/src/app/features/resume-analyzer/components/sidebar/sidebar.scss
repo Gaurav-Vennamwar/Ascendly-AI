@@ -1,5 +1,6 @@
 :host { display:block; height:100%; }
 .sidebar { display:flex; flex-direction:column; height:100%; padding:25px 14px 15px; border-right:1px solid rgba(148,163,184,.11); background:linear-gradient(180deg,rgba(6,8,20,.91),rgba(6,8,18,.74)); backdrop-filter:blur(18px); }.brand-row{display:flex;align-items:center;justify-content:space-between}
+.spark{width:7px;height:7px;margin-bottom:8px;border:1px solid currentColor;border-radius:50%;}
 .brand { display:flex; align-items:center; gap:.62rem; padding:0 9px; color:#f8fafc; text-decoration:none; font-size:1rem; font-weight:800; letter-spacing:-.04em; }.brand b { color:#67e8f9; font-weight:800; }.drawer-close{display:none;width:32px;height:32px;border:1px solid rgba(148,163,184,.15);border-radius:9px;color:#cbd5e1;background:rgba(255,255,255,.04);font-size:1.2rem}
 .brand-mark { position:relative; width:29px; height:29px; overflow:hidden; border-radius:9px; background:#070917; box-shadow:0 6px 16px rgba(79,70,229,.34); }.brand-mark img { position:absolute; width:46px; height:46px; max-width:none; transform:translate(-8px,-7px); }
 .navigation { flex:1; margin-top:43px; }.nav-label { margin:0 8px 10px; color:rgba(148,163,184,.55); font-size:.61rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; }.general { margin-top:30px; }
