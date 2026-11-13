@@ -323,3 +323,102 @@ select:focus-visible {
   outline: 2px solid #d9d1ea;
   outline-offset: 2px;
 }
+
+/* Static landing detail: structured like a resume workspace, never animated decoration. */
+app-landing {
+  position: relative;
+  display: block;
+  isolation: isolate;
+  background-color: #111713;
+  background-image:
+    linear-gradient(rgba(240, 238, 230, .035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(240, 238, 230, .035) 1px, transparent 1px);
+  background-size: 96px 96px;
+}
+
+app-landing::before,
+app-landing::after {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  content: '';
+}
+
+app-landing > * {
+  position: relative;
+  z-index: 1;
+}
+
+app-landing::before {
+  top: 112px;
+  right: clamp(24px, 5vw, 80px);
+  width: min(34vw, 440px);
+  height: 248px;
+  border-top: 1px solid rgba(217, 209, 234, .18);
+  border-right: 1px solid rgba(217, 209, 234, .18);
+  border-radius: 0 16px 0 0;
+}
+
+app-landing::after {
+  top: 196px;
+  right: clamp(40px, 7vw, 112px);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #8063bb;
+  box-shadow: 112px 64px 0 -2px #8063bb, -224px 176px 0 -3px rgba(217, 209, 234, .75);
+}
+
+app-landing .features,
+app-landing .workflow,
+app-landing .stats {
+  position: relative;
+}
+
+app-landing .features::before,
+app-landing .workflow::before,
+app-landing .stats::before {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 36px;
+  height: 1px;
+  background: #8063bb;
+  content: '';
+}
+
+app-landing .section-tag {
+  display: inline-flex !important;
+  min-height: 28px;
+  align-items: center;
+  padding: 0 10px !important;
+  color: #d9d1ea !important;
+  border: 1px solid rgba(217, 209, 234, .24) !important;
+  border-radius: 6px !important;
+  background: #202821 !important;
+  font-family: 'Manrope', sans-serif !important;
+  font-size: .78rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+
+app-landing .section-header h2,
+app-landing .section-header h2 span {
+  color: #f0eee6 !important;
+  background: none !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+
+app-landing .section-header p {
+  color: #b7b8b1 !important;
+}
+
+@media (max-width: 720px) {
+  app-landing { background-size: 72px 72px; }
+  app-landing::before { top: 88px; width: 52vw; height: 180px; }
+  app-landing::after { right: 44px; top: 152px; }
+  app-landing .features::before,
+  app-landing .workflow::before,
+  app-landing .stats::before { display: none; }
+}

@@ -24,10 +24,7 @@ export class Landing implements AfterViewInit {
   particles!: ElementRef<HTMLDivElement>;
 
   ngAfterViewInit(): void {
-
-    this.createParticles();
-    this.enableParallax();
-
+    // The landing environment is intentionally static: the content and product preview lead.
   }
 
   private createParticles() {
