@@ -10,32 +10,45 @@
   box-sizing: border-box;
 }
 
-/* Global Theme Tokens - Deep Obsidian & Electric Accent */
+/* Global Theme Tokens — Navy · Cream · Coral */
 :root {
-  --bg: #07090e;
-  --bg-gradient: linear-gradient(180deg, #07090e 0%, #0a0d16 100%);
-  --surface: #0e121b;
-  --surface-card: #121622;
-  --surface-raised: #181e2e;
+  /* Core palette */
+  --navy: #14213D;
+  --navy-deep: #0d1628;
+  --navy-light: #1b2d52;
+  --cream: #F4EDE0;
+  --cream-dark: #e8ddd0;
+  --cream-muted: #d4cdc0;
+  --coral: #FF6B5B;
+  --coral-light: #ff8a7d;
+  --coral-deep: #e85a4a;
+  --coral-glow: rgba(255, 107, 91, 0.30);
 
-  --primary: #6366f1;
-  --primary-bright: #818cf8;
-  --primary-glow: rgba(99, 102, 241, 0.35);
+  /* Semantic mappings */
+  --bg: var(--navy);
+  --bg-gradient: linear-gradient(180deg, #14213D 0%, #0d1628 100%);
+  --surface: #1b2d52;
+  --surface-card: rgba(244, 237, 224, 0.06);
+  --surface-raised: rgba(244, 237, 224, 0.10);
 
-  --cyan: #00f0ff;
-  --cyan-bright: #38bdf8;
-  --cyan-glow: rgba(0, 240, 255, 0.3);
+  --primary: var(--coral);
+  --primary-bright: var(--coral-light);
+  --primary-glow: var(--coral-glow);
+
+  --cyan: var(--coral);
+  --cyan-bright: var(--coral-light);
+  --cyan-glow: var(--coral-glow);
 
   --mint: #10b981;
   --warning: #f59e0b;
   --danger: #ef4444;
 
-  --text: #ffffff;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
+  --text: #F4EDE0;
+  --text-secondary: rgba(244, 237, 224, 0.65);
+  --text-muted: rgba(244, 237, 224, 0.40);
 
-  --hairline: rgba(255, 255, 255, 0.08);
-  --hairline-bright: rgba(255, 255, 255, 0.16);
+  --hairline: rgba(244, 237, 224, 0.10);
+  --hairline-bright: rgba(244, 237, 224, 0.18);
 
   --radius-sm: 8px;
   --radius-md: 14px;
@@ -57,7 +70,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background: var(--bg);
+  background: var(--navy);
   color: var(--text);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -87,8 +100,8 @@ code, pre, .font-mono {
 }
 
 ::selection {
-  background: rgba(99, 102, 241, 0.35);
-  color: #00f0ff;
+  background: rgba(255, 107, 91, 0.35);
+  color: #F4EDE0;
 }
 
 /* Scrollbar */
@@ -98,15 +111,15 @@ code, pre, .font-mono {
 }
 
 ::-webkit-scrollbar-track {
-  background: #07090e;
+  background: var(--navy);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(244, 237, 224, 0.15);
   border-radius: 999px;
 
   &:hover {
-    background: rgba(0, 240, 255, 0.3);
+    background: rgba(255, 107, 91, 0.4);
   }
 }
 
@@ -124,13 +137,13 @@ app-landing {
   background: transparent !important;
 
   .sidebar {
-    background: rgba(10, 13, 20, 0.85) !important;
+    background: rgba(20, 33, 61, 0.92) !important;
     border-color: var(--hairline) !important;
     backdrop-filter: blur(20px);
   }
 
   .topbar {
-    background: rgba(12, 16, 25, 0.75) !important;
+    background: rgba(20, 33, 61, 0.85) !important;
     border-color: var(--hairline) !important;
     backdrop-filter: blur(20px);
   }
@@ -148,23 +161,23 @@ app-landing {
   }
 
   input, textarea, select {
-    background: rgba(8, 11, 18, 0.6) !important;
+    background: rgba(13, 22, 40, 0.7) !important;
     border: 1px solid var(--hairline) !important;
     color: var(--text) !important;
     border-radius: var(--radius-md);
 
     &:focus {
-      border-color: var(--cyan) !important;
-      box-shadow: 0 0 0 3px rgba(0, 240, 255, 0.1) !important;
+      border-color: var(--coral) !important;
+      box-shadow: 0 0 0 3px rgba(255, 107, 91, 0.15) !important;
     }
   }
 
   .btn-primary,
   button.primary,
   app-primary-button .primary {
-    background: linear-gradient(135deg, #6366f1 0%, #06b6d4 100%) !important;
+    background: linear-gradient(135deg, #FF6B5B 0%, #ff8a7d 100%) !important;
     color: #ffffff !important;
     border: 1px solid rgba(255, 255, 255, 0.15) !important;
-    box-shadow: 0 8px 24px rgba(99, 102, 241, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+    box-shadow: 0 8px 24px rgba(255, 107, 91, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
   }
 }

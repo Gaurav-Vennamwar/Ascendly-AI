@@ -10,27 +10,30 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 20% 15%, rgba(255, 255, 255, 0.15) 0 1px, transparent 1.5px) 0 0 / 32px 32px,
-    radial-gradient(circle at 75% 65%, rgba(0, 240, 255, 0.12) 0 1px, transparent 1.5px) 0 0 / 48px 48px,
-    radial-gradient(ellipse 60rem 38rem at 50% -10%, rgba(99, 102, 241, 0.18), transparent 70%),
-    radial-gradient(ellipse 45rem 30rem at 90% 40%, rgba(6, 182, 212, 0.1), transparent 65%),
-    linear-gradient(180deg, #07090e 0%, #0a0d15 50%, #06080d 100%);
+    /* Subtle dot grid in cream */
+    radial-gradient(circle at 50% 50%, rgba(244, 237, 224, 0.06) 0 1px, transparent 1.5px) 0 0 / 40px 40px,
+    /* Soft top glow in coral */
+    radial-gradient(ellipse 60rem 38rem at 50% -10%, rgba(255, 107, 91, 0.10), transparent 70%),
+    /* Side glow in cream */
+    radial-gradient(ellipse 45rem 30rem at 90% 40%, rgba(244, 237, 224, 0.04), transparent 65%),
+    /* Base navy gradient */
+    linear-gradient(180deg, #14213D 0%, #0d1628 50%, #111d36 100%);
   background-attachment: fixed;
 }
 
-/* Subtle Luminous Meshes */
+/* Soft floating ambient meshes */
 .mesh {
   position: absolute;
   border-radius: 50%;
   filter: blur(140px);
-  opacity: 0.14;
+  opacity: 0.10;
   animation: mesh-float 22s ease-in-out infinite alternate;
 }
 
 .mesh-1 {
   width: 650px;
   height: 650px;
-  background: #6366f1;
+  background: #FF6B5B;
   top: -200px;
   left: -150px;
 }
@@ -38,7 +41,7 @@
 .mesh-2 {
   width: 550px;
   height: 550px;
-  background: #00f0ff;
+  background: #F4EDE0;
   right: -100px;
   top: 30%;
   animation-delay: -8s;
@@ -47,7 +50,7 @@
 .mesh-3 {
   width: 750px;
   height: 750px;
-  background: #7c3aed;
+  background: #1b2d52;
   bottom: -300px;
   left: 30%;
   animation-delay: -14s;
@@ -60,34 +63,34 @@
   height: 900px;
   border-radius: 50%;
   filter: blur(180px);
-  opacity: 0.08;
+  opacity: 0.06;
 }
 
 .glow-top {
   top: -400px;
   left: 50%;
   transform: translateX(-50%);
-  background: #00f0ff;
+  background: #FF6B5B;
 }
 
 .glow-bottom {
   bottom: -500px;
   right: -100px;
-  background: #6366f1;
+  background: #F4EDE0;
 }
 
 .grid {
   display: none;
 }
 
-/* Micro Particles */
+/* Micro Particles — cream-tinted */
 .particle {
   position: absolute;
   width: 2px;
   height: 2px;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(244, 237, 224, 0.7);
   border-radius: 50%;
-  box-shadow: 0 0 6px rgba(0, 240, 255, 0.6);
+  box-shadow: 0 0 6px rgba(255, 107, 91, 0.4);
   animation: particle-breathe 4s ease-in-out infinite alternate;
 }
 
@@ -98,6 +101,6 @@
 }
 
 @keyframes particle-breathe {
-  0% { opacity: 0.2; transform: scale(0.8); }
-  100% { opacity: 0.85; transform: scale(1.2); }
+  0% { opacity: 0.15; transform: scale(0.8); }
+  100% { opacity: 0.6; transform: scale(1.2); }
 }

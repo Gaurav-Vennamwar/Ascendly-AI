@@ -1,25 +1,28 @@
 // ============================================================
-// ASCENDLY AI — NEXT-LEVEL LANDING PAGE STYLES
-// Handcrafted following unslop design craft principles
+// ASCENDLY AI — NAVY · CREAM · CORAL LANDING PAGE
+// Professional, role-agnostic, unforgettable
 // ============================================================
 
-$obsidian-0: #07090e;
-$obsidian-1: #0a0d15;
-$obsidian-2: #0f1422;
-$obsidian-3: #141a2c;
+$navy: #14213D;
+$navy-deep: #0d1628;
+$navy-light: #1b2d52;
 
-$cyan: #00f0ff;
-$cyan-glow: rgba(0, 240, 255, 0.35);
-$violet: #6366f1;
-$violet-bright: #818cf8;
+$cream: #F4EDE0;
+$cream-dark: #e8ddd0;
+$cream-muted: rgba(244, 237, 224, 0.65);
+
+$coral: #FF6B5B;
+$coral-light: #ff8a7d;
+$coral-glow: rgba(255, 107, 91, 0.30);
+
 $mint: #10b981;
 $amber: #f59e0b;
 
-$text-bright: #ffffff;
-$text-secondary: #94a3b8;
-$text-muted: #64748b;
-$hairline: rgba(255, 255, 255, 0.08);
-$hairline-light: rgba(255, 255, 255, 0.15);
+$text-bright: #F4EDE0;
+$text-secondary: rgba(244, 237, 224, 0.60);
+$text-muted: rgba(244, 237, 224, 0.40);
+$hairline: rgba(244, 237, 224, 0.10);
+$hairline-light: rgba(244, 237, 224, 0.18);
 
 // ============================================================
 // 1. HERO SECTION
@@ -52,9 +55,9 @@ $hairline-light: rgba(255, 255, 255, 0.15);
   align-self: flex-start;
   padding: 6px 14px;
   border-radius: 999px;
-  background: rgba(99, 102, 241, 0.08);
-  border: 1px solid rgba(99, 102, 241, 0.28);
-  color: #c7d2fe;
+  background: rgba(255, 107, 91, 0.10);
+  border: 1px solid rgba(255, 107, 91, 0.30);
+  color: $coral-light;
   font-family: 'DM Mono', monospace;
   font-size: 0.72rem;
   font-weight: 600;
@@ -65,8 +68,8 @@ $hairline-light: rgba(255, 255, 255, 0.15);
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    background: #10b981;
-    box-shadow: 0 0 10px #10b981;
+    background: $coral;
+    box-shadow: 0 0 10px $coral;
     animation: pulse-dot 2s ease-in-out infinite;
   }
 }
@@ -85,7 +88,7 @@ $hairline-light: rgba(255, 255, 255, 0.15);
   letter-spacing: -0.035em;
 
   .grad {
-    background: linear-gradient(135deg, #ffffff 10%, #c4b5fd 55%, #00f0ff 100%);
+    background: linear-gradient(135deg, #F4EDE0 10%, #FF6B5B 55%, #ff8a7d 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -115,15 +118,15 @@ $hairline-light: rgba(255, 255, 255, 0.15);
   gap: 8px;
   padding: 13px 26px;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  background: linear-gradient(135deg, #6366f1 0%, #06b6d4 100%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: linear-gradient(135deg, #FF6B5B 0%, #ff8a7d 100%);
   color: #ffffff;
   font-family: 'Manrope', sans-serif;
   font-size: 0.94rem;
   font-weight: 650;
   text-decoration: none;
   cursor: pointer;
-  box-shadow: 0 10px 28px rgba(99, 102, 241, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  box-shadow: 0 10px 28px rgba(255, 107, 91, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.25);
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 
   .btn-arrow {
@@ -133,7 +136,7 @@ $hairline-light: rgba(255, 255, 255, 0.15);
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 14px 36px rgba(6, 182, 212, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    box-shadow: 0 14px 36px rgba(255, 107, 91, 0.50), inset 0 1px 0 rgba(255, 255, 255, 0.4);
 
     .btn-arrow {
       transform: translate(2px, -2px);
@@ -151,9 +154,9 @@ $hairline-light: rgba(255, 255, 255, 0.15);
   gap: 8px;
   padding: 13px 24px;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.04);
-  color: #e2e8f0;
+  border: 1px solid rgba(244, 237, 224, 0.14);
+  background: rgba(244, 237, 224, 0.05);
+  color: $cream;
   font-family: 'Manrope', sans-serif;
   font-size: 0.94rem;
   font-weight: 600;
@@ -162,8 +165,8 @@ $hairline-light: rgba(255, 255, 255, 0.15);
   transition: all 0.2s ease;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.25);
+    background: rgba(244, 237, 224, 0.10);
+    border-color: rgba(244, 237, 224, 0.25);
     color: #ffffff;
     transform: translateY(-1px);
   }
@@ -184,9 +187,9 @@ $hairline-light: rgba(255, 255, 255, 0.15);
   gap: 7px;
   padding: 5px 11px;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: #cbd5e1;
+  background: rgba(244, 237, 224, 0.04);
+  border: 1px solid rgba(244, 237, 224, 0.10);
+  color: rgba(244, 237, 224, 0.70);
   font-family: 'DM Mono', monospace;
   font-size: 0.72rem;
   letter-spacing: 0.02em;
@@ -196,9 +199,9 @@ $hairline-light: rgba(255, 255, 255, 0.15);
     height: 6px;
     border-radius: 50%;
 
-    &.mint-dot { background: #10b981; box-shadow: 0 0 6px #10b981; }
-    &.cyan-dot { background: #00f0ff; box-shadow: 0 0 6px #00f0ff; }
-    &.violet-dot { background: #a855f7; box-shadow: 0 0 6px #a855f7; }
+    &.mint-dot { background: $mint; box-shadow: 0 0 6px $mint; }
+    &.cyan-dot { background: $coral; box-shadow: 0 0 6px $coral; }
+    &.violet-dot { background: $cream; box-shadow: 0 0 6px rgba(244, 237, 224, 0.5); }
   }
 }
 
@@ -214,15 +217,15 @@ $hairline-light: rgba(255, 255, 255, 0.15);
   position: relative;
   width: 100%;
   border-radius: 20px;
-  background: linear-gradient(160deg, rgba(18, 22, 34, 0.88), rgba(10, 13, 22, 0.82));
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  background: linear-gradient(160deg, rgba(27, 45, 82, 0.85), rgba(20, 33, 61, 0.80));
+  border: 1px solid rgba(244, 237, 224, 0.12);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(244, 237, 224, 0.10);
   backdrop-filter: blur(28px);
   overflow: hidden;
   transition: border-color 0.3s ease;
 
   &:hover {
-    border-color: rgba(103, 232, 249, 0.28);
+    border-color: rgba(255, 107, 91, 0.28);
   }
 }
 
@@ -232,8 +235,8 @@ $hairline-light: rgba(255, 255, 255, 0.15);
   align-items: center;
   justify-content: space-between;
   padding: 12px 18px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid rgba(244, 237, 224, 0.08);
+  background: rgba(244, 237, 224, 0.02);
 }
 
 .terminal-dots {
@@ -253,13 +256,13 @@ $hairline-light: rgba(255, 255, 255, 0.15);
 }
 
 .terminal-title {
-  color: #cbd5e1;
+  color: rgba(244, 237, 224, 0.75);
   font-family: 'DM Mono', monospace;
   font-size: 0.73rem;
   letter-spacing: 0.03em;
 
   .term-dim {
-    color: #64748b;
+    color: $text-muted;
   }
 }
 
@@ -272,12 +275,12 @@ $hairline-light: rgba(255, 255, 255, 0.15);
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: #10b981;
-    box-shadow: 0 0 8px #10b981;
+    background: $mint;
+    box-shadow: 0 0 8px $mint;
   }
 
   .status-mono {
-    color: #a5f3fc;
+    color: rgba(244, 237, 224, 0.65);
     font-family: 'DM Mono', monospace;
     font-size: 0.68rem;
   }
@@ -301,8 +304,8 @@ $hairline-light: rgba(255, 255, 255, 0.15);
 .workbench-metric-tile {
   padding: 12px 14px;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.025);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(244, 237, 224, 0.03);
+  border: 1px solid rgba(244, 237, 224, 0.07);
 
   .wb-label {
     display: block;
@@ -322,13 +325,13 @@ $hairline-light: rgba(255, 255, 255, 0.15);
       font-size: 1.25rem;
       font-weight: 750;
 
-      &.cyan-text { color: #00f0ff; }
-      &.violet-text { color: #c4b5fd; }
-      &.mint-text { color: #86efac; }
+      &.cyan-text { color: $coral; }
+      &.violet-text { color: $cream; }
+      &.mint-text { color: $mint; }
     }
 
     .wb-denom {
-      color: #64748b;
+      color: $text-muted;
       font-size: 0.68rem;
       font-family: 'DM Mono', monospace;
     }
@@ -338,25 +341,25 @@ $hairline-light: rgba(255, 255, 255, 0.15);
     height: 4px;
     margin-top: 8px;
     border-radius: 99px;
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(244, 237, 224, 0.08);
     overflow: hidden;
 
     i {
       display: block;
       height: 100%;
-      background: linear-gradient(90deg, #6366f1, #00f0ff);
+      background: linear-gradient(90deg, $coral, $coral-light);
       border-radius: inherit;
     }
 
     &.violet-bar i {
-      background: linear-gradient(90deg, #8b5cf6, #c084fc);
+      background: linear-gradient(90deg, $cream-dark, $cream);
     }
   }
 
   .wb-subtag {
     display: block;
     margin-top: 4px;
-    color: #4ade80;
+    color: $mint;
     font-size: 0.65rem;
     font-family: 'DM Mono', monospace;
   }
@@ -366,8 +369,8 @@ $hairline-light: rgba(255, 255, 255, 0.15);
 .terminal-sim-card {
   padding: 18px;
   border-radius: 14px;
-  background: rgba(10, 13, 22, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(13, 22, 40, 0.6);
+  border: 1px solid rgba(244, 237, 224, 0.08);
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -389,25 +392,25 @@ $hairline-light: rgba(255, 255, 255, 0.15);
 .sim-badge {
   padding: 3px 8px;
   border-radius: 6px;
-  background: rgba(99, 102, 241, 0.15);
-  border: 1px solid rgba(99, 102, 241, 0.35);
-  color: #c7d2fe;
+  background: rgba(255, 107, 91, 0.12);
+  border: 1px solid rgba(255, 107, 91, 0.35);
+  color: $coral-light;
   font-family: 'DM Mono', monospace;
   font-size: 0.66rem;
   font-weight: 600;
 }
 
 .sim-topic {
-  color: #94a3b8;
+  color: $text-secondary;
   font-size: 0.72rem;
 }
 
 .sim-step-chip {
   padding: 3px 9px;
   border-radius: 999px;
-  background: rgba(0, 240, 255, 0.1);
-  border: 1px solid rgba(0, 240, 255, 0.25);
-  color: #00f0ff;
+  background: rgba(255, 107, 91, 0.10);
+  border: 1px solid rgba(255, 107, 91, 0.28);
+  color: $coral;
   font-family: 'DM Mono', monospace;
   font-size: 0.65rem;
   font-weight: 600;
@@ -415,7 +418,7 @@ $hairline-light: rgba(255, 255, 255, 0.15);
 
 .sim-question-text {
   margin: 0;
-  color: #ffffff;
+  color: $text-bright;
   font-size: 0.88rem;
   line-height: 1.5;
   font-weight: 550;
@@ -428,14 +431,14 @@ $hairline-light: rgba(255, 255, 255, 0.15);
   gap: 4px;
   padding: 8px 12px;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(244, 237, 224, 0.02);
+  border: 1px solid rgba(244, 237, 224, 0.05);
 
   .wave-bar {
     width: 3px;
     height: 14px;
     border-radius: 2px;
-    background: linear-gradient(180deg, #00f0ff, #6366f1);
+    background: linear-gradient(180deg, $coral, $coral-light);
     animation: wave-pulse 1.2s ease-in-out infinite alternate;
   }
 
@@ -454,7 +457,7 @@ $hairline-light: rgba(255, 255, 255, 0.15);
 
   .wave-label {
     margin-left: 8px;
-    color: #64748b;
+    color: $text-muted;
     font-family: 'DM Mono', monospace;
     font-size: 0.68rem;
   }
@@ -469,8 +472,8 @@ $hairline-light: rgba(255, 255, 255, 0.15);
 .sim-feedback-card {
   padding: 12px 14px;
   border-radius: 10px;
-  background: rgba(99, 102, 241, 0.06);
-  border: 1px solid rgba(99, 102, 241, 0.2);
+  background: rgba(255, 107, 91, 0.06);
+  border: 1px solid rgba(255, 107, 91, 0.18);
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -485,7 +488,7 @@ $hairline-light: rgba(255, 255, 255, 0.15);
 .feedback-score-pill {
   padding: 2px 8px;
   border-radius: 6px;
-  background: rgba(34, 197, 94, 0.14);
+  background: rgba(16, 185, 129, 0.14);
   border: 1px solid rgba(74, 222, 128, 0.35);
   color: #86efac;
   font-family: 'DM Mono', monospace;
@@ -494,21 +497,21 @@ $hairline-light: rgba(255, 255, 255, 0.15);
 }
 
 .feedback-meta {
-  color: #a5b4fc;
+  color: $coral-light;
   font-size: 0.68rem;
   font-weight: 600;
 }
 
 .sim-feedback-strength {
   margin: 0;
-  color: #e2e8f0;
+  color: $cream;
   font-size: 0.76rem;
   line-height: 1.5;
   display: flex;
   gap: 6px;
 
   .check-icon {
-    color: #4ade80;
+    color: $mint;
     font-weight: 700;
   }
 }
@@ -516,12 +519,12 @@ $hairline-light: rgba(255, 255, 255, 0.15);
 .sim-better-phrase {
   padding: 8px 10px;
   border-radius: 8px;
-  background: rgba(0, 240, 255, 0.05);
-  border-left: 2px solid #00f0ff;
+  background: rgba(255, 107, 91, 0.06);
+  border-left: 2px solid $coral;
 
   .phrase-tag {
     display: block;
-    color: #00f0ff;
+    color: $coral;
     font-family: 'DM Mono', monospace;
     font-size: 0.6rem;
     font-weight: 700;
@@ -531,7 +534,7 @@ $hairline-light: rgba(255, 255, 255, 0.15);
 
   p {
     margin: 0;
-    color: #f1f5f9;
+    color: $cream;
     font-size: 0.76rem;
     font-style: italic;
     line-height: 1.45;
@@ -544,8 +547,8 @@ $hairline-light: rgba(255, 255, 255, 0.15);
   align-items: center;
   justify-content: space-between;
   padding: 10px 18px;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  background: rgba(0, 0, 0, 0.2);
+  border-top: 1px solid rgba(244, 237, 224, 0.06);
+  background: rgba(0, 0, 0, 0.15);
 
   .foot-item {
     display: flex;
@@ -554,20 +557,20 @@ $hairline-light: rgba(255, 255, 255, 0.15);
     font-size: 0.7rem;
 
     .foot-key {
-      color: #64748b;
+      color: $text-muted;
     }
     .foot-val {
-      color: #cbd5e1;
+      color: rgba(244, 237, 224, 0.75);
     }
     .mint-text {
-      color: #4ade80;
+      color: $mint;
       font-weight: 600;
     }
   }
 }
 
 // ============================================================
-// 3. FEATURES SECTION (The 4 Signature Capability Cards)
+// 3. FEATURES SECTION
 // ============================================================
 .features {
   position: relative;
@@ -586,9 +589,9 @@ $hairline-light: rgba(255, 255, 255, 0.15);
     display: inline-block;
     padding: 4px 12px;
     border-radius: 999px;
-    background: rgba(99, 102, 241, 0.08);
-    border: 1px solid rgba(99, 102, 241, 0.25);
-    color: #a5b4fc;
+    background: rgba(255, 107, 91, 0.10);
+    border: 1px solid rgba(255, 107, 91, 0.28);
+    color: $coral;
     font-family: 'DM Mono', monospace;
     font-size: 0.7rem;
     font-weight: 700;
@@ -599,14 +602,14 @@ $hairline-light: rgba(255, 255, 255, 0.15);
 
   h2 {
     margin: 0 0 12px;
-    color: #ffffff;
+    color: $text-bright;
     font-size: clamp(1.8rem, 3.2vw, 2.6rem);
     font-weight: 750;
     letter-spacing: -0.03em;
     line-height: 1.2;
 
     .header-grad {
-      background: linear-gradient(135deg, #ffffff 20%, #c4b5fd 60%, #00f0ff 100%);
+      background: linear-gradient(135deg, #F4EDE0 20%, #FF6B5B 60%, #ff8a7d 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -632,9 +635,9 @@ $hairline-light: rgba(255, 255, 255, 0.15);
   position: relative;
   border-radius: 20px;
   padding: 24px;
-  background: linear-gradient(160deg, rgba(18, 22, 34, 0.8), rgba(10, 13, 22, 0.75));
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  background: linear-gradient(160deg, rgba(27, 45, 82, 0.75), rgba(20, 33, 61, 0.70));
+  border: 1px solid rgba(244, 237, 224, 0.09);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.30), inset 0 1px 0 rgba(244, 237, 224, 0.08);
   backdrop-filter: blur(20px);
   display: flex;
   flex-direction: column;
@@ -643,7 +646,7 @@ $hairline-light: rgba(255, 255, 255, 0.15);
 
   h3 {
     margin: 0;
-    color: #ffffff;
+    color: $text-bright;
     font-size: 1.12rem;
     font-weight: 700;
     letter-spacing: -0.02em;
@@ -660,25 +663,25 @@ $hairline-light: rgba(255, 255, 255, 0.15);
 
   &:hover {
     transform: translateY(-4px);
-    box-shadow: 0 24px 50px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    box-shadow: 0 24px 50px rgba(0, 0, 0, 0.40), inset 0 1px 0 rgba(244, 237, 224, 0.15);
   }
 
   // Accent Variations
   &.card-cyan:hover {
-    border-color: rgba(0, 240, 255, 0.38);
-    box-shadow: 0 24px 50px rgba(0, 0, 0, 0.55), 0 0 25px rgba(0, 240, 255, 0.12);
+    border-color: rgba(255, 107, 91, 0.38);
+    box-shadow: 0 24px 50px rgba(0, 0, 0, 0.40), 0 0 25px rgba(255, 107, 91, 0.10);
   }
   &.card-violet:hover {
-    border-color: rgba(99, 102, 241, 0.42);
-    box-shadow: 0 24px 50px rgba(0, 0, 0, 0.55), 0 0 25px rgba(99, 102, 241, 0.15);
+    border-color: rgba(244, 237, 224, 0.28);
+    box-shadow: 0 24px 50px rgba(0, 0, 0, 0.40), 0 0 25px rgba(244, 237, 224, 0.08);
   }
   &.card-mint:hover {
     border-color: rgba(16, 185, 129, 0.38);
-    box-shadow: 0 24px 50px rgba(0, 0, 0, 0.55), 0 0 25px rgba(16, 185, 129, 0.12);
+    box-shadow: 0 24px 50px rgba(0, 0, 0, 0.40), 0 0 25px rgba(16, 185, 129, 0.10);
   }
   &.card-amber:hover {
     border-color: rgba(245, 158, 11, 0.38);
-    box-shadow: 0 24px 50px rgba(0, 0, 0, 0.55), 0 0 25px rgba(245, 158, 11, 0.12);
+    box-shadow: 0 24px 50px rgba(0, 0, 0, 0.40), 0 0 25px rgba(245, 158, 11, 0.10);
   }
 }
 
@@ -708,23 +711,23 @@ $hairline-light: rgba(255, 255, 255, 0.15);
   }
 
   &.tag-cyan {
-    background: rgba(0, 240, 255, 0.1);
-    border: 1px solid rgba(0, 240, 255, 0.3);
-    color: #00f0ff;
+    background: rgba(255, 107, 91, 0.10);
+    border: 1px solid rgba(255, 107, 91, 0.30);
+    color: $coral;
   }
   &.tag-violet {
-    background: rgba(99, 102, 241, 0.12);
-    border: 1px solid rgba(99, 102, 241, 0.35);
-    color: #c7d2fe;
+    background: rgba(244, 237, 224, 0.08);
+    border: 1px solid rgba(244, 237, 224, 0.22);
+    color: $cream;
   }
   &.tag-mint {
-    background: rgba(16, 185, 129, 0.1);
-    border: 1px solid rgba(16, 185, 129, 0.3);
+    background: rgba(16, 185, 129, 0.10);
+    border: 1px solid rgba(16, 185, 129, 0.30);
     color: #86efac;
   }
   &.tag-amber {
-    background: rgba(245, 158, 11, 0.1);
-    border: 1px solid rgba(245, 158, 11, 0.3);
+    background: rgba(245, 158, 11, 0.10);
+    border: 1px solid rgba(245, 158, 11, 0.30);
     color: #fde047;
   }
 }
@@ -742,14 +745,14 @@ $hairline-light: rgba(255, 255, 255, 0.15);
   }
 
   &.icon-cyan {
-    background: rgba(0, 240, 255, 0.08);
-    border: 1px solid rgba(0, 240, 255, 0.22);
-    color: #00f0ff;
+    background: rgba(255, 107, 91, 0.08);
+    border: 1px solid rgba(255, 107, 91, 0.22);
+    color: $coral;
   }
   &.icon-violet {
-    background: rgba(99, 102, 241, 0.1);
-    border: 1px solid rgba(99, 102, 241, 0.25);
-    color: #a5b4fc;
+    background: rgba(244, 237, 224, 0.06);
+    border: 1px solid rgba(244, 237, 224, 0.18);
+    color: $cream;
   }
   &.icon-mint {
     background: rgba(16, 185, 129, 0.08);
@@ -768,8 +771,8 @@ $hairline-light: rgba(255, 255, 255, 0.15);
   margin-top: 6px;
   padding: 12px;
   border-radius: 12px;
-  background: rgba(0, 0, 0, 0.25);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(0, 0, 0, 0.18);
+  border: 1px solid rgba(244, 237, 224, 0.05);
 }
 
 .micro-stat-row {
@@ -779,10 +782,10 @@ $hairline-light: rgba(255, 255, 255, 0.15);
   font-family: 'DM Mono', monospace;
   font-size: 0.72rem;
 
-  .micro-label { color: #94a3b8; }
+  .micro-label { color: $text-secondary; }
   .micro-val { font-weight: 700; }
-  .cyan-text { color: #00f0ff; }
-  .violet-text { color: #c4b5fd; }
+  .cyan-text { color: $coral; }
+  .violet-text { color: $cream; }
 }
 
 .micro-chips-list {
@@ -794,8 +797,8 @@ $hairline-light: rgba(255, 255, 255, 0.15);
   .micro-chip {
     padding: 2px 7px;
     border-radius: 5px;
-    background: rgba(255, 255, 255, 0.05);
-    color: #cbd5e1;
+    background: rgba(244, 237, 224, 0.06);
+    color: rgba(244, 237, 224, 0.75);
     font-family: 'DM Mono', monospace;
     font-size: 0.64rem;
   }
@@ -803,7 +806,7 @@ $hairline-light: rgba(255, 255, 255, 0.15);
 
 .micro-quote {
   margin: 0;
-  color: #cbd5e1;
+  color: rgba(244, 237, 224, 0.75);
   font-size: 0.74rem;
   font-style: italic;
   line-height: 1.45;
@@ -819,8 +822,8 @@ $hairline-light: rgba(255, 255, 255, 0.15);
   .flow-node {
     padding: 3px 6px;
     border-radius: 5px;
-    background: rgba(255, 255, 255, 0.04);
-    color: #94a3b8;
+    background: rgba(244, 237, 224, 0.04);
+    color: $text-secondary;
 
     &.active-node {
       background: rgba(16, 185, 129, 0.12);
@@ -830,7 +833,7 @@ $hairline-light: rgba(255, 255, 255, 0.15);
   }
 
   .flow-arrow {
-    color: #64748b;
+    color: $text-muted;
   }
 }
 
@@ -844,17 +847,17 @@ $hairline-light: rgba(255, 255, 255, 0.15);
     justify-content: space-between;
     padding: 3px 6px;
     border-radius: 5px;
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(244, 237, 224, 0.03);
     font-family: 'DM Mono', monospace;
     font-size: 0.64rem;
 
-    span { color: #94a3b8; }
-    strong { color: #fde047; }
+    span { color: $text-secondary; }
+    strong { color: $amber; }
   }
 }
 
 // ============================================================
-// 4. WORKFLOW SECTION ("Four Simple Steps")
+// 4. WORKFLOW SECTION
 // ============================================================
 .workflow {
   position: relative;
@@ -873,9 +876,9 @@ $hairline-light: rgba(255, 255, 255, 0.15);
 .workflow-step-card {
   padding: 24px;
   border-radius: 18px;
-  background: rgba(15, 20, 32, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
+  background: rgba(27, 45, 82, 0.50);
+  border: 1px solid rgba(244, 237, 224, 0.08);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.25);
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -885,9 +888,9 @@ $hairline-light: rgba(255, 255, 255, 0.15);
     align-self: flex-start;
     padding: 3px 9px;
     border-radius: 6px;
-    background: rgba(99, 102, 241, 0.12);
-    border: 1px solid rgba(99, 102, 241, 0.3);
-    color: #c7d2fe;
+    background: rgba(255, 107, 91, 0.12);
+    border: 1px solid rgba(255, 107, 91, 0.30);
+    color: $coral-light;
     font-family: 'DM Mono', monospace;
     font-size: 0.68rem;
     font-weight: 700;
@@ -896,7 +899,7 @@ $hairline-light: rgba(255, 255, 255, 0.15);
 
   h3 {
     margin: 0;
-    color: #ffffff;
+    color: $text-bright;
     font-size: 1.05rem;
     font-weight: 700;
   }
@@ -910,7 +913,7 @@ $hairline-light: rgba(255, 255, 255, 0.15);
 
   &:hover {
     transform: translateY(-3px);
-    border-color: rgba(0, 240, 255, 0.3);
+    border-color: rgba(255, 107, 91, 0.30);
   }
 }
 
@@ -935,9 +938,9 @@ $hairline-light: rgba(255, 255, 255, 0.15);
   position: relative;
   padding: 24px;
   border-radius: 18px;
-  background: linear-gradient(160deg, rgba(16, 20, 32, 0.75), rgba(9, 12, 20, 0.7));
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
+  background: linear-gradient(160deg, rgba(27, 45, 82, 0.65), rgba(20, 33, 61, 0.60));
+  border: 1px solid rgba(244, 237, 224, 0.08);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.25);
   overflow: hidden;
 
   .stat-accent-bar {
@@ -947,15 +950,15 @@ $hairline-light: rgba(255, 255, 255, 0.15);
     right: 0;
     height: 3px;
 
-    &.cyan-accent { background: linear-gradient(90deg, #00f0ff, transparent); }
-    &.violet-accent { background: linear-gradient(90deg, #8b5cf6, transparent); }
-    &.mint-accent { background: linear-gradient(90deg, #10b981, transparent); }
-    &.amber-accent { background: linear-gradient(90deg, #f59e0b, transparent); }
+    &.cyan-accent { background: linear-gradient(90deg, $coral, transparent); }
+    &.violet-accent { background: linear-gradient(90deg, $cream, transparent); }
+    &.mint-accent { background: linear-gradient(90deg, $mint, transparent); }
+    &.amber-accent { background: linear-gradient(90deg, $amber, transparent); }
   }
 
   h3 {
     margin: 0 0 6px;
-    color: #ffffff;
+    color: $text-bright;
     font-family: 'DM Mono', monospace;
     font-size: clamp(1.8rem, 2.5vw, 2.3rem);
     font-weight: 800;
@@ -985,19 +988,19 @@ $hairline-light: rgba(255, 255, 255, 0.15);
   text-align: center;
   padding: clamp(48px, 6vw, 72px) 24px;
   border-radius: 24px;
-  background: radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.22), transparent 70%),
-              linear-gradient(160deg, rgba(16, 20, 34, 0.9), rgba(8, 11, 20, 0.85));
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  background: radial-gradient(circle at 50% 0%, rgba(255, 107, 91, 0.18), transparent 70%),
+              linear-gradient(160deg, rgba(27, 45, 82, 0.85), rgba(20, 33, 61, 0.80));
+  border: 1px solid rgba(244, 237, 224, 0.14);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(244, 237, 224, 0.12);
   backdrop-filter: blur(28px);
 
   .section-tag {
     display: inline-block;
     padding: 4px 12px;
     border-radius: 999px;
-    background: rgba(0, 240, 255, 0.1);
-    border: 1px solid rgba(0, 240, 255, 0.3);
-    color: #00f0ff;
+    background: rgba(255, 107, 91, 0.10);
+    border: 1px solid rgba(255, 107, 91, 0.30);
+    color: $coral;
     font-family: 'DM Mono', monospace;
     font-size: 0.7rem;
     font-weight: 700;
@@ -1007,14 +1010,14 @@ $hairline-light: rgba(255, 255, 255, 0.15);
 
   h2 {
     margin: 0 0 16px;
-    color: #ffffff;
+    color: $text-bright;
     font-size: clamp(2rem, 3.8vw, 3.2rem);
     font-weight: 800;
     letter-spacing: -0.035em;
     line-height: 1.18;
 
     .header-grad {
-      background: linear-gradient(135deg, #ffffff 15%, #c4b5fd 60%, #00f0ff 100%);
+      background: linear-gradient(135deg, #F4EDE0 15%, #FF6B5B 60%, #ff8a7d 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -1044,7 +1047,7 @@ $hairline-light: rgba(255, 255, 255, 0.15);
   max-width: 1360px;
   margin: 0 auto;
   padding: 64px 24px 40px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(244, 237, 224, 0.08);
 }
 
 .footer-top {
@@ -1064,7 +1067,7 @@ $hairline-light: rgba(255, 255, 255, 0.15);
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    color: #ffffff;
+    color: $text-bright;
     font-family: 'Manrope', sans-serif;
     font-size: 1.25rem;
     font-weight: 750;
@@ -1079,8 +1082,8 @@ $hairline-light: rgba(255, 255, 255, 0.15);
     height: 32px;
     overflow: hidden;
     border-radius: 9px;
-    background: #0f1322;
-    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: $navy-light;
+    border: 1px solid rgba(244, 237, 224, 0.16);
 
     img {
       position: absolute;
@@ -1094,9 +1097,9 @@ $hairline-light: rgba(255, 255, 255, 0.15);
   .logo-ai-badge {
     padding: 2px 6px;
     border-radius: 5px;
-    background: rgba(0, 240, 255, 0.1);
-    border: 1px solid rgba(0, 240, 255, 0.3);
-    color: #00f0ff;
+    background: rgba(255, 107, 91, 0.12);
+    border: 1px solid rgba(255, 107, 91, 0.30);
+    color: $coral;
     font-family: 'DM Mono', monospace;
     font-size: 0.65rem;
     font-weight: 700;
@@ -1126,8 +1129,8 @@ $hairline-light: rgba(255, 255, 255, 0.15);
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: #10b981;
-    box-shadow: 0 0 8px #10b981;
+    background: $mint;
+    box-shadow: 0 0 8px $mint;
   }
 }
 
@@ -1144,7 +1147,7 @@ $hairline-light: rgba(255, 255, 255, 0.15);
 
   h4 {
     margin: 0 0 4px;
-    color: #ffffff;
+    color: $text-bright;
     font-size: 0.85rem;
     font-weight: 650;
     letter-spacing: -0.01em;
@@ -1157,7 +1160,7 @@ $hairline-light: rgba(255, 255, 255, 0.15);
     transition: color 0.2s ease;
 
     &:hover {
-      color: #00f0ff;
+      color: $coral;
     }
   }
 }
@@ -1167,9 +1170,9 @@ $hairline-light: rgba(255, 255, 255, 0.15);
   align-items: center;
   justify-content: space-between;
   padding-top: 24px;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid rgba(244, 237, 224, 0.06);
   font-size: 0.78rem;
-  color: #64748b;
+  color: $text-muted;
   flex-wrap: wrap;
   gap: 16px;
 
@@ -1186,12 +1189,12 @@ $hairline-light: rgba(255, 255, 255, 0.15);
   gap: 18px;
 
   a {
-    color: #94a3b8;
+    color: $text-secondary;
     text-decoration: none;
     transition: color 0.2s ease;
 
     &:hover {
-      color: #ffffff;
+      color: $text-bright;
     }
   }
 }

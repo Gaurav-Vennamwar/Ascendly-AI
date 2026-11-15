@@ -5,21 +5,25 @@
   <title>Ascendly AI | AI Resume Analyzer and Mock Interview Practice</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Optimize your developer resume for ATS, practice AI-powered mock interviews, and build a focused career roadmap with Ascendly AI.">
+  <meta name="description" content="Optimize your resume for ATS, practice AI-powered mock interviews, and build a focused career roadmap with Ascendly AI.">
   <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#1F3D2B">
+  <meta name="theme-color" content="#14213D">
   <link rel="canonical" href="https://www.ascendlyai.in/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Ascendly AI">
   <meta property="og:title" content="Ascendly AI | AI Resume Analyzer and Mock Interview Practice">
-  <meta property="og:description" content="Optimize your developer resume for ATS, practice AI-powered mock interviews, and build a focused career roadmap.">
+  <meta property="og:description" content="Optimize your resume for ATS, practice AI-powered mock interviews, and build a focused career roadmap.">
   <meta property="og:url" content="https://www.ascendlyai.in/">
   <meta property="og:image" content="https://www.ascendlyai.in/logo.png">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Ascendly AI | AI Resume Analyzer and Mock Interview Practice">
-  <meta name="twitter:description" content="Optimize your developer resume for ATS and prepare for better interviews.">
+  <meta name="twitter:description" content="Optimize your resume for ATS and prepare for better interviews.">
   <meta name="twitter:image" content="https://www.ascendlyai.in/logo.png">
   <link rel="icon" type="image/png" href="logo.png?v=2">
+
+  <!-- Lenis Smooth Scrolling CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.27/dist/lenis.css">
+
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -28,11 +32,32 @@
       "applicationCategory": "BusinessApplication",
       "operatingSystem": "Web",
       "url": "https://www.ascendlyai.in/",
-      "description": "An AI career platform for developers with an ATS resume analyzer and mock interview preparation tools."
+      "description": "An AI career platform with an ATS resume analyzer, mock interview preparation tools, and career roadmaps."
     }
   </script>
 </head>
 <body>
   <app-root></app-root>
+
+  <!-- Lenis Smooth Scrolling JS -->
+  <script src="https://unpkg.com/lenis@1.3.27/dist/lenis.min.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      if (typeof Lenis !== 'undefined') {
+        const lenis = new Lenis({
+          autoRaf: true,
+          autoToggle: true,
+          anchors: true,
+          allowNestedScroll: true,
+          naiveDimensions: true,
+          stopInertiaOnNavigate: true
+        });
+      }
+    });
+  </script>
+
+  <!-- GSAP Animation Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 </body>
 </html>
