@@ -48,7 +48,7 @@ export class Landing implements AfterViewInit {
         gsap.from('.feature-card', {
           scrollTrigger: {
             trigger: '.features',
-            start: 'top 80%'
+            start: 'top 85%'
           },
           opacity: 0,
           y: 30,
@@ -61,7 +61,7 @@ export class Landing implements AfterViewInit {
         gsap.from('.workflow-step-card', {
           scrollTrigger: {
             trigger: '.workflow',
-            start: 'top 80%'
+            start: 'top 85%'
           },
           opacity: 0,
           y: 25,
@@ -74,7 +74,7 @@ export class Landing implements AfterViewInit {
         gsap.from('.stat-card', {
           scrollTrigger: {
             trigger: '.stats',
-            start: 'top 85%'
+            start: 'top 90%'
           },
           opacity: 0,
           scale: 0.95,
